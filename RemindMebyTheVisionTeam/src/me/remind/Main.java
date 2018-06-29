@@ -8,5 +8,9 @@ public class Main {
     
         ClipBoard clipBoard = new ClipBoard();
         
+        Note textNote = new TextNote("Maths exam", "07.09.2018", "room 1152");
+        
+        
+        
     }
 }

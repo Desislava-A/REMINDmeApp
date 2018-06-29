@@ -17,6 +17,7 @@ public class ClipBoard
         setAllNotes(new ArrayList<>());
         setRemindableNotes(new ArrayList<>());
         setPinnedNotes(new HashSet<>());
+        setArchivedNotes(new ArrayList<>());
     }
     
     public List<Note> getAllNotes()
@@ -39,9 +40,14 @@ public class ClipBoard
         this.remindableNotes = remindableNotes;
     }
     
-    public void setPinnedNotes(Set<Note> pinnedNotes)
+    private void setPinnedNotes(Set<Note> pinnedNotes)
     {
         this.pinnedNotes = pinnedNotes;
+    }
+    
+    private void setArchivedNotes(List<Note> archivedNotes)
+    {
+        this.archivedNotes = archivedNotes;
     }
     
     public void search(String title)

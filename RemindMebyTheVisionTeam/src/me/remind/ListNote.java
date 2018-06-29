@@ -17,20 +17,20 @@ public class ListNote extends Note
         this.checkBoxesList = checkBoxesList;
     }
     
-    ListNote(String title, String deadline, Priority priority, List<String> checkBoxesList)
+    public ListNote(String title, String deadline, Priority priority, List<String> checkBoxesList)
     {
         this(title, deadline, priority);
         setCheckBoxesList(new ArrayList<>());
         
     }
     
-    ListNote(String title, String deadline, Priority priority)
+    public ListNote(String title, String deadline, Priority priority)
     {
         super(title, deadline, priority);
     }
     
     @Override
-    public void makeNote()
+    public void showNote(Note note)
     {
     
     }

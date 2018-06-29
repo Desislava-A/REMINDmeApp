@@ -11,7 +11,7 @@ public class TextNote extends Note implements Remindable
     }
     
     @Override
-    public void makeNote()
+    public void showNote(Note note)
     {
     
     }

@@ -6,7 +6,10 @@ public abstract class Note
     public static final int MIN_TITLE_LENGTH = 3;
     public static final int MAX_TITLE_LENGTH = 60;
     public static final int DEADLINE_LENGTH = 10;
-
+    public Note(String title, String deadline) {
+        this.title = title;
+        this.deadline = deadline;
+    }
     private String title;
     private String deadline;
     private Priority priority;
@@ -17,7 +20,9 @@ public abstract class Note
         setDeadline(deadline);
         setPriority(Priority.NONE);
     }
+
     
+
     private void setTitle(String title)
     {
         if (title == null)

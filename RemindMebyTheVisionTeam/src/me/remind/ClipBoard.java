@@ -33,6 +33,8 @@ public class ClipBoard
     {
         this.remindableNotes = remindableNotes;
     }
+
+    // add 4 methods to construct 4 types of notes
     
     public void search(String title)
     {

@@ -1,8 +1,11 @@
 package me.remind;
 
-public class TextNote extends Note {
+public class TextNote extends Note
+{
     private String text;
-    TextNote(String title, String deadline, String text) {
+    
+    TextNote(String title, String deadline, String text)
+    {
         super(title, deadline);
         this.text=text;
     }

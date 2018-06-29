@@ -6,7 +6,7 @@ public abstract class Note
     private String deadline;
     private Priority priority;
     
-    Note(String title, String deadline, Priority priority)
+    public Note(String title, String deadline, Priority priority)
     {
         setTitle(title);
         setDeadline(deadline);
@@ -50,4 +50,5 @@ public abstract class Note
     
     public abstract void reviewNote();
     
+    public abstract void search();
 }

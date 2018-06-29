@@ -1,4 +1,6 @@
 package me.remind;
 
-public enum Priority {CRITICAL, NORMAL, NONE
+public enum Priority
+{
+    CRITICAL, NORMAL, NONE
 }

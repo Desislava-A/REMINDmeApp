@@ -2,6 +2,11 @@ package me.remind;
 
 public abstract class Note
 {
+
+    public static final int MIN_TITLE_LENGTH = 3;
+    public static final int MAX_TITLE_LENGTH = 60;
+    public static final int DEADLINE_LENGTH = 10;
+
     private String title;
     private String deadline;
     private Priority priority;

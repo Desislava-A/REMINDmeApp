@@ -47,9 +47,4 @@ public class PhotoNote extends Note {
     public void reviewNote() {
 
     }
-
-    @Override
-    public void search() {
-
-    }
 }

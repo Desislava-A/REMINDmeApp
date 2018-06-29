@@ -18,9 +18,4 @@ public class TextNote extends Note
     public void reviewNote() {
 
     }
-
-    @Override
-    public void search() {
-
-    }
 }

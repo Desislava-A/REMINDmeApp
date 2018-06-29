@@ -59,6 +59,4 @@ public abstract class Note
     public abstract void makeNote();
     
     public abstract void reviewNote();
-    
-    public abstract void search();
 }

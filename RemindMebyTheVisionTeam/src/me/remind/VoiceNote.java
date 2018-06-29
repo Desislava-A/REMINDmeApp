@@ -31,10 +31,4 @@ public class VoiceNote extends Note
     {
     
     }
-    
-    @Override
-    public void search()
-    {
-    
-    }
 }

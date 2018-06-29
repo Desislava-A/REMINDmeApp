@@ -25,9 +25,6 @@ public class ListNote extends Note
         super(title, deadline, priority);
     }
 
-
-
-
     @Override
     public void makeNote() {
 
@@ -35,12 +32,6 @@ public class ListNote extends Note
     
     @Override
     public void reviewNote()
-    {
-    
-    }
-    
-    @Override
-    public void search()
     {
     
     }

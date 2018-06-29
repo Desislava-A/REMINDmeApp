@@ -33,4 +33,10 @@ public class ClipBoard
     {
         this.remindableNotes = remindableNotes;
     }
+    
+    public Note search(String title)
+    {
+        
+        return allNotes.get(0);
+    }
 }

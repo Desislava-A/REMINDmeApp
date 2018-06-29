@@ -10,14 +10,14 @@ public class PhotoNote extends Note
     private Image photo;
     private String shortText;
     
-    PhotoNote(String title, String deadline, Image photo, Priority priority, String shortText)
+    public PhotoNote(String title, String deadline, Image photo, Priority priority, String shortText)
     {
         this(title, deadline, photo, priority);
         this.photo = photo;
         setShortText(shortText);
     }
     
-    PhotoNote(String title, String deadline, Image photo, Priority priority)
+    public PhotoNote(String title, String deadline, Image photo, Priority priority)
     {
         super(title, deadline, priority);
         this.photo = photo;
@@ -46,12 +46,6 @@ public class PhotoNote extends Note
     public void showNote(Note note)
     {
         // different implementation for image type
-    }
-    
-    @Override
-    public void makeNote()
-    {
-    
     }
     
     @Override

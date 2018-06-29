@@ -53,18 +53,13 @@ public abstract class Note
             this.priority = priority;
     }
     
-    public void showNote(Note note)
-    {
-        System.out.println(note.toString());
-    }
-    
     @Override
     public String toString()
     {
         return String.format("[ %s ] until: %s", title, deadline);
     }
     
-    public abstract void makeNote();
+    public abstract void showNote(Note note);
     
     public abstract void previewNote();
 }

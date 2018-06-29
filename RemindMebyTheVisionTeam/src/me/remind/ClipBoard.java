@@ -34,9 +34,10 @@ public class ClipBoard
         this.remindableNotes = remindableNotes;
     }
     
-    public Note search(String title)
+    public void search(String title)
     {
-        
-        return allNotes.get(0);
+        for (Note note : allNotes)
+            if (note.getTitle().equals(title))
+                note.showNote(note);
     }
 }

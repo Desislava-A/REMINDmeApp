@@ -20,9 +20,12 @@ public abstract class Note
         setDeadline(deadline);
         setPriority(Priority.NONE);
     }
-
     
-
+    public String getTitle()
+    {
+        return title;
+    }
+    
     private void setTitle(String title)
     {
         if (title == null)
@@ -50,6 +53,11 @@ public abstract class Note
             this.priority = priority;
     }
     
+    public void showNote(Note note)
+    {
+        System.out.println(note.toString());
+    }
+    
     @Override
     public String toString()
     {
@@ -58,5 +66,5 @@ public abstract class Note
     
     public abstract void makeNote();
     
-    public abstract void reviewNote();
+    public abstract void previewNote();
 }

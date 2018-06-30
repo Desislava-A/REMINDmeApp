@@ -10,6 +10,7 @@ public class Main {
         
         Note textNote = new TextNote("Maths exam", "07.09.2018", "room 1152");
         
+        Note list = new ListNote("Urgent meeting","20:00" , Priority.CRITICAL);
         
         
     }

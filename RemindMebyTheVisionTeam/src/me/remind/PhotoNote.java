@@ -28,13 +28,13 @@ public class PhotoNote extends Note
     {
         if (shortText == null)
         {
-            System.err.println("Text shuild be between 3 and 40 symbols");
+            System.err.println("Text should be between 3 and 40 symbols");
             return;
         }
         
         if (shortText.length() < MIN_SHORTTXT_LENGHT || shortText.length() > MAX_SHORTTXT_LENGHT)
         {
-            System.err.println("Text shuild be between 3 and 40 symbols");
+            System.err.println("Text should be between 3 and 40 symbols");
             return;
         }
         

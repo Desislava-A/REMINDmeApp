@@ -16,8 +16,8 @@ public class ClipBoard
     {
         setAllNotes(new ArrayList<>());
         setRemindableNotes(new ArrayList<>());
-        setPinnedNotes(new HashSet<>());
         setArchivedNotes(new ArrayList<>());
+        setPinnedNotes(new HashSet<>());
     }
     
     public List<Note> getAllNotes()
@@ -49,6 +49,10 @@ public class ClipBoard
     {
         this.archivedNotes = archivedNotes;
     }
+    
+    // add 4 void methods that construct different types of messages (Desi)
+    
+    
     
     public void search(String title)
     {

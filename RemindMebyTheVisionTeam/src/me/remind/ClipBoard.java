@@ -39,6 +39,8 @@ public class ClipBoard
     {
         this.remindableNotes = remindableNotes;
     }
+
+    // add 4 methods to construct 4 types of notes
     
     private void setPinnedNotes(Set<Note> pinnedNotes)
     {

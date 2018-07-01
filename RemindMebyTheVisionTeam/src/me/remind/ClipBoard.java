@@ -8,7 +8,7 @@ public class ClipBoard implements Enumeration<Note>
     private List<Remindable> remindableNotes;
     private List<Note> archivedNotes;
     private Set<Note> pinnedNotes;
-    private static int iteratorIndex = 0;
+    private int iteratorIndex = 0;
     
     public ClipBoard()
     {
@@ -134,7 +134,7 @@ public class ClipBoard implements Enumeration<Note>
      */
     public boolean isNotePinned(String title)
     {
-        for (Note note: allNotes)
+        for (Note note: pinnedNotes)
             if (note.getTitle().equals(title))
                 return true;
         
@@ -193,20 +193,25 @@ public class ClipBoard implements Enumeration<Note>
         for (Note note: archivedNotes)
             if (note.getTitle().equals(title))
                 return true;
-    
+        
         return false;
     }
     
     /**
      * Method that deltetes a note by title
-     *
+     * Also deletes the note if it's also in the pinned data structure
      * @param title - the title of the note to be deleted
      */
     public void deleteNote(String title)
     {
         for (Note note: allNotes)
             if (note.getTitle().equals(title))
-                pinnedNotes.remove(note);
+                allNotes.remove(note);
+        
+        if (isNotePinned(title))
+            for (Note note: pinnedNotes)
+                if (note.getTitle().equals(title))
+                    pinnedNotes.remove(note);
     }
     
     /**
@@ -256,14 +261,14 @@ public class ClipBoard implements Enumeration<Note>
             {
                 return hasMoreElements();
             }
-    
+            
             @Override
             public Note next()
             {
                 return nextElement();
             }
         };
-    
+        
         return it;
     }
 }

@@ -1,5 +1,6 @@
 package me.remind;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -40,7 +41,7 @@ public class ClipBoard
         this.remindableNotes = remindableNotes;
     }
 
-    // add 4 methods to construct 4 types of notes
+
     
     private void setPinnedNotes(Set<Note> pinnedNotes)
     {
@@ -52,10 +53,29 @@ public class ClipBoard
         this.archivedNotes = archivedNotes;
     }
     
-    // add 4 void methods that construct different types of messages (Desi)
     
-    
-    
+
+    public void makeTextNote (String title, String deadline,String text, Priority priority){
+        TextNote textNote = new TextNote(title,deadline,text,priority);
+        allNotes.add(textNote);
+        remindableNotes.add(textNote);
+    }
+
+    public void makePhotoNoteNoText (String title, String deadline, Image photo, Priority priority){
+        PhotoNote photoNote = new PhotoNote(title,deadline,photo,priority);
+        allNotes.add(photoNote);
+    }
+
+    public void makePhotoNoteWithText (String title, String deadline, Image photo, String shortText, Priority priority){
+        PhotoNote photoNote = new PhotoNote(title,deadline,photo,shortText,priority);
+        allNotes.add(photoNote);
+    }
+
+
+
+
+
+
     public void search(String title)
     {
         for (Note note : allNotes)

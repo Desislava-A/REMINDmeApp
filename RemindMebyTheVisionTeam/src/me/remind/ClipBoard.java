@@ -82,7 +82,7 @@ public class ClipBoard
         allNotes.add(listNote);
         remindableNotes.add(listNote);
     }
-    
+
 
     public void search(String title)
     {

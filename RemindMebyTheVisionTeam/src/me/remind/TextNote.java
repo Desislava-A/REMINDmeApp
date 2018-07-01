@@ -4,9 +4,9 @@ public class TextNote extends Note implements Remindable
 {
     private String text;
     
-    TextNote(String title, String deadline, String text)
+    TextNote(String title, String deadline, String text, Priority priority)
     {
-        super(title, deadline);
+        super(title, deadline,priority);
         this.text = text;
     }
     

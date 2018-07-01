@@ -13,7 +13,7 @@ public class TextNote extends Note implements Remindable
     @Override
     public void showNote(Note note)
     {
-    
+        System.out.printf("%s: %s Note text: \n", super.toString(), text);
     }
     
     @Override

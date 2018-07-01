@@ -10,7 +10,7 @@ public class PhotoNote extends Note
     private Image photo;
     private String shortText;
     
-    public PhotoNote(String title, String deadline, Image photo, Priority priority, String shortText)
+    public PhotoNote(String title, String deadline, Image photo, String shortText, Priority priority)
     {
         this(title, deadline, photo, priority);
         this.photo = photo;

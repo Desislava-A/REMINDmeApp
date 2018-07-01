@@ -10,9 +10,14 @@ public class Menus
         
         System.out.println("1.Show notes");
         System.out.println("2.Show reminders");
+        System.out.println("3.Show archive");
         System.out.println("3.Add note");
         System.out.println("4.Pin note");
-        System.out.println("5.Delete note");
+        System.out.println("5.Unpin note");
+        System.out.println("6.Archive note");
+        System.out.println("7.Delete note");
+        System.out.println("8.Clear all notes");
+        System.out.println("9.Clear archive");
         System.out.println("0.Exit");
         
         Scanner input = new Scanner(System.in);
@@ -20,7 +25,7 @@ public class Menus
         {
             System.out.print("\nChoice: ");
             choice = input.nextInt();
-        } while (choice < 0 || choice > 6);
+        } while (choice < 0 || choice > 10);
         
         return choice;
     }

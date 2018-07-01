@@ -24,7 +24,7 @@ public class TextNote extends Note implements Remindable
         Scanner input = new Scanner(System.in);
         
         System.out.print("\nText: ");
-        text = Note.noteCounter++ + "." + input.nextLine();
+        text =  input.nextLine();
     }
     
     @Override

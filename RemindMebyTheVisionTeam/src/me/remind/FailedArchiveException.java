@@ -1,10 +1,10 @@
 package me.remind;
 
-public class FailedPinException extends Exception
+public class FailedArchiveException extends Exception
 {
     private String message;
     
-    public FailedPinException(String message)
+    public FailedArchiveException(String message)
     {
         this.message = message;
     }

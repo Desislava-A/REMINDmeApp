@@ -1,8 +1,6 @@
 package me.remind;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ClipBoard
 {
@@ -54,6 +52,11 @@ public class ClipBoard
         return pinnedNotes;
     }
     
+    public List<Note> getArchivedNotes()
+    {
+        return archivedNotes;
+    }
+    
     public void addTextNote(String title, Calendar deadline, Priority priority)
     {
         TextNote textNote = new TextNote(title, deadline, priority);
@@ -72,16 +75,16 @@ public class ClipBoard
     
     public void search(String title)
     {
-        for (Note note : allNotes)
+        for (Note note: allNotes)
             if (note.getTitle().equals(title))
                 note.showNote();
     }
     
     public void showAllNotes()
     {
-        System.out.println("[Pinned]");
+        System.out.println("\n[Pinned]");
         pinnedNotes.forEach(Note::showNote);
-    
+        
         System.out.println("\n[All notes]");
         allNotes.forEach(Note::showNote);
     }
@@ -92,35 +95,75 @@ public class ClipBoard
         remindableNotes.forEach(Remindable::remind);
     }
     
-    public void showTitlesForPin()
+    public void showTitles()
     {
         allNotes.forEach(Note::printTitle);
     }
     
+    public void showPinnedTitles()
+    {
+        pinnedNotes.forEach(Note::printTitle);
+    }
+    
     public boolean isNotePinned(String title)
     {
-        final Stream<Boolean> booleanStream = pinnedNotes.stream().map(note ->
-        {
+        for (Note note: allNotes)
             if (note.getTitle().equals(title))
                 return true;
         
-            return false;
-        });
-    
         return false;
     }
     
     public void pinNote(String title)
     {
-        for (Note note : allNotes)
+        for (Note note: allNotes)
             if (note.getTitle().equals(title))
                 pinnedNotes.add(note);
     }
     
-    public void archiveNote(Note note)
+    public void unpinNote(String title)
     {
-        archivedNotes.add(note);
-        
-        allNotes.remove(note);
+        for (Note note: pinnedNotes)
+            if (note.getTitle().equals(title))
+                pinnedNotes.remove(note);
+    }
+    
+    public void archiveNote(String title)
+    {
+        for (Note note: allNotes)
+        {
+            if (note.getTitle().equals(title))
+            {
+                archivedNotes.add(note);
+                allNotes.remove(note);
+            }
+        }
+    }
+    
+    public boolean isNoteArchived(String title)
+    {
+        for (Note note: archivedNotes)
+            if (note.getTitle().equals(title))
+                return true;
+    
+        return false;
+    }
+    
+    public void deleteNote(String title)
+    {
+        for (Note note: allNotes)
+            if (note.getTitle().equals(title))
+                pinnedNotes.remove(note);
+    }
+    
+    public void clearAllNotes()
+    {
+        allNotes.clear();
+        archivedNotes.clear();
+    }
+    
+    public void clearArchive()
+    {
+        archivedNotes.clear();
     }
 }

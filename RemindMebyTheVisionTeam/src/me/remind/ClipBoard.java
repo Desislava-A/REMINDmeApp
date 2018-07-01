@@ -2,12 +2,13 @@ package me.remind;
 
 import java.util.*;
 
-public class ClipBoard
+public class ClipBoard implements Enumeration<Note>
 {
     private List<Note> allNotes;
     private List<Remindable> remindableNotes;
     private List<Note> archivedNotes;
     private Set<Note> pinnedNotes;
+    private static int iteratorIndex = 0;
     
     public ClipBoard()
     {
@@ -127,6 +128,7 @@ public class ClipBoard
     
     /**
      * Method that checks if a note has been successfully pinned
+     *
      * @param title - the title of the note to be checked
      * @return - true or false
      */
@@ -141,6 +143,7 @@ public class ClipBoard
     
     /**
      * Method that pins a note by title
+     *
      * @param title - the title of the note to be pinned
      */
     public void pinNote(String title)
@@ -152,6 +155,7 @@ public class ClipBoard
     
     /**
      * Method that unpins a note by title
+     *
      * @param title - the title of the note to be unpinned
      */
     public void unpinNote(String title)
@@ -163,6 +167,7 @@ public class ClipBoard
     
     /**
      * Method that archives a note by title
+     *
      * @param title - the title of the note to be archived
      */
     public void archiveNote(String title)
@@ -179,6 +184,7 @@ public class ClipBoard
     
     /**
      * Method that checks if a note has been successfully archived
+     *
      * @param title - the title of the note to be checked
      * @return - true or false
      */
@@ -193,6 +199,7 @@ public class ClipBoard
     
     /**
      * Method that deltetes a note by title
+     *
      * @param title - the title of the note to be deleted
      */
     public void deleteNote(String title)
@@ -226,5 +233,37 @@ public class ClipBoard
     public void clearReminders()
     {
         remindableNotes.clear();
+    }
+    
+    @Override
+    public boolean hasMoreElements()
+    {
+        return iteratorIndex < allNotes.size() && allNotes.get(iteratorIndex) != null;
+    }
+    
+    @Override
+    public Note nextElement()
+    {
+        return allNotes.get(iteratorIndex++);
+    }
+    
+    public Iterator<Note> asIterator()
+    {
+        Iterator<Note> it = new Iterator<Note>()
+        {
+            @Override
+            public boolean hasNext()
+            {
+                return hasMoreElements();
+            }
+    
+            @Override
+            public Note next()
+            {
+                return nextElement();
+            }
+        };
+    
+        return it;
     }
 }

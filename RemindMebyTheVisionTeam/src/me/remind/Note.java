@@ -11,7 +11,6 @@ public abstract class Note
     
     private String title;
     private Calendar deadline;
-    protected static int noteCounter = 1;
     
     private Priority priority;
     

@@ -14,7 +14,7 @@ public class VoiceNote extends Note implements Remindable
         this.audioFile = audioFile;
     }
     
-    public VoiceNote(String title, String deadline, Priority priority, String audioFile)
+    public VoiceNote(String title, String deadline, String audioFile,Priority priority)
     {
         this(title, deadline, priority);
         setAudioFile(audioFile);

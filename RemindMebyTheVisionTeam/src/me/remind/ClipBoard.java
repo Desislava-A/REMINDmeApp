@@ -1,6 +1,8 @@
 package me.remind;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class ClipBoard implements Enumeration<Note>
 {
@@ -79,6 +81,26 @@ public class ClipBoard implements Enumeration<Note>
         allNotes.add(textNote);
         remindableNotes.add(textNote);
     }
+
+    /**
+     * Method that constructs a photoNote object and adds it to the allNotes list
+     */
+    public void addPhotoNote (String title, Calendar deadline, Image photo, Priority priority){
+        PhotoNote photoNote = new PhotoNote(title,deadline,photo,priority);
+        allNotes.add(photoNote);
+    }
+
+    /**
+     * Method that constructs a voiceNote object and adds it to to the allNotes list
+     * and remindableNotes list
+     */
+    public void makeVoiceNote (String title, Calendar deadline, Priority priority, String audioFile){
+        VoiceNote voiceNote = new VoiceNote(title,deadline,priority,audioFile);
+        allNotes.add(voiceNote);
+        remindableNotes.add(voiceNote);
+    }
+
+
     
     /**
      * Method that prints the contents of a note searched by title

@@ -43,7 +43,7 @@ public class PhotoNote extends Note
     }
     
     @Override
-    public void showNote(Note note)
+    public void showNote()
     {
         // different implementation for image type
     }

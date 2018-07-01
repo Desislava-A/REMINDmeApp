@@ -11,9 +11,9 @@ public class TextNote extends Note implements Remindable
     }
     
     @Override
-    public void showNote(Note note)
+    public void showNote()
     {
-        System.out.printf("%s: %s Note text: \n", super.toString(), text);
+        System.out.printf("%s: %s \n", super.toString(), text);
     }
     
     @Override

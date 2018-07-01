@@ -61,17 +61,11 @@ public abstract class Note
     @Override
     public String toString()
     {
-        if (priority==Priority.NONE){
             return String.format("[ %s ] until: %s", title, deadline);
-        }
-
-        else {
-            return String.format("[ %s ] until: %s | priority: %s", title, deadline,priority);
-        }
 
     }
     
-    public abstract void showNote(Note note);
+    public abstract void showNote();
     
     public abstract void previewNote();
 }

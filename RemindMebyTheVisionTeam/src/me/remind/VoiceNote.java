@@ -26,9 +26,9 @@ public class VoiceNote extends Note implements Remindable
     }
     
     @Override
-    public void showNote(Note note)
+    public void showNote()
     {
-    
+        System.out.printf("%s: This is voice note: %s \n", super.toString(),audioFile );
     }
     
     @Override

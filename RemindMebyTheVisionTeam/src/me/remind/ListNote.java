@@ -104,7 +104,7 @@ public class ListNote extends Note implements Remindable
     }
     
     @Override
-    public void showNote(Note note)
+    public void showNote()
     {
         getCheckBoxesList().forEach(System.out::println);
     }

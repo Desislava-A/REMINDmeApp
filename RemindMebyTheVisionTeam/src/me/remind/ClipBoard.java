@@ -88,7 +88,7 @@ public class ClipBoard
     {
         for (Note note : allNotes)
             if (note.getTitle().equals(title))
-                note.showNote(note);
+                note.showNote();
     }
     
     public void pinNote(Note note)

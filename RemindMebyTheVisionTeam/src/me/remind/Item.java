@@ -8,6 +8,10 @@ public class Item
     private String itemText;
     private Check check;
     
+    public Item()
+    {
+    }
+    
     public Item(String itemText, Check check)
     {
         setItemText(itemText);
@@ -19,12 +23,12 @@ public class Item
         return check;
     }
     
-    private void setCheck(Check check)
+    protected void setCheck(Check check)
     {
         this.check = check;
     }
     
-    private void setItemText(String itemText)
+    protected void setItemText(String itemText)
     {
         if (itemText == null)
             return;
@@ -38,5 +42,20 @@ public class Item
     public String getItemText()
     {
         return itemText;
+    }
+    
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append(itemText);
+        
+        if (check == Check.CHECKED)
+            sb.append(" 1");
+        else
+            sb.append(" 0");
+        
+        return sb.toString();
     }
 }

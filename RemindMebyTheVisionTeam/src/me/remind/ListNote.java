@@ -3,26 +3,30 @@ package me.remind;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ListNote extends Note implements Remindable
 {
+    public static final int EXIT_PROMPT = -1;
+    public static final int MIN_LIST_SIZE_LENGTH = 0;
+    
     private List<Item> checkBoxesList;
     
-    public ListNote(String title, String deadline, Priority priority,
-                    List<String> checkBoxesList) throws IOException
+    public ListNote()
+    {
+    }
+    
+    public ListNote(String title, String deadline, Priority priority, List<String> checkBoxesList)
     {
         this(title, deadline, priority);
-        setCheckBoxesList(initializeList());
+        initializeList();
     }
     
     public ListNote(String title, String deadline, Priority priority)
     {
         super(title, deadline, priority);
+        initializeList();
     }
     
     public List<Item> getCheckBoxesList()
@@ -35,35 +39,74 @@ public class ListNote extends Note implements Remindable
         this.checkBoxesList = checkBoxesList;
     }
     
-    public List<Item> initializeList() throws IOException
+    public void initializeList()
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
-        Queue<String> lines = new LinkedList<>();
-        
-        String newLine = "";
-        while (!newLine.equals("ok"))
+        try
         {
-            lines.add(br.readLine());
+            Queue<String> lines = new LinkedList<>();
+            
+            String newLine = "";
+            while (true)
+            {
+                newLine = br.readLine();
+                
+                if (newLine.equals("ok"))
+                    break;
+                
+                lines.add(newLine);
+            }
+            
+            List<Item> checkBoxesAndText = lines.stream()
+                    .map(line ->
+                    {
+                        
+                        Item listNote2 = new Item();
+                        listNote2.setItemText(line);
+                        listNote2.setCheck(Check.UNCHECKED);
+                        return listNote2;
+                        
+                        
+                    }).collect(Collectors.toList());
+            
+            setCheckBoxesList(checkBoxesAndText);
+            
+        } catch (IOException ioex)
+        {
+            ioex.printStackTrace();
         }
+    }
+    
+    public void promptToCheck()
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
-        List<Item> checkboxes = new ArrayList<>();
-        
-        checkboxes = lines.stream()
-                .map(line ->
-                {
-                    Item newItem = new Item(lines.poll(), Check.UNCHECKED);
-                    return newItem;
-                    
-                }).collect(Collectors.toList());
-        
-        return checkboxes;
+        System.out.println("Select which index to check: ");
+        try
+        {
+            while (true)
+            {
+                int index = Integer.parseInt(br.readLine());
+                
+                if ((index < MIN_LIST_SIZE_LENGTH || index > checkBoxesList.size()) &&
+                        index != EXIT_PROMPT)
+                    return;
+                else if (index == EXIT_PROMPT)
+                    return;
+                else
+                    checkBoxesList.get(index).setCheck(Check.CHECKED);
+            }
+        } catch (IOException ioex)
+        {
+            ioex.printStackTrace();
+        }
     }
     
     @Override
     public void showNote(Note note)
     {
-    
+        getCheckBoxesList().forEach(System.out::println);
     }
     
     @Override

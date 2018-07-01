@@ -10,6 +10,9 @@ public abstract class Note
     private String deadline;
     private Priority priority;
     
+    public Note()
+    {
+    }
     
     public Note(String title, String deadline)
     {

@@ -53,7 +53,7 @@ public class ClipBoard
         this.archivedNotes = archivedNotes;
     }
     
-    
+
 
     public void makeTextNote (String title, String deadline,String text, Priority priority){
         TextNote textNote = new TextNote(title,deadline,text,priority);
@@ -71,10 +71,18 @@ public class ClipBoard
         allNotes.add(photoNote);
     }
 
+    public void makeVoiceNote (String title, String deadline, String audioFile, Priority priority){
+        VoiceNote voiceNote = new VoiceNote(title,deadline,audioFile,priority);
+        allNotes.add(voiceNote);
+        remindableNotes.add(voiceNote);
+    }
 
-
-
-
+    public void makeListNote (String title, String deadline, Priority priority, List<String> checkBoxesList){
+        ListNote listNote = new ListNote(title,deadline,priority,checkBoxesList);
+        allNotes.add(listNote);
+        remindableNotes.add(listNote);
+    }
+    
 
     public void search(String title)
     {

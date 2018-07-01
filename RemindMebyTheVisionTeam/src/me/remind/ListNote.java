@@ -17,13 +17,18 @@ public class ListNote extends Note implements Remindable
     {
     }
     
-    public ListNote(String title, String deadline, Priority priority, List<String> checkBoxesList)
+    public ListNote(String title)
+    {
+        super(title);
+    }
+    
+    public ListNote(String title, Calendar deadline, Priority priority, List<String> checkBoxesList)
     {
         this(title, deadline, priority);
         initializeList();
     }
     
-    public ListNote(String title, String deadline, Priority priority)
+    public ListNote(String title, Calendar deadline, Priority priority)
     {
         super(title, deadline, priority);
         initializeList();
@@ -34,12 +39,7 @@ public class ListNote extends Note implements Remindable
         return new ArrayList<>(checkBoxesList);
     }
     
-    public void setCheckBoxesList(List<Item> checkBoxesList)
-    {
-        this.checkBoxesList = checkBoxesList;
-    }
-    
-    public void initializeList()
+    private void initializeList()
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
@@ -70,8 +70,7 @@ public class ListNote extends Note implements Remindable
                         
                     }).collect(Collectors.toList());
             
-            setCheckBoxesList(checkBoxesAndText);
-            
+            checkBoxesList = checkBoxesAndText;
         } catch (IOException ioex)
         {
             ioex.printStackTrace();
@@ -110,14 +109,9 @@ public class ListNote extends Note implements Remindable
     }
     
     @Override
-    public void previewNote()
-    {
-    
-    }
-    
-    @Override
     public void remind()
     {
-    
+        showNote();
+        System.out.print("->[Reminder set in " + getDaysToDeadline() + "]");
     }
 }

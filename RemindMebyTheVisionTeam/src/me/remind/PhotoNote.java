@@ -1,6 +1,7 @@
 package me.remind;
 
 import java.awt.*;
+import java.util.Calendar;
 
 public class PhotoNote extends Note
 {
@@ -10,14 +11,14 @@ public class PhotoNote extends Note
     private Image photo;
     private String shortText;
     
-    public PhotoNote(String title, String deadline, Image photo, String shortText, Priority priority)
+    public PhotoNote(String title, Calendar deadline, Image photo, Priority priority, String shortText)
     {
         this(title, deadline, photo, priority);
         this.photo = photo;
         setShortText(shortText);
     }
     
-    public PhotoNote(String title, String deadline, Image photo, Priority priority)
+    public PhotoNote(String title, Calendar deadline, Image photo, Priority priority)
     {
         super(title, deadline, priority);
         this.photo = photo;
@@ -27,17 +28,10 @@ public class PhotoNote extends Note
     private void setShortText(String shortText)
     {
         if (shortText == null)
-        {
-            System.err.println("Text should be between 3 and 40 symbols");
             return;
-        }
         
         if (shortText.length() < MIN_SHORTTXT_LENGHT || shortText.length() > MAX_SHORTTXT_LENGHT)
-        {
-            System.err.println("Text should be between 3 and 40 symbols");
             return;
-        }
-        
         
         this.shortText = shortText;
     }
@@ -46,11 +40,5 @@ public class PhotoNote extends Note
     public void showNote()
     {
         // different implementation for image type
-    }
-    
-    @Override
-    public void previewNote()
-    {
-    
     }
 }

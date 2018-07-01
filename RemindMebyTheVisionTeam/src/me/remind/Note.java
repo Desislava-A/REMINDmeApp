@@ -1,5 +1,8 @@
 package me.remind;
 
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
+
 public abstract class Note
 {
     public static final int MIN_TITLE_LENGTH = 3;
@@ -7,23 +10,30 @@ public abstract class Note
     public static final int DEADLINE_LENGTH = 10;
     
     private String title;
-    private String deadline;
+    private Calendar deadline;
+    protected static int noteCounter = 1;
+    
     private Priority priority;
     
     public Note()
     {
     }
     
-    public Note(String title, String deadline)
+    public Note(String title)
     {
-        this.title = title;
-        this.deadline = deadline;
+        this(title, null);
     }
     
-    public Note(String title, String deadline, Priority priority)
+    public Note(String title, Calendar deadline)
     {
-        this(title, deadline);
-        setPriority(Priority.NONE);
+        this(title, deadline, Priority.NONE);
+    }
+    
+    public Note(String title, Calendar deadline, Priority priority)
+    {
+        setTitle(title);
+        setDeadline(deadline);
+        setPriority(priority);
     }
     
     public String getTitle()
@@ -39,11 +49,13 @@ public abstract class Note
         this.title = title;
     }
     
-    private void setDeadline(String deadline)
+    public Calendar getDeadline()
     {
-        if (title == null)
-            return;
-        
+        return deadline;
+    }
+    
+    private void setDeadline(Calendar deadline)
+    {
         this.deadline = deadline;
     }
     
@@ -58,14 +70,16 @@ public abstract class Note
             this.priority = priority;
     }
     
-    @Override
-    public String toString()
+    protected long getDaysToDeadline()
     {
-            return String.format("[ %s ] until: %s", title, deadline);
-
+        return TimeUnit.MILLISECONDS.toDays(deadline.getTimeInMillis() -
+                System.currentTimeMillis()) + 1;
+    }
+    
+    protected void printTitle()
+    {
+        System.out.println(getTitle());
     }
     
     public abstract void showNote();
-    
-    public abstract void previewNote();
 }

@@ -1,5 +1,7 @@
 package me.remind;
 
+import java.util.Calendar;
+
 public class VoiceNote extends Note implements Remindable
 {
     private String audioFile;
@@ -14,25 +16,19 @@ public class VoiceNote extends Note implements Remindable
         this.audioFile = audioFile;
     }
     
-    public VoiceNote(String title, String deadline, String audioFile,Priority priority)
+    public VoiceNote(String title, Calendar deadline, Priority priority, String audioFile)
     {
         this(title, deadline, priority);
         setAudioFile(audioFile);
     }
     
-    public VoiceNote(String title, String deadline, Priority priority)
+    public VoiceNote(String title, Calendar deadline, Priority priority)
     {
         super(title, deadline, priority);
     }
     
     @Override
     public void showNote()
-    {
-        System.out.printf("%s: This is voice note: %s \n", super.toString(),audioFile );
-    }
-    
-    @Override
-    public void previewNote()
     {
     
     }

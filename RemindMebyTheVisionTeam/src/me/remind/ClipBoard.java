@@ -1,10 +1,8 @@
 package me.remind;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ClipBoard
 {
@@ -40,8 +38,6 @@ public class ClipBoard
     {
         this.remindableNotes = remindableNotes;
     }
-
-
     
     private void setPinnedNotes(Set<Note> pinnedNotes)
     {
@@ -53,37 +49,27 @@ public class ClipBoard
         this.archivedNotes = archivedNotes;
     }
     
-
-
-    public void makeTextNote (String title, String deadline,String text, Priority priority){
-        TextNote textNote = new TextNote(title,deadline,text,priority);
+    public Set<Note> getPinnedNotes()
+    {
+        return pinnedNotes;
+    }
+    
+    public void addTextNote(String title, Calendar deadline, Priority priority)
+    {
+        TextNote textNote = new TextNote(title, deadline, priority);
+        
         allNotes.add(textNote);
         remindableNotes.add(textNote);
     }
-
-    public void makePhotoNoteNoText (String title, String deadline, Image photo, Priority priority){
-        PhotoNote photoNote = new PhotoNote(title,deadline,photo,priority);
-        allNotes.add(photoNote);
+    
+    public void addListNote(String title, Calendar deadline, Priority priority)
+    {
+        ListNote textNote = new ListNote(title, deadline, priority);
+        
+        allNotes.add(textNote);
+        remindableNotes.add(textNote);
     }
-
-    public void makePhotoNoteWithText (String title, String deadline, Image photo, String shortText, Priority priority){
-        PhotoNote photoNote = new PhotoNote(title,deadline,photo,shortText,priority);
-        allNotes.add(photoNote);
-    }
-
-    public void makeVoiceNote (String title, String deadline, String audioFile, Priority priority){
-        VoiceNote voiceNote = new VoiceNote(title,deadline,audioFile,priority);
-        allNotes.add(voiceNote);
-        remindableNotes.add(voiceNote);
-    }
-
-    public void makeListNote (String title, String deadline, Priority priority, List<String> checkBoxesList){
-        ListNote listNote = new ListNote(title,deadline,priority,checkBoxesList);
-        allNotes.add(listNote);
-        remindableNotes.add(listNote);
-    }
-
-
+    
     public void search(String title)
     {
         for (Note note : allNotes)
@@ -91,9 +77,44 @@ public class ClipBoard
                 note.showNote();
     }
     
-    public void pinNote(Note note)
+    public void showAllNotes()
     {
-        pinnedNotes.add(note);
+        System.out.println("[Pinned]");
+        pinnedNotes.forEach(Note::showNote);
+    
+        System.out.println("\n[All notes]");
+        allNotes.forEach(Note::showNote);
+    }
+    
+    public void showReminders()
+    {
+        System.out.println("[Reminders]");
+        remindableNotes.forEach(Remindable::remind);
+    }
+    
+    public void showTitlesForPin()
+    {
+        allNotes.forEach(Note::printTitle);
+    }
+    
+    public boolean isNotePinned(String title)
+    {
+        final Stream<Boolean> booleanStream = pinnedNotes.stream().map(note ->
+        {
+            if (note.getTitle().equals(title))
+                return true;
+        
+            return false;
+        });
+    
+        return false;
+    }
+    
+    public void pinNote(String title)
+    {
+        for (Note note : allNotes)
+            if (note.getTitle().equals(title))
+                pinnedNotes.add(note);
     }
     
     public void archiveNote(Note note)

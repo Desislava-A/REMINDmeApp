@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<<<<<<< Updated upstream
-    <list default="true" id="c1a1083b-d12c-4bbe-816b-0e3de81a6a81" name="Default" comment="added private Image photo and constructor with super parameters + Image photo">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-=======
-    <list default="true" id="c1a1083b-d12c-4bbe-816b-0e3de81a6a81" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e545b6fb-88e8-49a2-8e03-315cc6f8e021" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/remind/ClipBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/remind/ClipBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/remind/ListNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/remind/ListNote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/remind/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/remind/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/me/remind/Note.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/remind/Note.java" afterDir="false" />
->>>>>>> Stashed changes
+      <change beforePath="$PROJECT_DIR$/src/me/remind/PhotoNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/remind/PhotoNote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/remind/TextNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/remind/TextNote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/remind/VoiceNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/remind/VoiceNote.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,25 +26,60 @@
     </option>
   </component>
   <component name="FUSProjectUsageTrigger">
-    <session id="666749701">
+    <session id="-1637696325">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="36" />
-          <entry key="txt" value="42" />
+          <entry key="dummy" value="97" />
+          <entry key="java" value="42731" />
+          <entry key="txt" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="36" />
-          <entry key="PLAIN_TEXT" value="42" />
+          <entry key="JAVA" value="42731" />
+          <entry key="PLAIN_TEXT" value="101" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="158" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="158" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="666749701">
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="6249" />
+          <entry key="txt" value="45" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="6249" />
+          <entry key="PLAIN_TEXT" value="45" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="12" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
-          <entry key="project.open.time.12" value="1" />
-          <entry key="project.open.time.17" value="1" />
+          <entry key="project.closed" value="3" />
+          <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.7" value="1" />
+          <entry key="project.open.time.8" value="1" />
           <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
@@ -57,67 +90,53 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/me/remind/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< Updated upstream
-            <state relative-caret-position="68">
-              <caret line="4" column="42" lean-forward="true" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
-              <folding />
-=======
-            <state relative-caret-position="216">
-              <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
->>>>>>> Stashed changes
+            <state relative-caret-position="232">
+              <caret line="126" column="5" selection-start-line="126" selection-start-column="5" selection-end-line="126" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/me/remind/FailedPinException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/me/remind/ClipBoard.java">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/me/remind/Priority.java">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/me/remind/Reminder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+            <state relative-caret-position="387">
+              <caret line="117" column="5" selection-start-line="117" selection-start-column="5" selection-end-line="117" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/me/remind/PhotoNote.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="249">
+              <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/me/remind/TextNote.java">
-<<<<<<< Updated upstream
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Note.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/me/remind/Note.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="64" lean-forward="false" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
-              <folding>
-                <element signature="e#247#248#0" expanded="true" />
-                <element signature="e#318#319#0" expanded="true" />
-              </folding>
-=======
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/me/remind/Note.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
->>>>>>> Stashed changes
+            <state relative-caret-position="-24">
+              <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -125,14 +144,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/me/remind/VoiceNote.java">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< Updated upstream
-            <state relative-caret-position="102">
-              <caret line="6" column="5" lean-forward="true" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
-              <folding />
-=======
-            <state relative-caret-position="48">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
->>>>>>> Stashed changes
+            <state relative-caret-position="153">
+              <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -140,335 +153,496 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/me/remind/ListNote.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="1689">
+              <caret line="106" column="5" selection-start-line="106" selection-start-column="5" selection-end-line="106" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< Updated upstream
-      <file leaf-file-name="PhotoNote.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/me/remind/PhotoNote.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-              <folding />
-=======
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/me/remind/PhotoNote.java">
+        <entry file="file://$PROJECT_DIR$/src/me/remind/Check.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
->>>>>>> Stashed changes
+            <state relative-caret-position="96">
+              <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/me/remind/Note.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="417">
+              <caret line="82" column="4" selection-start-line="82" selection-start-column="4" selection-end-line="82" selection-end-column="4" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Main + fakeInput" />
+        <option value="Interface" />
+        <option value="Class + main" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>br</find>
+      <find>566</find>
+      <find>/</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>counter</replace>
+    </replaceStrings>
+  </component>
   <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/me/remind/Main.java" />
-        <option value="$PROJECT_DIR$/src/me/remind/Note.java" />
-        <option value="$PROJECT_DIR$/src/me/remind/TextNote.java" />
+        <option value="$PROJECT_DIR$/src/oop/simplechess/chess/Time.java" />
+        <option value="$PROJECT_DIR$/src/oop/simplechess/pieces/Piece.java" />
+        <option value="$PROJECT_DIR$/src/oop/simplechess/pieces/King.java" />
+        <option value="$PROJECT_DIR$/src/oop/simplechess/pieces/Knight.java" />
+        <option value="$PROJECT_DIR$/src/oop/simplechess/pieces/Queen.java" />
+        <option value="$PROJECT_DIR$/src/oop/simplechess/pieces/Rook.java" />
+        <option value="$PROJECT_DIR$/src/oop/simplechess/pieces/Pawn.java" />
+        <option value="$PROJECT_DIR$/src/oop/simplechess/pieces/Bishop.java" />
+        <option value="$PROJECT_DIR$/src/oop/simplechess/chess/Cell.java" />
+        <option value="$PROJECT_DIR$/src/oop/superheroes/Superhero.java" />
+        <option value="$PROJECT_DIR$/src/oop/superheroes/Power.java" />
+        <option value="$PROJECT_DIR$/src/Tubes.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/recursion/Tubes.java" />
+        <option value="$PROJECT_DIR$/src/LargestMatrixArea.java" />
+        <option value="$PROJECT_DIR$/src/recursion/LargestMatrixArea.java" />
+        <option value="$PROJECT_DIR$/src/LongestMatrixSequence.java" />
+        <option value="$PROJECT_DIR$/src/MaxSum3x3.java" />
+        <option value="$PROJECT_DIR$/src/InputReader.java" />
+        <option value="$PROJECT_DIR$/src/Krachkomer.java" />
+        <option value="$PROJECT_DIR$/src/FindPassword.java" />
+        <option value="$PROJECT_DIR$/src/com/drawingshapes/GraphicalElement.java" />
+        <option value="$PROJECT_DIR$/src/com/drawingshapes/Element.java" />
+        <option value="$PROJECT_DIR$/src/Kitty.java" />
+        <option value="$PROJECT_DIR$/src/FastInputReader.java" />
+        <option value="$PROJECT_DIR$/src/com/slack/MessageType.java" />
+        <option value="$PROJECT_DIR$/src/com/slack/FileMEssage.java" />
+        <option value="$PROJECT_DIR$/src/com/slack/IconTypes.java" />
+        <option value="$PROJECT_DIR$/src/com/slack/User.java" />
+        <option value="$PROJECT_DIR$/src/com/slack/Likable.java" />
+        <option value="$PROJECT_DIR$/src/com/slack/Downloadable.java" />
+        <option value="$PROJECT_DIR$/src/com/slack/FileMessage.java" />
+        <option value="$PROJECT_DIR$/src/com/slack/Message.java" />
+        <option value="$PROJECT_DIR$/src/com/slack/IconMessage.java" />
+        <option value="$PROJECT_DIR$/src/com/slack/TextMessage.java" />
+        <option value="$PROJECT_DIR$/src/com/slack/ImageMessage.java" />
+        <option value="$PROJECT_DIR$/src/com/slack/Application.java" />
+        <option value="$PROJECT_DIR$/src/com/slack/Channel.java" />
+        <option value="$PROJECT_DIR$/src/com/slack/Main.java" />
+        <option value="$PROJECT_DIR$/src/me/remind/Item.java" />
+        <option value="$PROJECT_DIR$/src/me/remind/Check.java" />
+        <option value="$PROJECT_DIR$/src/me/remind/Menus.java" />
+        <option value="$PROJECT_DIR$/src/me/remind/Remindable.java" />
         <option value="$PROJECT_DIR$/src/me/remind/PhotoNote.java" />
+        <option value="$PROJECT_DIR$/src/me/remind/VoiceNote.java" />
+        <option value="$PROJECT_DIR$/src/me/remind/TextNote.java" />
+        <option value="$PROJECT_DIR$/src/me/remind/ListNote.java" />
+        <option value="$PROJECT_DIR$/src/me/remind/Note.java" />
+        <option value="$PROJECT_DIR$/src/me/remind/ClipBoard.java" />
+        <option value="$PROJECT_DIR$/src/me/remind/FailedPinException.java" />
+        <option value="$PROJECT_DIR$/src/me/remind/Main.java" />
       </list>
     </option>
   </component>
+  <component name="JsBowerSettings">
+    <node-interpreter value="project" />
+    <bower-package value="$USER_HOME$/node_modules/bower" />
+    <bower.json value="$USER_HOME$/node_modules/bower/package.json" />
+  </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
-    <option name="y" value="-10" />
-    <option name="width" value="1390" />
-    <option name="height" value="790" />
+    <option name="x" value="950" />
+    <option name="width" value="980" />
+    <option name="height" value="1040" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectUserFactors">
     <factor id="binaryFeature:liftShorter">
-      <dailyData date="29-6-2018">
-        <observation name="false" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="false" value="322,0" />
       </dailyData>
     </factor>
     <factor id="binaryFeature:liftShorterClasses">
-      <dailyData date="29-6-2018">
-        <observation name="false" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="17,0" />
+        <observation name="false" value="305,0" />
       </dailyData>
     </factor>
     <factor id="binaryFeature:middleMatching">
-      <dailyData date="29-6-2018">
-        <observation name="false" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="false" value="321,0" />
+        <observation name="true" value="1,0" />
       </dailyData>
     </factor>
     <factor id="binaryFeature:nonGeneric">
-      <dailyData date="29-6-2018">
-        <observation name="UNDEFINED" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="0" value="136,0" />
+        <observation name="UNDEFINED" value="186,0" />
       </dailyData>
     </factor>
     <factor id="binaryFeature:prox_inResolveScope">
-      <dailyData date="29-6-2018">
-        <observation name="false" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="16,0" />
+        <observation name="false" value="97,0" />
+        <observation name="true" value="209,0" />
       </dailyData>
     </factor>
     <factor id="binaryFeature:prox_openedInEditor">
-      <dailyData date="29-6-2018">
-        <observation name="false" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="16,0" />
+        <observation name="false" value="181,0" />
+        <observation name="true" value="125,0" />
       </dailyData>
     </factor>
     <factor id="binaryFeature:prox_sameDirectory">
-      <dailyData date="29-6-2018">
-        <observation name="false" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="16,0" />
+        <observation name="false" value="181,0" />
+        <observation name="true" value="125,0" />
       </dailyData>
     </factor>
     <factor id="binaryFeature:prox_sameLogicalRoot">
-      <dailyData date="29-6-2018">
-        <observation name="false" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="16,0" />
+        <observation name="false" value="181,0" />
+        <observation name="true" value="125,0" />
       </dailyData>
     </factor>
     <factor id="binaryFeature:prox_sdkOrLibrary">
-      <dailyData date="29-6-2018">
-        <observation name="false" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="16,0" />
+        <observation name="false" value="222,0" />
+        <observation name="true" value="84,0" />
       </dailyData>
     </factor>
     <factor id="binaryFeature:templates">
-      <dailyData date="29-6-2018">
-        <observation name="false" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="false" value="307,0" />
+        <observation name="true" value="15,0" />
       </dailyData>
     </factor>
     <factor id="categoricalFeature:accessible">
-      <dailyData date="29-6-2018">
-        <observation name="NORMAL" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="NORMAL" value="306,0" />
+        <observation name="UNDEFINED" value="16,0" />
       </dailyData>
     </factor>
     <factor id="categoricalFeature:expectedType">
-      <dailyData date="29-6-2018">
-        <observation name="normal" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="16,0" />
+        <observation name="expected" value="47,0" />
+        <observation name="maybeExpected" value="3,0" />
+        <observation name="normal" value="236,0" />
+        <observation name="ofDefaultType" value="12,0" />
+        <observation name="unexpected" value="8,0" />
       </dailyData>
     </factor>
     <factor id="categoricalFeature:kind">
-      <dailyData date="29-6-2018">
-        <observation name="normal" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="OTHER" value="2,0" />
+        <observation name="UNDEFINED" value="16,0" />
+        <observation name="classNameOrGlobalStatic" value="29,0" />
+        <observation name="expectedTypeVariable" value="7,0" />
+        <observation name="normal" value="186,0" />
+        <observation name="probableKeyword" value="22,0" />
+        <observation name="variable" value="60,0" />
       </dailyData>
     </factor>
     <factor id="categoricalFeature:prox_groovyReferenceListWeigher">
-      <dailyData date="29-6-2018">
-        <observation name="unknown" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="16,0" />
+        <observation name="unknown" value="306,0" />
       </dailyData>
     </factor>
     <factor id="categoricalFeature:prox_javaInheritance">
-      <dailyData date="29-6-2018">
-        <observation name="null" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="16,0" />
+        <observation name="false" value="28,0" />
+        <observation name="null" value="276,0" />
+        <observation name="true" value="2,0" />
       </dailyData>
     </factor>
     <factor id="categoricalFeature:prox_referenceList">
-      <dailyData date="29-6-2018">
-        <observation name="unknown" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="16,0" />
+        <observation name="applicableByKind" value="1,0" />
+        <observation name="unknown" value="305,0" />
       </dailyData>
     </factor>
     <factor id="categoricalFeature:recursion">
-      <dailyData date="29-6-2018">
-        <observation name="UNDEFINED" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="54,0" />
+        <observation name="normal" value="268,0" />
       </dailyData>
     </factor>
     <factor id="completionFinishedType">
-      <dailyData date="29-6-2018">
-        <observation name="typedSelect" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="cancelled" value="612,0" />
+        <observation name="explicitSelect" value="191,0" />
+        <observation name="typedSelect" value="131,0" />
       </dailyData>
     </factor>
     <factor id="completionType">
-      <dailyData date="29-6-2018">
-        <observation name="BASIC" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="BASIC" value="454,0" />
       </dailyData>
     </factor>
     <factor id="completionUsage">
-      <dailyData date="29-6-2018">
-        <observation name="count" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="count" value="934,0" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:explicitProximity">
-      <dailyData date="29-6-2018">
-        <observation name="average" value="0,0" />
-        <observation name="count" value="1,0" />
-        <observation name="max" value="0,0" />
+      <dailyData date="1-7-2018">
+        <observation name="average" value="0,242613" />
+        <observation name="count" value="643,0" />
+        <observation name="max" value="1,0" />
         <observation name="min" value="0,0" />
-        <observation name="variance" value="0,0" />
+        <observation name="variance" value="0,174748" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:grouping">
-      <dailyData date="29-6-2018">
+      <dailyData date="1-7-2018">
         <observation name="average" value="0,0" />
-        <observation name="count" value="1,0" />
+        <observation name="count" value="643,0" />
         <observation name="max" value="0,0" />
         <observation name="min" value="0,0" />
         <observation name="variance" value="0,0" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:mostUsed">
-      <dailyData date="29-6-2018">
-        <observation name="UNDEFINED" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="234,0" />
+        <observation name="average" value="-11,811429" />
+        <observation name="count" value="175,0" />
+        <observation name="max" value="0,0" />
+        <observation name="min" value="-43,0" />
+        <observation name="variance" value="150,984817" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:nameEnd">
-      <dailyData date="29-6-2018">
-        <observation name="average" value="0,0" />
-        <observation name="count" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="16,0" />
+        <observation name="average" value="-0,02946" />
+        <observation name="count" value="611,0" />
         <observation name="max" value="0,0" />
-        <observation name="min" value="0,0" />
-        <observation name="variance" value="0,0" />
+        <observation name="min" value="-1,0" />
+        <observation name="variance" value="0,024056" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:position">
-      <dailyData date="29-6-2018">
-        <observation name="average" value="0,0" />
-        <observation name="count" value="1,0" />
-        <observation name="max" value="0,0" />
+      <dailyData date="1-7-2018">
+        <observation name="average" value="0,208398" />
+        <observation name="count" value="643,0" />
+        <observation name="max" value="13,0" />
         <observation name="min" value="0,0" />
-        <observation name="variance" value="0,0" />
+        <observation name="variance" value="1,016649" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:prefix">
-      <dailyData date="29-6-2018">
-        <observation name="average" value="-1153,0" />
-        <observation name="count" value="1,0" />
-        <observation name="max" value="-1153,0" />
-        <observation name="min" value="-1153,0" />
-        <observation name="variance" value="0,0" />
+      <dailyData date="1-7-2018">
+        <observation name="average" value="-1038,573872" />
+        <observation name="count" value="643,0" />
+        <observation name="max" value="0,0" />
+        <observation name="min" value="-1203,0" />
+        <observation name="variance" value="106107,361568" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:priority">
-      <dailyData date="29-6-2018">
-        <observation name="average" value="0,0" />
-        <observation name="count" value="1,0" />
-        <observation name="max" value="0,0" />
-        <observation name="min" value="0,0" />
-        <observation name="variance" value="0,0" />
+      <dailyData date="1-7-2018">
+        <observation name="average" value="-0,009331" />
+        <observation name="count" value="643,0" />
+        <observation name="max" value="1,0" />
+        <observation name="min" value="-1,0" />
+        <observation name="variance" value="0,011104" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:prox_explicitlyImported">
-      <dailyData date="29-6-2018">
-        <observation name="average" value="0,0" />
-        <observation name="count" value="1,0" />
-        <observation name="max" value="0,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="16,0" />
+        <observation name="average" value="112,765957" />
+        <observation name="count" value="611,0" />
+        <observation name="max" value="300,0" />
         <observation name="min" value="0,0" />
-        <observation name="variance" value="0,0" />
+        <observation name="variance" value="13805,336085" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:prox_knownElement">
-      <dailyData date="29-6-2018">
-        <observation name="average" value="0,0" />
-        <observation name="count" value="1,0" />
-        <observation name="max" value="0,0" />
-        <observation name="min" value="0,0" />
-        <observation name="variance" value="0,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="16,0" />
+        <observation name="average" value="1,630115" />
+        <observation name="count" value="611,0" />
+        <observation name="max" value="8,0" />
+        <observation name="min" value="-1,0" />
+        <observation name="variance" value="8,330134" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:prox_sameModule">
-      <dailyData date="29-6-2018">
-        <observation name="average" value="0,0" />
-        <observation name="count" value="1,0" />
-        <observation name="max" value="0,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="16,0" />
+        <observation name="average" value="0,844517" />
+        <observation name="count" value="611,0" />
+        <observation name="max" value="2,0" />
         <observation name="min" value="0,0" />
-        <observation name="variance" value="0,0" />
+        <observation name="variance" value="0,851115" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:prox_samePsiMember">
-      <dailyData date="29-6-2018">
-        <observation name="average" value="0,0" />
-        <observation name="count" value="1,0" />
-        <observation name="max" value="0,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="16,0" />
+        <observation name="average" value="0,396072" />
+        <observation name="count" value="611,0" />
+        <observation name="max" value="2,0" />
         <observation name="min" value="0,0" />
-        <observation name="variance" value="0,0" />
+        <observation name="variance" value="0,425528" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:query_length">
-      <dailyData date="29-6-2018">
+      <dailyData date="1-7-2018">
         <observation name="average" value="0,0" />
-        <observation name="count" value="1,0" />
+        <observation name="count" value="643,0" />
         <observation name="max" value="0,0" />
         <observation name="min" value="0,0" />
         <observation name="variance" value="0,0" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:result_length">
-      <dailyData date="29-6-2018">
-        <observation name="average" value="6,0" />
-        <observation name="count" value="1,0" />
-        <observation name="max" value="6,0" />
-        <observation name="min" value="6,0" />
-        <observation name="variance" value="0,0" />
+      <dailyData date="1-7-2018">
+        <observation name="average" value="6,958009" />
+        <observation name="count" value="643,0" />
+        <observation name="max" value="31,0" />
+        <observation name="min" value="1,0" />
+        <observation name="variance" value="13,125452" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:sameWords">
-      <dailyData date="29-6-2018">
-        <observation name="average" value="0,0" />
-        <observation name="count" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="16,0" />
+        <observation name="average" value="-0,022913" />
+        <observation name="count" value="611,0" />
         <observation name="max" value="0,0" />
-        <observation name="min" value="0,0" />
-        <observation name="variance" value="0,0" />
+        <observation name="min" value="-2,0" />
+        <observation name="variance" value="0,02268" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:shorter">
-      <dailyData date="29-6-2018">
-        <observation name="average" value="0,0" />
-        <observation name="count" value="1,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="16,0" />
+        <observation name="average" value="-29,430442" />
+        <observation name="count" value="611,0" />
         <observation name="max" value="0,0" />
-        <observation name="min" value="0,0" />
-        <observation name="variance" value="0,0" />
+        <observation name="min" value="-999,0" />
+        <observation name="variance" value="24008,188259" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:simple">
-      <dailyData date="29-6-2018">
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="16,0" />
         <observation name="average" value="0,0" />
-        <observation name="count" value="1,0" />
+        <observation name="count" value="611,0" />
         <observation name="max" value="0,0" />
         <observation name="min" value="0,0" />
         <observation name="variance" value="0,0" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:sorter">
-      <dailyData date="29-6-2018">
+      <dailyData date="1-7-2018">
         <observation name="average" value="1,0" />
-        <observation name="count" value="1,0" />
+        <observation name="count" value="643,0" />
         <observation name="max" value="1,0" />
         <observation name="min" value="1,0" />
         <observation name="variance" value="0,0" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:statics">
-      <dailyData date="29-6-2018">
-        <observation name="average" value="-3,0" />
-        <observation name="count" value="1,0" />
-        <observation name="max" value="-3,0" />
-        <observation name="min" value="-3,0" />
-        <observation name="variance" value="0,0" />
+      <dailyData date="1-7-2018">
+        <observation name="UNDEFINED" value="259,0" />
+        <observation name="average" value="-3,488" />
+        <observation name="count" value="125,0" />
+        <observation name="max" value="0,0" />
+        <observation name="min" value="-5,0" />
+        <observation name="variance" value="1,215158" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:stats">
-      <dailyData date="29-6-2018">
-        <observation name="average" value="0,0" />
-        <observation name="count" value="1,0" />
-        <observation name="max" value="0,0" />
+      <dailyData date="1-7-2018">
+        <observation name="average" value="3187,40902" />
+        <observation name="count" value="643,0" />
+        <observation name="max" value="10000,0" />
         <observation name="min" value="0,0" />
-        <observation name="variance" value="0,0" />
+        <observation name="variance" value="20187223,883094" />
       </dailyData>
     </factor>
-    <factor id="itemPosition" />
-    <factor id="mnemonicsUsage" />
-    <factor id="prefixLength" />
+    <factor id="itemPosition">
+      <dailyData date="1-7-2018">
+        <observation name="0" value="169,0" />
+        <observation name="1" value="7,0" />
+        <observation name="10" value="1,0" />
+        <observation name="13" value="1,0" />
+        <observation name="2" value="6,0" />
+        <observation name="3" value="5,0" />
+        <observation name="4" value="1,0" />
+        <observation name="6" value="1,0" />
+      </dailyData>
+    </factor>
+    <factor id="mnemonicsUsage">
+      <dailyData date="1-7-2018">
+        <observation name="total" value="109,0" />
+        <observation name="withMnemonics" value="7,0" />
+      </dailyData>
+    </factor>
+    <factor id="prefixLength">
+      <dailyData date="1-7-2018">
+        <observation name="0" value="29,0" />
+        <observation name="1" value="53,0" />
+        <observation name="2" value="69,0" />
+        <observation name="3" value="23,0" />
+        <observation name="4" value="15,0" />
+        <observation name="5" value="2,0" />
+      </dailyData>
+    </factor>
     <factor id="timeBetweenTyping">
-      <dailyData date="29-6-2018">
-        <observation name="average" value="138,0" />
-        <observation name="count" value="2,0" />
+      <dailyData date="1-7-2018">
+        <observation name="average" value="280,337255" />
+        <observation name="count" value="510,0" />
       </dailyData>
     </factor>
   </component>
@@ -477,49 +651,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="RemindMebyTheVisionTeam" type="b2602c69:ProjectViewProjectNode" />
               <item name="RemindMebyTheVisionTeam" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RemindMebyTheVisionTeam" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RemindMebyTheVisionTeam" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RemindMebyTheVisionTeam" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RemindMebyTheVisionTeam" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RemindMebyTheVisionTeam" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RemindMebyTheVisionTeam" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-              <item name="RemindMebyTheVisionTeam" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RemindMebyTheVisionTeam" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RemindMebyTheVisionTeam" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-              <item name="RemindMebyTheVisionTeam" type="462c0819:PsiDirectoryNode" />
-              <item name="me" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RemindMebyTheVisionTeam" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RemindMebyTheVisionTeam" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-              <item name="RemindMebyTheVisionTeam" type="462c0819:PsiDirectoryNode" />
-              <item name="me" type="462c0819:PsiDirectoryNode" />
-              <item name="remind" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="RemindMebyTheVisionTeam" type="b2602c69:ProjectViewProjectNode" />
@@ -536,18 +674,36 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1530204571896" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://D:/workspace/IdeaProjects/TelerikAlpha/src/Recursion/NumerologyArrLists.java" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1530434941891" />
+    <property name="ignore_missing_gitignore" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.selected.package.eslint" value="C:\Users\i_rac\node_modules\eslint" />
+    <property name="node.js.selected.package.standard" value="C:\Users\i_rac\node_modules\eslint" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Desi\REPOs\REMINDmeApp\RemindMebyTheVisionTeam\src\me\remind" />
-    </key>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings sdk-home="C:\Users\i_rac\AppData\Local\Programs\Python\Python36-32\python.exe">
+        <option name="mySdkHome" value="C:\Users\i_rac\AppData\Local\Programs\Python\Python36-32\python.exe" />
+      </console-settings>
+    </option>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -561,156 +717,155 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="me.remind.Main" />
-      <module name="RemindMebyTheVisionTeam" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="&lt;template&gt;" type="TestNG" default="true" selected="false">
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+    </configuration>
+    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.slack.Application" />
+      <module name="TelerikAlpha" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.slack.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="FindPassword" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="FindPassword" />
+      <module name="TelerikAlpha" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Kitty" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Kitty" />
+      <module name="TelerikAlpha" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="me.remind.Main" />
+      <module name="RemindMebyTheVisionTeam" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.slack.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MaxSum3x3" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MaxSum3x3" />
+      <module name="TelerikAlpha" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.MaxSum3x3" />
+      <item itemvalue="Application.FindPassword" />
+      <item itemvalue="Application.Kitty" />
+      <item itemvalue="Application.Application" />
+      <item itemvalue="Application.Main" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Application" />
+        <item itemvalue="Application.MaxSum3x3" />
+        <item itemvalue="Application.Kitty" />
+        <item itemvalue="Application.FindPassword" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c1a1083b-d12c-4bbe-816b-0e3de81a6a81" name="Default" comment="" />
-      <created>1530188175161</created>
+      <changelist id="e545b6fb-88e8-49a2-8e03-315cc6f8e021" name="Default" comment="" />
+      <created>1527767031500</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1530188175161</updated>
+      <updated>1527767031500</updated>
     </task>
-    <task id="LOCAL-00001" summary="Project architecture with abstract class Note and classes for Text notes, List notes, Image notes , Voice notes , plus class ClipBoard and Priority enum">
-      <created>1530188513210</created>
+    <task id="LOCAL-00001" summary="&quot;listnote implementation update&quot;">
+      <created>1530403839729</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1530188513210</updated>
+      <updated>1530403839729</updated>
     </task>
-    <task id="LOCAL-00002" summary="Compile tried">
-      <created>1530188706472</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1530188706472</updated>
-    </task>
-    <task id="LOCAL-00003" summary="added default constructor to Note">
-      <created>1530195450721</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1530195450721</updated>
-    </task>
-<<<<<<< Updated upstream
-    <task id="LOCAL-00004" summary="added constructor with title and deadline parameters&#10;added override of ToString method">
-      <created>1530250131189</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1530250131190</updated>
-    </task>
-    <task id="LOCAL-00005" summary="added private String text&#10;added constructor with super parameters + String text">
-      <created>1530250371339</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1530250371339</updated>
-    </task>
-    <task id="LOCAL-00006" summary="added private Image photo&#10;added constructor with super parameters + Image photo">
-      <created>1530251122538</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1530251122538</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
-  <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1386" height="788" extended-state="0" />
-    <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842416" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298969" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.359352" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21386862" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4472441" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-=======
-    <task id="LOCAL-00004" summary="trying intellij git push">
-      <created>1530202089118</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1530202089118</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
-    <servers />
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Capture Tool" order="0" />
-      <window_info id="Designer" order="1" />
-      <window_info id="UI Designer" order="2" />
-      <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="4" visible="true" weight="0.15973154" />
-      <window_info id="Structure" order="5" weight="0.24963397" />
-      <window_info id="Image Layers" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.50067115" side_tool="true" weight="0.3565341" />
-      <window_info anchor="bottom" id="Version Control" order="1" />
-      <window_info anchor="bottom" id="Terminal" order="2" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49932885" weight="0.35795453" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.4472441" />
-      <window_info anchor="bottom" id="Message" order="5" />
-      <window_info anchor="bottom" id="Find" order="6" />
-      <window_info anchor="bottom" id="TODO" order="7" />
-      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32913387" />
-      <window_info anchor="bottom" id="CheckStyle" order="11" />
-      <window_info anchor="bottom" id="Tail" order="12" />
-      <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
-      <window_info anchor="right" id="Palette&#9;" order="0" />
-      <window_info anchor="right" id="Maven Projects" order="1" />
-      <window_info anchor="right" id="Capture Analysis" order="2" />
-      <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="right" id="Ant Build" order="5" weight="0.25" />
-      <window_info anchor="right" id="Commander" order="6" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="7" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16778524" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="JRebel" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32670453" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49731544" weight="0.30539772" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39772728" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32907802" />
+      <window_info anchor="bottom" id="Version Control" order="7" visible="true" weight="0.32954547" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32907802" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5026846" side_tool="true" weight="0.30539772" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.3252841" />
+      <window_info anchor="bottom" id="JRebel Console" order="12" side_tool="true" />
+      <window_info anchor="bottom" id="SonarLint" order="13" />
+      <window_info anchor="bottom" id="Tail" order="14" />
+      <window_info anchor="bottom" id="CheckStyle" order="15" weight="0.32907802" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="SciView" order="8" />
-      <window_info anchor="right" id="Database" order="9" />
->>>>>>> Stashed changes
+      <window_info anchor="right" id="Maven Projects" order="9" weight="0.3295302" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -720,187 +875,255 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Project architecture with abstract class Note and classes for Text notes, List notes, Image notes , Voice notes , plus class ClipBoard and Priority enum" />
-    <MESSAGE value="Compile tried" />
-    <MESSAGE value="added default constructor to Note" />
-<<<<<<< Updated upstream
-    <MESSAGE value="added constructor with title and deadline parameters&#10;added override of ToString method" />
-    <MESSAGE value="added private String text&#10;added constructor with super parameters + String text" />
-    <MESSAGE value="added private Image photo&#10;added constructor with super parameters + Image photo" />
-    <option name="LAST_COMMIT_MESSAGE" value="added private Image photo&#10;added constructor with super parameters + Image photo" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+      <path value="$PROJECT_DIR$/git" />
+      <path value="D:\workspace\IdeaProjects\TelerikAlpha\src\java" />
+    </ignored-roots>
+    <MESSAGE value="&quot;listnote implementation update&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;listnote implementation update&quot;" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager />
-    <watches-manager />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/me/remind/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="43" lean-forward="false" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/remind/ClipBoard.java">
-=======
-    <MESSAGE value="trying intellij git push" />
-    <option name="LAST_COMMIT_MESSAGE" value="trying intellij git push" />
+  <component name="debuggerHistoryManager">
+    <expressions id="breakpointCondition">
+      <expression>
+        <expression-string>currentPow &lt; x</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/me/remind/Main.java">
->>>>>>> Stashed changes
+    <entry file="file://$PROJECT_DIR$/src/oop/simplechess/pieces/Piece.java" />
+    <entry file="file://$PROJECT_DIR$/src/oop/simplechess/chess/Cell.java" />
+    <entry file="file://$PROJECT_DIR$/src/Main.java" />
+    <entry file="file://$PROJECT_DIR$/src/oop/superheroes/HeroAlignment.java" />
+    <entry file="file://$PROJECT_DIR$/src/Krachkomer.java" />
+    <entry file="file://$PROJECT_DIR$/src/oop/superheroes/PowerType.java" />
+    <entry file="file://$PROJECT_DIR$/src/oop/superheroes/Power.java" />
+    <entry file="file://$PROJECT_DIR$/src/oop/superheroes/Superhero.java" />
+    <entry file="file://$PROJECT_DIR$/src/oop/superheroes/Application.java" />
+    <entry file="file://$PROJECT_DIR$/src/recursion/Tubes.java" />
+    <entry file="file://$PROJECT_DIR$/src/recursion/LargestMatrixArea.java" />
+    <entry file="file://$PROJECT_DIR$/src/LongestMatrixSequence.java" />
+    <entry file="file://$PROJECT_DIR$/src/boy/Temperatur.java" />
+    <entry file="file://$PROJECT_DIR$/src/boy/WetterAllgemein.java" />
+    <entry file="file://$PROJECT_DIR$/src/boy/Wetterdaten.java" />
+    <entry file="file://$PROJECT_DIR$/src/boy/Main.java" />
+    <entry file="file://$PROJECT_DIR$/src/boy/Feuchtigkeit.java" />
+    <entry file="file://$PROJECT_DIR$/src/boy/Druck.java" />
+    <entry file="file://$PROJECT_DIR$/src/boy/City.java" />
+    <entry file="file://$PROJECT_DIR$/src/MaxSum3x3.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/slack/GraphicalElement.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/slack/Element.java" />
+    <entry file="file://$PROJECT_DIR$/src/FindPassword.java" />
+    <entry file="file://$PROJECT_DIR$/src/Kitty.java" />
+    <entry file="file://$PROJECT_DIR$/src/FastInputReader.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/slack/MessageType.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/slack/Likable.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/slack/FileMessage.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/slack/User.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/slack/IconMessage.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/slack/Downloadable.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/slack/TextMessage.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/slack/Application.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/slack/IconTypes.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/slack/ImageMessage.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/slack/Message.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/slack/Channel.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/slack/Main.java" />
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+        <state>
+          <folding>
+            <element signature="e#48203#48207#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/remind/ClipBoard.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-<<<<<<< Updated upstream
-    <entry file="file://$PROJECT_DIR$/src/me/remind/TextNote.java">
+    <entry file="file://$PROJECT_DIR$/src/me/remind/Item.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="-324">
+          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/remind/Reminder.java">
+    <entry file="file://$PROJECT_DIR$/src/me/remind/Remindable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state>
+          <caret column="18" lean-forward="true" selection-start-column="18" selection-end-column="18" />
         </state>
       </provider>
-=======
-    <entry file="file://$PROJECT_DIR$/src/me/remind/Priority.java">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/remind/TextNote.java">
-      <provider selected="true" editor-type-id="text-editor" />
->>>>>>> Stashed changes
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/remind/ListNote.java">
+    <entry file="file://$PROJECT_DIR$/src/me/remind/Menus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="-579">
+          <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/me/remind/PhotoNote.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/remind/VoiceNote.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/remind/ListNote.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1689">
+          <caret line="106" column="5" selection-start-line="106" selection-start-column="5" selection-end-line="106" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/remind/Check.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/remind/TextNote.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-24">
+          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/remind/Note.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="82" column="4" selection-start-line="82" selection-start-column="4" selection-end-line="82" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/remind/ClipBoard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="117" column="5" selection-start-line="117" selection-start-column="5" selection-end-line="117" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/remind/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="126" column="5" selection-start-line="126" selection-start-column="5" selection-end-line="126" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/remind/FailedPinException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
-          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+          <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/remind/Reminder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-<<<<<<< Updated upstream
-    <entry file="file://$PROJECT_DIR$/src/me/remind/Note.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding>
-            <element signature="e#247#248#0" expanded="true" />
-            <element signature="e#318#319#0" expanded="true" />
-          </folding>
-=======
-    <entry file="file://$PROJECT_DIR$/src/me/remind/VoiceNote.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
->>>>>>> Stashed changes
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/remind/Priority.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/remind/ClipBoard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/remind/Reminder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/remind/Note.java">
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< Updated upstream
-        <state relative-caret-position="238">
-          <caret line="14" column="64" lean-forward="false" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
-          <folding>
-            <element signature="e#247#248#0" expanded="true" />
-            <element signature="e#318#319#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/remind/VoiceNote.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="5" lean-forward="true" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/remind/ListNote.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/remind/TextNote.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/remind/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="42" lean-forward="true" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/remind/PhotoNote.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-=======
-        <state relative-caret-position="240">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
->>>>>>> Stashed changes
-        </state>
-      </provider>
-    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>guava-18.0</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>10.0.1</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>TelerikAlpha</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>guava-18.0</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

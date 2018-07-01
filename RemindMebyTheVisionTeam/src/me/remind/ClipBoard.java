@@ -57,6 +57,9 @@ public class ClipBoard
         return archivedNotes;
     }
     
+    /**
+     * Method that constructs a textNote object and adds it to the data structures
+     */
     public void addTextNote(String title, Calendar deadline, Priority priority)
     {
         TextNote textNote = new TextNote(title, deadline, priority);
@@ -65,6 +68,9 @@ public class ClipBoard
         remindableNotes.add(textNote);
     }
     
+    /**
+     * Method that constructs a listNote object and adds it to the data structures
+     */
     public void addListNote(String title, Calendar deadline, Priority priority)
     {
         ListNote textNote = new ListNote(title, deadline, priority);
@@ -73,6 +79,9 @@ public class ClipBoard
         remindableNotes.add(textNote);
     }
     
+    /**
+     * Method that prints the contents of a note searched by title
+     */
     public void search(String title)
     {
         for (Note note: allNotes)
@@ -80,6 +89,9 @@ public class ClipBoard
                 note.showNote();
     }
     
+    /**
+     * Method that prints the contents of all pinned and unpinned notes
+     */
     public void showAllNotes()
     {
         System.out.println("\n[Pinned]");
@@ -95,16 +107,29 @@ public class ClipBoard
         remindableNotes.forEach(Remindable::remind);
     }
     
+    /**
+     * Method that prints all notes' titles
+     * Invoked prior to various different structural changes within the app
+     */
     public void showTitles()
     {
         allNotes.forEach(Note::printTitle);
     }
     
+    /**
+     * Method that prints all pinned notes' titles
+     * Invoked prior to pinning a certain note
+     */
     public void showPinnedTitles()
     {
         pinnedNotes.forEach(Note::printTitle);
     }
     
+    /**
+     * Method that checks if a note has been successfully pinned
+     * @param title - the title of the note to be checked
+     * @return - true or false
+     */
     public boolean isNotePinned(String title)
     {
         for (Note note: allNotes)
@@ -114,6 +139,10 @@ public class ClipBoard
         return false;
     }
     
+    /**
+     * Method that pins a note by title
+     * @param title - the title of the note to be pinned
+     */
     public void pinNote(String title)
     {
         for (Note note: allNotes)
@@ -121,6 +150,10 @@ public class ClipBoard
                 pinnedNotes.add(note);
     }
     
+    /**
+     * Method that unpins a note by title
+     * @param title - the title of the note to be unpinned
+     */
     public void unpinNote(String title)
     {
         for (Note note: pinnedNotes)
@@ -128,6 +161,10 @@ public class ClipBoard
                 pinnedNotes.remove(note);
     }
     
+    /**
+     * Method that archives a note by title
+     * @param title - the title of the note to be archived
+     */
     public void archiveNote(String title)
     {
         for (Note note: allNotes)
@@ -140,6 +177,11 @@ public class ClipBoard
         }
     }
     
+    /**
+     * Method that checks if a note has been successfully archived
+     * @param title - the title of the note to be checked
+     * @return - true or false
+     */
     public boolean isNoteArchived(String title)
     {
         for (Note note: archivedNotes)
@@ -149,6 +191,10 @@ public class ClipBoard
         return false;
     }
     
+    /**
+     * Method that deltetes a note by title
+     * @param title - the title of the note to be deleted
+     */
     public void deleteNote(String title)
     {
         for (Note note: allNotes)
@@ -156,14 +202,29 @@ public class ClipBoard
                 pinnedNotes.remove(note);
     }
     
+    /**
+     * Method to clear the main data structure
+     */
     public void clearAllNotes()
     {
         allNotes.clear();
         archivedNotes.clear();
+        remindableNotes.clear();
     }
     
+    /**
+     * Method to clear the archive data structure
+     */
     public void clearArchive()
     {
         archivedNotes.clear();
+    }
+    
+    /**
+     * Method to clear the remindables data structure
+     */
+    public void clearReminders()
+    {
+        remindableNotes.clear();
     }
 }

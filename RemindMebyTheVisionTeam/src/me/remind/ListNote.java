@@ -39,10 +39,15 @@ public class ListNote extends Note implements Remindable
         return new ArrayList<>(checkBoxesList);
     }
     
+    /**
+     * Method to initialize the ListNote fields
+     * All items are initialized with Check status "UNCHECKED"
+     */
     private void initializeList()
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
+        // When done adding new lines, type "ok" to terminate the adding process
         try
         {
             Queue<String> lines = new LinkedList<>();
@@ -77,6 +82,9 @@ public class ListNote extends Note implements Remindable
         }
     }
     
+    /**
+     * Method that prompts for checking different items from a list note by index
+     */
     public void promptToCheck()
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -84,6 +92,7 @@ public class ListNote extends Note implements Remindable
         System.out.println("Select which index to check: ");
         try
         {
+            // when done with marking items checked, type "-1" to terminate the process
             while (true)
             {
                 int index = Integer.parseInt(br.readLine());

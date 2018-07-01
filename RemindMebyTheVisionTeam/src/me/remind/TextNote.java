@@ -19,6 +19,9 @@ public class TextNote extends Note implements Remindable
         initialize();
     }
     
+    /**
+     * Method to initialize the TextNote field
+     */
     private void initialize()
     {
         Scanner input = new Scanner(System.in);

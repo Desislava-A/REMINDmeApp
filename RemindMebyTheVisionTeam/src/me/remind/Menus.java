@@ -2,6 +2,9 @@ package me.remind;
 
 import java.util.Scanner;
 
+/**
+ * A class containing the different menus for the console UI
+ */
 public class Menus
 {
     public static int mainMenu()

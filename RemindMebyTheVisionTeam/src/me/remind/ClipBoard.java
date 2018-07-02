@@ -94,7 +94,7 @@ public class ClipBoard implements Enumeration<Note>
      * Method that constructs a voiceNote object and adds it to to the allNotes list
      * and remindableNotes list
      */
-    public void makeVoiceNote (String title, Calendar deadline, Priority priority, String audioFile){
+    public void addVoiceNote (String title, Calendar deadline, Priority priority, String audioFile){
         VoiceNote voiceNote = new VoiceNote(title,deadline,priority,audioFile);
         allNotes.add(voiceNote);
         remindableNotes.add(voiceNote);

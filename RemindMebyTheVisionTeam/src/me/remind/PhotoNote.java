@@ -5,6 +5,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 public class PhotoNote extends Note
@@ -15,7 +16,7 @@ public class PhotoNote extends Note
     private Image photo;
     private String shortText;
     
-    public PhotoNote(String title, Calendar deadline, Image photo, Priority priority, String shortText)
+    public PhotoNote(String title, Date deadline, Image photo, Priority priority, String shortText)
     {
         this(title, deadline, photo, priority);
         //this.photo = photo;
@@ -23,7 +24,7 @@ public class PhotoNote extends Note
         setShortText(shortText);
     }
     
-    public PhotoNote(String title, Calendar deadline, Image photo, Priority priority)
+    public PhotoNote(String title, Date deadline, Image photo, Priority priority)
     {
         super(title, deadline, priority);
         //this.photo = photo;

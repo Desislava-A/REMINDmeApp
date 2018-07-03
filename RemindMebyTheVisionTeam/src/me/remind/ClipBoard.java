@@ -63,7 +63,7 @@ public class ClipBoard implements Enumeration<Note>
     /**
      * Method that constructs a textNote object and adds it to the data structures
      */
-    public void addTextNote(String title, Calendar deadline, Priority priority)
+    public void addTextNote(String title, Date deadline, Priority priority)
     {
         TextNote textNote = new TextNote(title, deadline, priority);
         
@@ -85,7 +85,7 @@ public class ClipBoard implements Enumeration<Note>
     /**
      * Method that constructs a photoNote object and adds it to the allNotes list
      */
-    public void addPhotoNote (String title, Calendar deadline, Image photo, Priority priority){
+    public void addPhotoNote (String title, Date deadline, Image photo, Priority priority){
         PhotoNote photoNote = new PhotoNote(title,deadline,photo,priority);
         allNotes.add(photoNote);
     }

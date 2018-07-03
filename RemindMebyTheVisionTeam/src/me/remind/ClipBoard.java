@@ -74,7 +74,7 @@ public class ClipBoard implements Enumeration<Note>
     /**
      * Method that constructs a listNote object and adds it to the data structures
      */
-    public void addListNote(String title, Calendar deadline, Priority priority)
+    public void addListNote(String title, Date deadline, Priority priority)
     {
         ListNote textNote = new ListNote(title, deadline, priority);
         
@@ -94,7 +94,7 @@ public class ClipBoard implements Enumeration<Note>
      * Method that constructs a voiceNote object and adds it to to the allNotes list
      * and remindableNotes list
      */
-    public void addVoiceNote (String title, Calendar deadline, Priority priority, String audioFile){
+    public void addVoiceNote (String title, Date deadline, Priority priority, String audioFile){
         VoiceNote voiceNote = new VoiceNote(title,deadline,priority,audioFile);
         allNotes.add(voiceNote);
         remindableNotes.add(voiceNote);

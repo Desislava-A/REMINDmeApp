@@ -27,13 +27,26 @@ public class TextNote extends Note implements Remindable
         Scanner input = new Scanner(System.in);
         
         System.out.print("\nText: ");
-        text =  input.nextLine();
+        text = input.nextLine();
+    }
+    
+    @Override
+    public String getTitleWithType()
+    {
+        return "[TextNote]" + "\n\t" + getTitle();
+    }
+    
+    @Override
+    public String toString()
+    {
+        return getTitle();
     }
     
     @Override
     public void showNote()
     {
-        System.out.print(text);
+        System.out.println("[TextNote]");
+        System.out.print("\t" + text);
     }
     
     @Override

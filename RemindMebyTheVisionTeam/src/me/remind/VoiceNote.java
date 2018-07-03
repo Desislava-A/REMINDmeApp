@@ -4,7 +4,7 @@ import javax.sound.sampled.*;
 import java.io.IOException;
 import java.util.Date;
 
-public class VoiceNote extends Note implements Remindable, Playable
+public class VoiceNote extends Note implements Remindable
 {
     private String fileName;
     private AudioInputStream inputStream;
@@ -17,7 +17,7 @@ public class VoiceNote extends Note implements Remindable, Playable
         initializeVoiceFile(fileName);
     }
     
-    private String getFileName()
+    public String getFileName()
     {
         return fileName;
     }
@@ -59,26 +59,19 @@ public class VoiceNote extends Note implements Remindable, Playable
     }
     
     @Override
+    public String getTitleWithType()
+    {
+        return "[VoiceNote]" + "\n\t" + getTitle();
+    }
+    
+    @Override
     public String toString()
     {
-        return getTitle();
+        return "[VoiceNote]" + "\n\t" + getTitle();
     }
     
     @Override
     public void showNote()
-    {
-        System.out.println("Sound note title: " + getTitle());
-    }
-    
-    @Override
-    public void remind()
-    {
-        showNote();
-        System.out.print("->[Reminder set in " + getDaysToDeadline() + "]");
-    }
-    
-    @Override
-    public void play()
     {
         try
         {
@@ -90,8 +83,15 @@ public class VoiceNote extends Note implements Remindable, Playable
         {
             lineex.printStackTrace();
         }
-        
+    
         audioClip.setFramePosition(0);
         audioClip.start();
+    }
+    
+    @Override
+    public void remind()
+    {
+        showNote();
+        System.out.print("->[Reminder set in " + getDaysToDeadline() + "]");
     }
 }

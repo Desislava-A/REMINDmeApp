@@ -98,8 +98,6 @@ public class ListNote extends Note implements Remindable
         try
         {
             // when done with marking items checked, type "-1" to terminate the process
-            
-            
             while (true)
             {
                 listAllItemsFromList();
@@ -127,15 +125,22 @@ public class ListNote extends Note implements Remindable
     }
     
     @Override
+    public String getTitleWithType()
+    {
+        return "[ListNote]" + "\n\t" + getTitle();
+    }
+    
+    @Override
     public String toString()
     {
-        return "List note title: " + super.getTitle();
+        return getTitle();
     }
     
     @Override
     public void showNote()
     {
-        getCheckBoxesList().forEach(System.out::println);
+        System.out.println("\n[List]");
+        getCheckBoxesList().forEach(x -> System.out.println("\t" + x));
     }
     
     @Override

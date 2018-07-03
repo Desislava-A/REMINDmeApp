@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Date;
 
-public class PhotoNote extends Note implements Viewable
+public class PhotoNote extends Note
 {
     public static final int MIN_SHORTTXT_LENGHT = 3;
     public static final int MAX_SHORTTXT_LENGHT = 40;
@@ -51,19 +51,19 @@ public class PhotoNote extends Note implements Viewable
     }
     
     @Override
+    public String getTitleWithType()
+    {
+        return "[PhotoNote]" + "\n\t" + getTitle();
+    }
+    
+    @Override
     public String toString()
     {
-        return getTitle();
+        return "[PhotoNote]" + "\n\t" + getTitle();
     }
     
     @Override
     public void showNote()
-    {
-        System.out.println(this.toString());
-    }
-    
-    @Override
-    public void view()
     {
         try
         {

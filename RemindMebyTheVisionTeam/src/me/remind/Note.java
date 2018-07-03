@@ -12,6 +12,7 @@ public abstract class Note
     private String title;
     private Date deadline;
     private Priority priority;
+    private boolean pinned;
     
     public Note()
     {
@@ -32,6 +33,7 @@ public abstract class Note
         setTitle(title);
         setDeadline(deadline);
         setPriority(priority);
+        setPinned(false);
     }
     
     public String getTitle()
@@ -47,7 +49,8 @@ public abstract class Note
         this.title = title;
     }
     
-    public Date getDeadline() {
+    public Date getDeadline()
+    {
         return deadline;
     }
     
@@ -61,10 +64,20 @@ public abstract class Note
         this.priority = priority;
     }
     
-    public void changePriority(Priority priority)
+    protected void changePriority(Priority priority)
     {
         if (this.priority != priority)
             this.priority = priority;
+    }
+    
+    public boolean isPinned()
+    {
+        return pinned;
+    }
+    
+    protected void setPinned(boolean pinned)
+    {
+        this.pinned = pinned;
     }
     
     protected long getDaysToDeadline()
@@ -79,4 +92,6 @@ public abstract class Note
     }
     
     public abstract void showNote();
+    
+    public abstract String getTitleWithType();
 }

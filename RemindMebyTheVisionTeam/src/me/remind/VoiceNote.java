@@ -1,41 +1,97 @@
 package me.remind;
 
+import javax.sound.sampled.*;
+import java.io.IOException;
 import java.util.Calendar;
 
-public class VoiceNote extends Note implements Remindable
+public class VoiceNote extends Note implements Remindable, Playable
 {
-    private String audioFile;
+    private String fileName;
+    private AudioInputStream inputStream;
+    private Clip audioClip;
     
-    private String getAudioFile()
-    {
-        return audioFile;
-    }
-    
-    private void setAudioFile(String audioFile)
-    {
-        this.audioFile = audioFile;
-    }
-    
-    public VoiceNote(String title, Calendar deadline, Priority priority, String audioFile)
-    {
-        this(title, deadline, priority);
-        setAudioFile(audioFile);
-    }
-    
-    public VoiceNote(String title, Calendar deadline, Priority priority)
+    public VoiceNote(String title, Calendar deadline, Priority priority, String fileName)
     {
         super(title, deadline, priority);
+        setFileName(fileName);
+        initializeVoiceFile(fileName);
+    }
+    
+    private String getFileName()
+    {
+        return fileName;
+    }
+    
+    private void setFileName(String audioFilePath)
+    {
+        this.fileName = audioFilePath;
+    }
+    
+    private  void setInputStream(AudioInputStream inputStream)
+    {
+        this.inputStream = inputStream;
+    }
+    
+    private void setAudioClip(Clip audioClip)
+    {
+        this.audioClip = audioClip;
+    }
+    
+    private void initializeVoiceFile(final String fileName)
+    {
+        try
+        {
+            setInputStream(AudioSystem.getAudioInputStream(Main.class.getResourceAsStream(
+                            "/res/sounds/" + fileName)));
+            setAudioClip(AudioSystem.getClip());
+        } catch (LineUnavailableException lineex)
+        {
+            System.out.println(lineex.getMessage());
+            lineex.printStackTrace();
+        } catch (UnsupportedAudioFileException audioex)
+        {
+            System.out.println(audioex.getMessage());
+            audioex.printStackTrace();
+        } catch (IOException ioex)
+        {
+            ioex.printStackTrace();
+        }
+    }
+    
+    @Override
+    public String toString()
+    {
+        return getTitle();
     }
     
     @Override
     public void showNote()
     {
-    
+        System.out.println("Sound note title: " + getTitle());
     }
     
     @Override
     public void remind()
     {
+        showNote();
+        System.out.print("->[Reminder set in " + getDaysToDeadline() + "]");
+    }
     
+    @Override
+    public void play()
+    {
+        try
+        {
+            audioClip.open(inputStream);
+        } catch (IOException ioex)
+        {
+            ioex.printStackTrace();
+        } catch (LineUnavailableException lineex)
+        {
+            lineex.printStackTrace();
+        }
+        
+        audioClip.setFramePosition(0);
+        audioClip.start();
     }
 }

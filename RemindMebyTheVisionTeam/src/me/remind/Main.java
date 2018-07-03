@@ -1,7 +1,6 @@
 package me.remind;
 
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class Main
@@ -18,16 +17,66 @@ public class Main
             switch (Menus.mainMenu())
             {
                 case 1:
-                    clipBoard.showAllNotes();
-                    input.nextLine();
+                    System.out.println();
+                    switch (Menus.showSubMenu())
+                    {
+                        case 1:
+                            clipBoard.showAllNotes();
+                            input.nextLine();
+                            break;
+                        case 2:
+                        {
+                            System.out.println("\n[Titles]");
+                            clipBoard.getImages().forEach(x -> System.out.println(
+                                    "\t" + x.toString()));
+                            
+                            System.out.print("\nWhich title to show: ");
+                            String title = input.nextLine();
+                            
+                            for (Viewable img: clipBoard.getImages())
+                                if (img.toString().equals(title))
+                                    img.view();
+                            
+                            break;
+                        }
+                        case 3:
+                        {
+                            System.out.println("\n[Titles]");
+                            clipBoard.getVoiceRecords().forEach(x -> System.out.println(
+                                    "\t" + x.toString()));
+                            
+                            System.out.print("\nWhich title to play: ");
+                            String title = input.nextLine();
+                            
+                            for (Playable record: clipBoard.getVoiceRecords())
+                                if (record.toString().equals(title))
+                                    record.play();
+                            
+                            break;
+                        }
+                        case 4:
+                            clipBoard.showListTitles();
+                            
+                            System.out.print("\nWhich title to edit: ");
+                            String title = input.nextLine();
+                            
+                            clipBoard.promptToCheckListItems(title);
+                            
+                            break;
+                    }
+                    
                     break;
                 case 2:
                     clipBoard.showReminders();
                     input.nextLine();
                     break;
                 case 3:
+                    clipBoard.showArchive();
+                    input.nextLine();
+                    break;
+                case 4:
                     System.out.println();
-                    switch (Menus.addMenu())
+                    switch (Menus.addSubMenu())
                     {
                         case 1:
                         {
@@ -45,7 +94,8 @@ public class Main
                                     deadline.add(Calendar.DATE, input.nextInt());
                                     input.nextLine();
                                     
-                                    clipBoard.addTextNote(title, deadline, Priority.NONE);
+                                    clipBoard.addTextNote(title, deadline,
+                                            Priority.NONE);
                                     break;
                                 }
                                 case 2:
@@ -55,7 +105,8 @@ public class Main
                                     System.out.print("\nTitle: ");
                                     title = input.nextLine();
                                     
-                                    clipBoard.addTextNote(title, null, Priority.NONE);
+                                    clipBoard.addTextNote(title, null,
+                                            Priority.NONE);
                                     break;
                                 }
                             }
@@ -77,7 +128,8 @@ public class Main
                                     deadline.add(Calendar.DATE, input.nextInt());
                                     input.nextLine();
                                     
-                                    clipBoard.addListNote(title, deadline, Priority.NONE);
+                                    clipBoard.addListNote(title, deadline,
+                                            Priority.NONE);
                                     break;
                                 }
                                 case 2:
@@ -86,45 +138,127 @@ public class Main
                                     System.out.print("\nTitle: ");
                                     title = input.nextLine();
                                     
-                                    clipBoard.addListNote(title, null, Priority.NONE);
+                                    clipBoard.addListNote(title, null,
+                                            Priority.NONE);
                                     break;
-                                case 0:
+                                default:
+                                    System.out.println("Going back a menu...");
+                                    Thread.sleep(150);
+                                    
                                     break;
                             }
                             break;
                         }
-                        // WIP
                         case 3:
+                            switch (Menus.hasReminderMenu())
+                            {
+                                case 1:
+                                {
+                                    String title, filePath;
+                                    
+                                    Calendar deadline = Calendar.getInstance();
+                                    
+                                    System.out.print("\nTitle: ");
+                                    title = input.nextLine();
+                                    System.out.print("Deadline in days: ");
+                                    deadline.add(Calendar.DATE, input.nextInt());
+                                    input.nextLine();
+                                    System.out.print("File name: ");
+                                    filePath = input.nextLine();
+                                    
+                                    clipBoard.addVoiceNote(title, deadline,
+                                            Priority.NONE, filePath);
+                                    
+                                    break;
+                                }
+                                case 2:
+                                    String title, filePath;
+                                    
+                                    System.out.print("\nTitle: ");
+                                    title = input.nextLine();
+                                    System.out.print("File name: ");
+                                    filePath = input.nextLine();
+                                    
+                                    clipBoard.addVoiceNote(title, null,
+                                            Priority.NONE, filePath);
+                                    
+                                    break;
+                                default:
+                                    System.out.println("Going back a menu...");
+                                    Thread.sleep(150);
+                                    
+                                    break;
+                            }
                             break;
                         case 4:
-                            break;
-                        case 0:
-                            break;
+                            switch (Menus.hasReminderMenu())
+                            {
+                                case 1:
+                                {
+                                    String title, filePath, description;
+                                    
+                                    Calendar deadline = Calendar.getInstance();
+                                    
+                                    System.out.print("\nTitle: ");
+                                    title = input.nextLine();
+                                    System.out.print("Deadline in days: ");
+                                    deadline.add(Calendar.DATE, input.nextInt());
+                                    input.nextLine();
+                                    System.out.print("File name: ");
+                                    filePath = input.nextLine();
+                                    System.out.print("Image description: ");
+                                    description = input.nextLine();
+                                    
+                                    clipBoard.addPhotoNote(title, null, Priority.NONE,
+                                            filePath, description);
+                                    
+                                    break;
+                                }
+                                case 2:
+                                    String title, filePath, shortText;
+                                    
+                                    Calendar deadline = Calendar.getInstance();
+                                    
+                                    System.out.print("\nTitle: ");
+                                    title = input.nextLine();
+                                    System.out.print("File name: ");
+                                    filePath = input.nextLine();
+                                    System.out.print("Image description: ");
+                                    shortText = input.nextLine();
+                                    
+                                    clipBoard.addPhotoNote(title, null, Priority.NONE,
+                                            filePath, shortText);
+                                    
+                                    break;
+                                default:
+                                    System.out.println("Going back a menu...");
+                                    Thread.sleep(150);
+                                    
+                                    break;
+                            }
                     }
                     break;
-                case 4:
+                case 5:
                     clipBoard.showTitles();
                     
                     System.out.print("\nTitle of note to be pinned: ");
                     String titleToBePinned = input.nextLine();
-                    
                     clipBoard.pinNote(titleToBePinned);
-    
-                    Thread.sleep(250);
+                    
                     try
                     {
-                        if (clipBoard.isNotePinned(titleToBePinned))
-                            System.out.print("\nThe note was pinned!");
-                        else
-                            throw new FailedPinException("\nPin failed");
-                    } catch (FailedPinException fpex)
+                        if (!clipBoard.isNotePinned(titleToBePinned))
+                            throw new FailedPinException("Pin failed");
+                    } catch (FailedPinException ex)
                     {
-                        System.err.println(fpex.getMessage());
+                        System.err.println(ex.getMessage());
+                        ex.printStackTrace();
                     }
+                    
                     break;
-                case 5:
+                case 6:
                     clipBoard.showPinnedTitles();
-    
+                    
                     try
                     {
                         if (clipBoard.getPinnedNotes().size() == 0)
@@ -140,14 +274,14 @@ public class Main
                     String titleToBeUnpinned = input.nextLine();
                     clipBoard.unpinNote(titleToBeUnpinned);
                     break;
-                case 6:
+                case 7:
                     clipBoard.showTitles();
-    
+                    
                     System.out.print("\nTitle of note to be archived: ");
                     String titleToBeArchived = input.nextLine();
                     
                     clipBoard.archiveNote(titleToBeArchived);
-    
+                    
                     Thread.sleep(300);
                     try
                     {
@@ -159,23 +293,24 @@ public class Main
                     {
                         System.err.println(farchex.getMessage());
                     }
+                    
                     break;
-                case 7:
+                case 8:
                     System.out.print("\nTitle of note to be deleted: ");
                     String titleToBeDeleted = input.nextLine();
                     
                     clipBoard.deleteNote(titleToBeDeleted);
                     break;
-                case 8:
+                case 9:
                     clipBoard.clearAllNotes();
-    
+                    
                     Thread.sleep(300);
                     if (clipBoard.getAllNotes().size() == 0)
                         System.out.println("\nNotes cleared");
                     break;
-                case 9:
+                case 10:
                     clipBoard.clearArchive();
-    
+                    
                     Thread.sleep(300);
                     if (clipBoard.getArchivedNotes().size() == 0)
                         System.out.println("\nArchive cleared");

@@ -1,37 +1,35 @@
 package me.remind;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
-import java.io.File;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Scanner;
 
-public class PhotoNote extends Note
+public class PhotoNote extends Note implements Viewable
 {
     public static final int MIN_SHORTTXT_LENGHT = 3;
     public static final int MAX_SHORTTXT_LENGHT = 40;
     
-    private Image photo;
-    private String shortText;
+    private BufferedImage image;
+    private String fileName;
+    private String text;
     
-    public PhotoNote(String title, Calendar deadline, Image photo, Priority priority, String shortText)
+    public PhotoNote(String title, Calendar deadline, Priority priority,
+                     String shortText, String fileName)
     {
-        this(title, deadline, photo, priority);
-        //this.photo = photo;
-        initializeImage(); // reading the photo by file path input from user
-        setShortText(shortText);
+        this(title, deadline, priority, fileName);
+        setText(shortText);
     }
     
-    public PhotoNote(String title, Calendar deadline, Image photo, Priority priority)
+    public PhotoNote(String title, Calendar deadline, Priority priority, String fileName)
     {
         super(title, deadline, priority);
-        //this.photo = photo;
-        initializeImage(); // reading the photo by file path input from user
-        setShortText(null);
+        setFileName(fileName);
+        setText(null);
     }
     
-    private void setShortText(String shortText)
+    private void setText(String shortText)
     {
         if (shortText == null)
             return;
@@ -39,29 +37,50 @@ public class PhotoNote extends Note
         if (shortText.length() < MIN_SHORTTXT_LENGHT || shortText.length() > MAX_SHORTTXT_LENGHT)
             return;
         
-        this.shortText = shortText;
+        this.text = shortText;
     }
-
-    /**
-     * Method to initialize the Image photo field
-     */
-    private void initializeImage()
+    
+    private void setFileName(String fileName)
     {
-        Scanner input = new Scanner(System.in);
-        System.out.print("\nFile path: ");
-        String filePath= input.nextLine();
-        try{
-            photo = ImageIO.read(new File(filePath));
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-
+        this.fileName = fileName;
+    }
+    
+    public String getFileName()
+    {
+        return fileName;
+    }
+    
+    @Override
+    public String toString()
+    {
+        return getTitle();
     }
     
     @Override
     public void showNote()
     {
-        // different implementation for image type
+        System.out.println(this.toString());
+    }
+    
+    @Override
+    public void view()
+    {
+        try
+        {
+            image = ImageIO.read(this.getClass().getResource("/res/images/" + fileName));
+        } catch (IOException ioex)
+        {
+            System.err.println(ioex.getMessage());
+            ioex.printStackTrace();
+        }
+        
+        ImageIcon imageIcon = new ImageIcon(image);
+        JLabel jLabel = new JLabel(imageIcon);
+        JFrame frame = new JFrame(getTitle());
+        frame.setSize(image.getWidth(), image.getHeight());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        frame.add(jLabel);
+        frame.setVisible(true);
     }
 }

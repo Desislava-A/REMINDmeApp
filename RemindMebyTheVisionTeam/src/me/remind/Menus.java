@@ -11,16 +11,16 @@ public class Menus
     {
         int choice;
         
-        System.out.println("1.Show notes");
+        System.out.println("1.Show/alter notes");
         System.out.println("2.Show reminders");
         System.out.println("3.Show archive");
-        System.out.println("3.Add note");
-        System.out.println("4.Pin note");
-        System.out.println("5.Unpin note");
-        System.out.println("6.Archive note");
-        System.out.println("7.Delete note");
-        System.out.println("8.Clear all notes");
-        System.out.println("9.Clear archive");
+        System.out.println("4.Add notes");
+        System.out.println("5.Pin note");
+        System.out.println("6.Unpin note");
+        System.out.println("7.Archive note");
+        System.out.println("8.Delete note");
+        System.out.println("9.Clear all notes");
+        System.out.println("10.Clear archive");
         System.out.println("0.Exit");
         
         Scanner input = new Scanner(System.in);
@@ -33,7 +33,27 @@ public class Menus
         return choice;
     }
     
-    public static int addMenu()
+    public static int showSubMenu()
+    {
+        int choice;
+    
+        System.out.println("1.Show all notes");
+        System.out.println("2.View photo notes");
+        System.out.println("3.Play audio notes");
+        System.out.println("4.Change list note items status");
+        System.out.println("0.Exit");
+    
+        Scanner input = new Scanner(System.in);
+        do
+        {
+            System.out.print("\nChoice: ");
+            choice = input.nextInt();
+        } while (choice < 0 || choice > 4);
+    
+        return choice;
+    }
+    
+    public static int addSubMenu()
     {
         int choice;
         

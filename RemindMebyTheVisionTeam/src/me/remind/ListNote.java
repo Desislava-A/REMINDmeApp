@@ -67,10 +67,10 @@ public class ListNote extends Note implements Remindable
                     .map(line ->
                     {
                         
-                        Item listNote2 = new Item();
-                        listNote2.setItemText(line);
-                        listNote2.setCheck(Check.UNCHECKED);
-                        return listNote2;
+                        Item listNote = new Item();
+                        listNote.setItemText(line);
+                        listNote.setCheck(Check.UNCHECKED);
+                        return listNote;
                         
                         
                     }).collect(Collectors.toList());
@@ -82,19 +82,29 @@ public class ListNote extends Note implements Remindable
         }
     }
     
+    private void listAllItemsFromList()
+    {
+        System.out.println("\n[List]");
+        checkBoxesList.forEach(x -> System.out.println("\t" + x.toString()));
+    }
+    
     /**
      * Method that prompts for checking different items from a list note by index
      */
-    public void promptToCheck()
+    public void promptToChangeStatus()
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
-        System.out.println("Select which index to check: ");
         try
         {
             // when done with marking items checked, type "-1" to terminate the process
+            
+            
             while (true)
             {
+                listAllItemsFromList();
+                System.out.print("\nSelect which index status to change: ");
+                
                 int index = Integer.parseInt(br.readLine());
                 
                 if ((index < MIN_LIST_SIZE_LENGTH || index > checkBoxesList.size()) &&
@@ -103,12 +113,23 @@ public class ListNote extends Note implements Remindable
                 else if (index == EXIT_PROMPT)
                     return;
                 else
-                    checkBoxesList.get(index).setCheck(Check.CHECKED);
+                {
+                    if (checkBoxesList.get(index - 1).getCheck() == Check.UNCHECKED)
+                        checkBoxesList.get(index - 1).setCheck(Check.CHECKED);
+                    else
+                        checkBoxesList.get(index - 1).setCheck(Check.UNCHECKED);
+                }
             }
         } catch (IOException ioex)
         {
             ioex.printStackTrace();
         }
+    }
+    
+    @Override
+    public String toString()
+    {
+        return "List note title: " + super.getTitle();
     }
     
     @Override

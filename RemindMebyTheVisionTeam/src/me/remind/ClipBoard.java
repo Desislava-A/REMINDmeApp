@@ -1,23 +1,27 @@
 package me.remind;
 
-import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 public class ClipBoard implements Enumeration<Note>
 {
     private List<Note> allNotes;
     private List<Remindable> remindableNotes;
+    private List<ListNote> listNotes;
+    private List<Viewable> images;
+    private List<Playable> voiceRecords;
     private List<Note> archivedNotes;
     private Set<Note> pinnedNotes;
-    private int iteratorIndex = 0;
+    private static int iteratorIndex = 0;
     
     public ClipBoard()
     {
         setAllNotes(new ArrayList<>());
         setRemindableNotes(new ArrayList<>());
         setArchivedNotes(new ArrayList<>());
-        setPinnedNotes(new HashSet<>());
+        setListNotes(new ArrayList<>());
+        setImages(new ArrayList<>());
+        setVoiceRecords(new ArrayList<>());
+        setPinnedNotes(new LinkedHashSet<>());
     }
     
     public List<Note> getAllNotes()
@@ -40,6 +44,31 @@ public class ClipBoard implements Enumeration<Note>
         this.remindableNotes = remindableNotes;
     }
     
+    private void setImages(List<Viewable> images)
+    {
+        this.images = images;
+    }
+    
+    public List<Viewable> getImages()
+    {
+        return images;
+    }
+    
+    private void setVoiceRecords(List<Playable> voiceRecords)
+    {
+        this.voiceRecords = voiceRecords;
+    }
+    
+    public List<Playable> getVoiceRecords()
+    {
+        return voiceRecords;
+    }
+    
+    public Set<Note> getPinnedNotes()
+    {
+        return pinnedNotes;
+    }
+    
     private void setPinnedNotes(Set<Note> pinnedNotes)
     {
         this.pinnedNotes = pinnedNotes;
@@ -50,14 +79,19 @@ public class ClipBoard implements Enumeration<Note>
         this.archivedNotes = archivedNotes;
     }
     
-    public Set<Note> getPinnedNotes()
-    {
-        return pinnedNotes;
-    }
-    
     public List<Note> getArchivedNotes()
     {
         return archivedNotes;
+    }
+    
+    public List<ListNote> getListNotes()
+    {
+        return listNotes;
+    }
+    
+    private void setListNotes(List<ListNote> listNotes)
+    {
+        this.listNotes = listNotes;
     }
     
     /**
@@ -76,31 +110,39 @@ public class ClipBoard implements Enumeration<Note>
      */
     public void addListNote(String title, Calendar deadline, Priority priority)
     {
-        ListNote textNote = new ListNote(title, deadline, priority);
+        ListNote listNote = new ListNote(title, deadline, priority);
         
-        allNotes.add(textNote);
-        remindableNotes.add(textNote);
+        allNotes.add(listNote);
+        remindableNotes.add(listNote);
+        listNotes.add(listNote);
     }
-
+    
     /**
      * Method that constructs a photoNote object and adds it to the allNotes list
      */
-    public void addPhotoNote (String title, Calendar deadline, Image photo, Priority priority){
-        PhotoNote photoNote = new PhotoNote(title,deadline,photo,priority);
+    public void addPhotoNote(String title, Calendar deadline, Priority priority,
+                             String filePath, String description)
+    {
+        PhotoNote photoNote = new PhotoNote(title, deadline, priority,
+                filePath, description);
+        
         allNotes.add(photoNote);
+        images.add(photoNote);
     }
-
+    
     /**
      * Method that constructs a voiceNote object and adds it to to the allNotes list
      * and remindableNotes list
      */
-    public void addVoiceNote (String title, Calendar deadline, Priority priority, String audioFile){
-        VoiceNote voiceNote = new VoiceNote(title,deadline,priority,audioFile);
+    public void addVoiceNote(String title, Calendar deadline, Priority priority, String audioFile)
+    {
+        VoiceNote voiceNote = new VoiceNote(title, deadline, priority, audioFile);
+        
         allNotes.add(voiceNote);
         remindableNotes.add(voiceNote);
+        voiceRecords.add(voiceNote);
     }
-
-
+    
     
     /**
      * Method that prints the contents of a note searched by title
@@ -139,6 +181,12 @@ public class ClipBoard implements Enumeration<Note>
         allNotes.forEach(Note::printTitle);
     }
     
+    public void showListTitles()
+    {
+        System.out.println("\n[Titles]");
+        listNotes.forEach(Note::printTitle);
+    }
+    
     /**
      * Method that prints all pinned notes' titles
      * Invoked prior to pinning a certain note
@@ -149,10 +197,19 @@ public class ClipBoard implements Enumeration<Note>
     }
     
     /**
+     * Method that prints all archived notes' titles
+     *
+     */
+    public void showArchive()
+    {
+        archivedNotes.forEach(Note::printTitle);
+    }
+    
+    /**
      * Method that checks if a note has been successfully pinned
      *
      * @param title - the title of the note to be checked
-     * @return - true or false
+     * @return - true if a positive match for title is found
      */
     public boolean isNotePinned(String title)
     {
@@ -204,6 +261,13 @@ public class ClipBoard implements Enumeration<Note>
         }
     }
     
+    public void promptToCheckListItems(String title)
+    {
+        for (ListNote list: listNotes)
+            if (list.getTitle().equals(title))
+                list.promptToChangeStatus();
+    }
+    
     /**
      * Method that checks if a note has been successfully archived
      *
@@ -222,6 +286,7 @@ public class ClipBoard implements Enumeration<Note>
     /**
      * Method that deltetes a note by title
      * Also deletes the note if it's also in the pinned data structure
+     *
      * @param title - the title of the note to be deleted
      */
     public void deleteNote(String title)
@@ -244,6 +309,8 @@ public class ClipBoard implements Enumeration<Note>
         allNotes.clear();
         archivedNotes.clear();
         remindableNotes.clear();
+        images.clear();
+        voiceRecords.clear();
     }
     
     /**
@@ -265,7 +332,7 @@ public class ClipBoard implements Enumeration<Note>
     @Override
     public boolean hasMoreElements()
     {
-        return iteratorIndex < allNotes.size() && allNotes.get(iteratorIndex) != null;
+        return allNotes.get(iteratorIndex) != null;
     }
     
     @Override
@@ -276,6 +343,8 @@ public class ClipBoard implements Enumeration<Note>
     
     public Iterator<Note> asIterator()
     {
+        iteratorIndex = 0;
+        
         Iterator<Note> it = new Iterator<Note>()
         {
             @Override

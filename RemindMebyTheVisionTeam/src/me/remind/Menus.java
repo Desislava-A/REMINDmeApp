@@ -9,7 +9,7 @@ public class Menus
 {
     public static int mainMenu()
     {
-        int choice;
+        int choice = -1;
         
         System.out.println("1.Show/alter notes");
         System.out.println("2.Show reminders");
@@ -27,7 +27,19 @@ public class Menus
         do
         {
             System.out.print("\nChoice: ");
-            choice = input.nextInt();
+            /*
+             * Using input.hasNextInt() handles input mismatch errors
+             */
+            if (input.hasNextInt()) {
+
+                choice = input.nextInt();
+            }
+            else {
+                System.err.println("Please choose a number from the menu options");
+                input.next();
+                continue;
+            }
+
         } while (choice < 0 || choice > 10);
         
         return choice;
@@ -35,7 +47,7 @@ public class Menus
     
     public static int showSubMenu()
     {
-        int choice;
+        int choice=-1;
     
         System.out.println("1.Show all notes");
         System.out.println("2.View photo notes");
@@ -47,7 +59,19 @@ public class Menus
         do
         {
             System.out.print("\nChoice: ");
-            choice = input.nextInt();
+            /*
+             * Using input.hasNextInt() handles input mismatch errors
+             */
+            if (input.hasNextInt()) {
+
+                choice = input.nextInt();
+            }
+            else {
+                System.err.println("Please choose a number from the menu options");
+                input.next();
+                continue;
+            }
+            
         } while (choice < 0 || choice > 4);
     
         return choice;
@@ -55,7 +79,7 @@ public class Menus
     
     public static int addSubMenu()
     {
-        int choice;
+        int choice=-1;
         
         System.out.println("1.Add text note");
         System.out.println("2.Add checkbox list");
@@ -67,7 +91,20 @@ public class Menus
         do
         {
             System.out.print("\nChoice: ");
-            choice = input.nextInt();
+
+            /*
+             * Using input.hasNextInt() handles input mismatch errors
+             */
+            if (input.hasNextInt()) {
+
+                choice = input.nextInt();
+            }
+            else {
+                System.err.println("Please choose a number from the menu options");
+                input.next();
+                continue;
+            }
+
         } while (choice < 0 || choice > 5);
         
         return choice;
@@ -75,7 +112,7 @@ public class Menus
     
     public static int hasReminderMenu()
     {
-        int choice;
+        int choice=-1;
     
         System.out.println("\n1.Reminder on");
         System.out.println("2.Reminder off\n");
@@ -84,7 +121,20 @@ public class Menus
         do
         {
             System.out.print("Choice: ");
-            choice = input.nextInt();
+
+            /*
+             * Using input.hasNextInt() handles input mismatch errors
+             */
+            if (input.hasNextInt()) {
+
+                choice = input.nextInt();
+            }
+            else {
+                System.err.println("Please choose a number from the menu options");
+                input.next();
+                continue;
+            }
+
         } while (choice < 0 || choice > 3);
     
         return choice;

@@ -4,7 +4,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Calendar;
+import java.util.Date;
 
 public class PhotoNote extends Note implements Viewable
 {
@@ -15,14 +15,14 @@ public class PhotoNote extends Note implements Viewable
     private String fileName;
     private String text;
     
-    public PhotoNote(String title, Calendar deadline, Priority priority,
+    public PhotoNote(String title, Date deadline, Priority priority,
                      String shortText, String fileName)
     {
         this(title, deadline, priority, fileName);
         setText(shortText);
     }
     
-    public PhotoNote(String title, Calendar deadline, Priority priority, String fileName)
+    public PhotoNote(String title, Date deadline, Priority priority, String fileName)
     {
         super(title, deadline, priority);
         setFileName(fileName);

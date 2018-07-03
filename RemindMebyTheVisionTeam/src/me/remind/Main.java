@@ -94,7 +94,7 @@ public class Main
                                     deadline.add(Calendar.DATE, input.nextInt());
                                     input.nextLine();
                                     
-                                    clipBoard.addTextNote(title, deadline,
+                                    clipBoard.addTextNote(title, deadline.getTime(),
                                             Priority.NONE);
                                     break;
                                 }
@@ -128,7 +128,7 @@ public class Main
                                     deadline.add(Calendar.DATE, input.nextInt());
                                     input.nextLine();
                                     
-                                    clipBoard.addListNote(title, deadline,
+                                    clipBoard.addListNote(title, deadline.getTime(),
                                             Priority.NONE);
                                     break;
                                 }
@@ -166,7 +166,7 @@ public class Main
                                     System.out.print("File name: ");
                                     filePath = input.nextLine();
                                     
-                                    clipBoard.addVoiceNote(title, deadline,
+                                    clipBoard.addVoiceNote(title, deadline.getTime(),
                                             Priority.NONE, filePath);
                                     
                                     break;

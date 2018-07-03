@@ -2,7 +2,7 @@ package me.remind;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
-import java.util.Calendar;
+import java.util.Date;
 
 public class VoiceNote extends Note implements Remindable, Playable
 {
@@ -10,7 +10,7 @@ public class VoiceNote extends Note implements Remindable, Playable
     private AudioInputStream inputStream;
     private Clip audioClip;
     
-    public VoiceNote(String title, Calendar deadline, Priority priority, String fileName)
+    public VoiceNote(String title, Date deadline, Priority priority, String fileName)
     {
         super(title, deadline, priority);
         setFileName(fileName);

@@ -1,6 +1,5 @@
 package me.remind;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -11,7 +10,6 @@ public abstract class Note
     public static final int DEADLINE_LENGTH = 10;
     
     private String title;
-//    private Calendar deadline;
     private Date deadline;
     private Priority priority;
     

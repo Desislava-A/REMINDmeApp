@@ -97,7 +97,7 @@ public class ClipBoard implements Enumeration<Note>
     /**
      * Method that constructs a textNote object and adds it to the data structures
      */
-    public void addTextNote(String title, Calendar deadline, Priority priority)
+    public void addTextNote(String title, Date deadline, Priority priority)
     {
         TextNote textNote = new TextNote(title, deadline, priority);
         
@@ -108,7 +108,7 @@ public class ClipBoard implements Enumeration<Note>
     /**
      * Method that constructs a listNote object and adds it to the data structures
      */
-    public void addListNote(String title, Calendar deadline, Priority priority)
+    public void addListNote(String title, Date deadline, Priority priority)
     {
         ListNote listNote = new ListNote(title, deadline, priority);
         
@@ -120,7 +120,7 @@ public class ClipBoard implements Enumeration<Note>
     /**
      * Method that constructs a photoNote object and adds it to the allNotes list
      */
-    public void addPhotoNote(String title, Calendar deadline, Priority priority,
+    public void addPhotoNote(String title, Date deadline, Priority priority,
                              String filePath, String description)
     {
         PhotoNote photoNote = new PhotoNote(title, deadline, priority,
@@ -134,7 +134,7 @@ public class ClipBoard implements Enumeration<Note>
      * Method that constructs a voiceNote object and adds it to to the allNotes list
      * and remindableNotes list
      */
-    public void addVoiceNote(String title, Calendar deadline, Priority priority, String audioFile)
+    public void addVoiceNote(String title, Date deadline, Priority priority, String audioFile)
     {
         VoiceNote voiceNote = new VoiceNote(title, deadline, priority, audioFile);
         

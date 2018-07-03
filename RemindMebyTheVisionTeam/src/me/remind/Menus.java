@@ -71,7 +71,7 @@ public class Menus
                 input.next();
                 continue;
             }
-            
+
         } while (choice < 0 || choice > 4);
     
         return choice;

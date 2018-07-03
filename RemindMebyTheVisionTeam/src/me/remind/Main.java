@@ -1,7 +1,7 @@
 package me.remind;
 
 import java.util.Calendar;
-import java.util.Iterator;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Main
@@ -37,14 +37,14 @@ public class Main
                                 {
                                     String title;
                                     
-                                    Calendar deadline = Calendar.getInstance();
-                                    
+                                    Calendar calendar = Calendar.getInstance();
+                                    Date deadline;
                                     System.out.print("\nTitle: ");
                                     title = input.nextLine();
                                     System.out.print("Deadline in days: ");
-                                    deadline.add(Calendar.DATE, input.nextInt());
+                                    calendar.add(Calendar.DATE, input.nextInt());
                                     input.nextLine();
-                                    
+                                    deadline = calendar.getTime();
                                     clipBoard.addTextNote(title, deadline, Priority.NONE);
                                     break;
                                 }
@@ -69,14 +69,14 @@ public class Main
                                 {
                                     String title;
                                     
-                                    Calendar deadline = Calendar.getInstance();
-                                    
+                                    Calendar calendar = Calendar.getInstance();
+                                    Date deadline;
                                     System.out.print("\nTitle: ");
                                     title = input.nextLine();
                                     System.out.print("Deadline in days: ");
-                                    deadline.add(Calendar.DATE, input.nextInt());
+                                    calendar.add(calendar.DATE, input.nextInt());
                                     input.nextLine();
-                                    
+                                    deadline = calendar.getTime();
                                     clipBoard.addListNote(title, deadline, Priority.NONE);
                                     break;
                                 }

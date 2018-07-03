@@ -1,6 +1,5 @@
 package me.remind;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class VoiceNote extends Note implements Remindable

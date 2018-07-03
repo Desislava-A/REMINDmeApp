@@ -1,6 +1,6 @@
 package me.remind;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 public class TextNote extends Note implements Remindable
@@ -13,7 +13,7 @@ public class TextNote extends Note implements Remindable
         initialize();
     }
     
-    public TextNote(String title, Calendar deadline, Priority priority)
+    public TextNote(String title, Date deadline, Priority priority)
     {
         super(title, deadline);
         initialize();

@@ -22,13 +22,13 @@ public class ListNote extends Note implements Remindable
         super(title);
     }
     
-    public ListNote(String title, Calendar deadline, Priority priority, List<String> checkBoxesList)
+    public ListNote(String title, Date deadline, Priority priority, List<String> checkBoxesList)
     {
         this(title, deadline, priority);
         initializeList();
     }
     
-    public ListNote(String title, Calendar deadline, Priority priority)
+    public ListNote(String title, Date deadline, Priority priority)
     {
         super(title, deadline, priority);
         initializeList();

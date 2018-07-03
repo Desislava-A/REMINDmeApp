@@ -1,6 +1,7 @@
 package me.remind;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public abstract class Note
@@ -10,8 +11,8 @@ public abstract class Note
     public static final int DEADLINE_LENGTH = 10;
     
     private String title;
-    private Calendar deadline;
-    
+//    private Calendar deadline;
+    private Date deadline;
     private Priority priority;
     
     public Note()
@@ -23,12 +24,12 @@ public abstract class Note
         this(title, null);
     }
     
-    public Note(String title, Calendar deadline)
+    public Note(String title, Date deadline)
     {
         this(title, deadline, Priority.NONE);
     }
     
-    public Note(String title, Calendar deadline, Priority priority)
+    public Note(String title, Date deadline, Priority priority)
     {
         setTitle(title);
         setDeadline(deadline);
@@ -48,12 +49,11 @@ public abstract class Note
         this.title = title;
     }
     
-    public Calendar getDeadline()
-    {
+    public Date getDeadline() {
         return deadline;
     }
     
-    private void setDeadline(Calendar deadline)
+    private void setDeadline(Date deadline)
     {
         this.deadline = deadline;
     }
@@ -71,7 +71,7 @@ public abstract class Note
     
     protected long getDaysToDeadline()
     {
-        return TimeUnit.MILLISECONDS.toDays(deadline.getTimeInMillis() -
+        return TimeUnit.MILLISECONDS.toDays(deadline.getTime() -
                 System.currentTimeMillis()) + 1;
     }
     

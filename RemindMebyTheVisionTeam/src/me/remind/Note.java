@@ -36,7 +36,7 @@ public abstract class Note
         setPinned(false);
     }
     
-    public String getTitle()
+    protected String getTitle()
     {
         return title;
     }
@@ -49,7 +49,7 @@ public abstract class Note
         this.title = title;
     }
     
-    public Date getDeadline()
+    protected Date getDeadline()
     {
         return deadline;
     }
@@ -57,6 +57,11 @@ public abstract class Note
     private void setDeadline(Date deadline)
     {
         this.deadline = deadline;
+    }
+    
+    protected Priority getPriority()
+    {
+        return priority;
     }
     
     private void setPriority(Priority priority)
@@ -70,7 +75,7 @@ public abstract class Note
             this.priority = priority;
     }
     
-    public boolean isPinned()
+    protected boolean isPinned()
     {
         return pinned;
     }
@@ -91,7 +96,7 @@ public abstract class Note
         System.out.println(getTitle());
     }
     
-    public abstract void showNote();
+    protected abstract void showNote();
     
-    public abstract String getTitleWithType();
+    protected abstract String getTitleWithType();
 }

@@ -1,42 +1,68 @@
 package me.remind;
 
 import java.util.Calendar;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main
 {
+    private static String title = null;
+    private static String fileName = null;
+    private static String description = null;
+    private static Calendar deadline = null;
+    private static boolean flag = false;
+    private static final Scanner input = new Scanner(System.in);
+    
+    private static void getTitle()
+    {
+        System.out.print("\nTitle: ");
+        title = input.nextLine();
+    }
+    
+    private static void getDeadline()
+    {
+        System.out.print("Deadline in days: ");
+        deadline.add(Calendar.DATE, input.nextInt());
+        input.nextLine();
+    }
+    
+    private static void getFileName()
+    {
+        System.out.print("File name: ");
+        fileName = input.nextLine();
+    }
+    
+    private static void getImgDescription()
+    {
+        System.out.print("Image description: ");
+        description = input.nextLine();
+    }
+    
     public static void main(String[] args) throws InterruptedException
     {
-        Scanner input = new Scanner(System.in);
-        
         ClipBoard clipBoard = new ClipBoard();
-    
-        String title = null;
-        String fileName = null;
-        String description = null;
-        Calendar deadline = null;
         
         while (true)
         {
-            System.out.println("\n");
+            System.out.println();
             switch (Menus.mainMenu())
             {
                 case 1:
                     System.out.println();
-                    Thread.sleep(300);
                     try
                     {
                         if (clipBoard.getAllNotes().size() == 0)
-                            throw new IllegalArgumentException("Clipboard empty!");
-                    } catch (IllegalArgumentException argex)
+                            throw new IllegalStateException("Clipboard empty!");
+                    } catch (IllegalStateException stateex)
                     {
-                        System.err.print(argex.getMessage());
+                        System.err.println(stateex.getMessage());
+                        Thread.sleep(400);
                         break;
                     }
                     
                     clipBoard.showAllNotes();
                     
-                    System.out.print("\nShow index : ");
+                    System.out.print("\nSelect note number: ");
                     int index = input.nextInt();
                     input.nextLine();
                     
@@ -44,14 +70,14 @@ public class Main
                     break;
                 case 2:
                     System.out.println();
-                    Thread.sleep(300);
                     try
                     {
                         if (clipBoard.getRemindableNotes().size() == 0)
-                            throw new IllegalArgumentException("No reminders!");
-                    } catch (IllegalArgumentException argex)
+                            throw new IllegalStateException("No reminders!");
+                    } catch (IllegalStateException stateex)
                     {
-                        System.err.print(argex.getMessage());
+                        System.err.println(stateex.getMessage());
+                        Thread.sleep(400);
                         break;
                     }
                     
@@ -60,14 +86,14 @@ public class Main
                     break;
                 case 3:
                     System.out.println();
-                    Thread.sleep(300);
                     try
                     {
                         if (clipBoard.getArchivedNotes().size() == 0)
-                            throw new IllegalArgumentException("No archived notes!");
-                    } catch (IllegalArgumentException argex)
+                            throw new IllegalStateException("No archived notes!");
+                    } catch (IllegalStateException stateex)
                     {
-                        System.err.print(argex.getMessage());
+                        System.err.println(stateex.getMessage());
+                        Thread.sleep(400);
                         break;
                     }
                     
@@ -84,11 +110,8 @@ public class Main
                             {
                                 case 1:
                                 {
-                                    System.out.print("\nTitle: ");
-                                    title = input.nextLine();
-                                    System.out.print("Deadline in days: ");
-                                    deadline.add(Calendar.DATE, input.nextInt());
-                                    input.nextLine();
+                                    getTitle();
+                                    getDeadline();
                                     
                                     clipBoard.addTextNote(title, deadline.getTime(),
                                             Priority.NONE);
@@ -96,9 +119,8 @@ public class Main
                                 }
                                 case 2:
                                 {
-                                    System.out.print("\nTitle: ");
-                                    title = input.nextLine();
-    
+                                    getTitle();
+                                    
                                     clipBoard.addTextNote(title, null,
                                             Priority.NONE);
                                     break;
@@ -114,28 +136,22 @@ public class Main
                                 {
                                     deadline = Calendar.getInstance();
                                     
-                                    System.out.print("\nTitle: ");
-                                    title = input.nextLine();
-                                    System.out.print("Deadline in days: ");
-                                    deadline.add(Calendar.DATE, input.nextInt());
-                                    input.nextLine();
-    
+                                    getTitle();
+                                    getDeadline();
+                                    
                                     clipBoard.addListNote(title, deadline.getTime(),
                                             Priority.NONE);
                                     break;
                                 }
                                 case 2:
                                 {
-                                    System.out.print("\nTitle: ");
-                                    title = input.nextLine();
-    
+                                    getTitle();
+                                    
                                     clipBoard.addListNote(title, null,
                                             Priority.NONE);
                                     break;
                                 }
-                                default:
-                                    System.out.println("Going back a menu...");
-                                    Thread.sleep(300);
+                                case 0:
                                     break;
                             }
                             break;
@@ -147,32 +163,24 @@ public class Main
                                 {
                                     deadline = Calendar.getInstance();
                                     
-                                    System.out.print("\nTitle: ");
-                                    title = input.nextLine();
-                                    System.out.print("Deadline in days: ");
-                                    deadline.add(Calendar.DATE, input.nextInt());
-                                    input.nextLine();
-                                    System.out.print("File name: ");
-                                    fileName = input.nextLine();
-    
+                                    getTitle();
+                                    getDeadline();
+                                    getFileName();
+                                    
                                     clipBoard.addVoiceNote(title, deadline.getTime(),
                                             Priority.NONE, fileName);
                                     break;
                                 }
                                 case 2:
                                 {
-                                    System.out.print("\nTitle: ");
-                                    title = input.nextLine();
-                                    System.out.print("File name: ");
-                                    fileName = input.nextLine();
-    
+                                    getTitle();
+                                    getFileName();
+                                    
                                     clipBoard.addVoiceNote(title, null,
                                             Priority.NONE, fileName);
                                     break;
                                 }
-                                default:
-                                    System.out.println("Going back a menu...");
-                                    Thread.sleep(150);
+                                case 0:
                                     break;
                             }
                             break;
@@ -183,36 +191,26 @@ public class Main
                                 {
                                     deadline = Calendar.getInstance();
                                     
-                                    System.out.print("\nTitle: ");
-                                    title = input.nextLine();
-                                    System.out.print("Deadline in days: ");
-                                    deadline.add(Calendar.DATE, input.nextInt());
-                                    input.nextLine();
-                                    System.out.print("File name: ");
-                                    fileName = input.nextLine();
-                                    System.out.print("Image description: ");
-                                    description = input.nextLine();
-    
+                                    getTitle();
+                                    getDeadline();
+                                    getFileName();
+                                    getImgDescription();
+                                    
                                     clipBoard.addPhotoNote(title, null, Priority.NONE,
                                             fileName, description);
                                     break;
                                 }
                                 case 2:
                                 {
-                                    System.out.print("\nTitle: ");
-                                    title = input.nextLine();
-                                    System.out.print("File name: ");
-                                    fileName = input.nextLine();
-                                    System.out.print("Image description: ");
-                                    description = input.nextLine();
-    
+                                    getTitle();
+                                    getFileName();
+                                    getImgDescription();
+                                    
                                     clipBoard.addPhotoNote(title, null, Priority.NONE,
                                             fileName, description);
                                     break;
                                 }
-                                default:
-                                    System.out.println("Going back a menu...");
-                                    Thread.sleep(150);
+                                case 0:
                                     break;
                             }
                     }
@@ -222,170 +220,190 @@ public class Main
                     try
                     {
                         if (clipBoard.getAllNotes().size() == 0)
-                            throw new IllegalArgumentException("Clipboard empty!");
-                    } catch (IllegalArgumentException argex)
-                    {
-                        System.err.print(argex.getMessage());
-                        break;
-                    }
-    
-                    System.out.print("\nTitle to search: ");
-                    title = input.nextLine();
-                    
-                    Thread.sleep(300);
-                    try
-                    {
+                            throw new IllegalStateException("Clipboard empty!");
+                        
+                        System.out.print("\nTitle to search: ");
+                        title = input.nextLine();
+                        
                         clipBoard.search(title);
-                    } catch (NullPointerException nullex)
+                    } catch (IllegalStateException stateex)
                     {
-                        System.err.println(nullex.getMessage());
-                        break;
+                        System.err.print(stateex.getMessage());
+                    } catch (NoSuchElementException notfoundex)
+                    {
+                        System.err.println("Note not found!");
                     }
                     
+                    Thread.sleep(400);
                     break;
                 case 6:
                     System.out.println();
-                    Thread.sleep(300);
                     try
                     {
                         if (clipBoard.getListNotes().size() == 0)
-                            throw new IllegalArgumentException("No list notes!");
-                    } catch (IllegalArgumentException argex)
+                            throw new IllegalStateException("No list notes!");
+                        
+                        clipBoard.showListTitles();
+                        
+                        System.out.println("\nWhich title to edit: ");
+                        title = input.nextLine();
+                        
+                        clipBoard.promptToCheckListItems(title);
+                    } catch (IllegalStateException stateex)
                     {
-                        System.err.print(argex.getMessage());
-                        break;
+                        System.err.println(stateex.getMessage());
+                    } catch (NoSuchElementException notfoundex)
+                    {
+                        System.err.println("Note not found!");
                     }
-                    
-                    clipBoard.showListTitles();
     
-                    System.out.print("\nWhich title to edit: ");
-                    title = input.nextLine();
-    
-                    clipBoard.promptToCheckListItems(title);
+                    Thread.sleep(400);
                     break;
                 case 7:
                     System.out.println();
-                    Thread.sleep(300);
                     try
                     {
                         if (clipBoard.getAllNotes().size() == 0)
-                            throw new IllegalArgumentException("Clipboard empty!");
-                    } catch (IllegalArgumentException argex)
-                    {
-                        System.err.print(argex.getMessage());
-                        break;
-                    }
-                    
-                    clipBoard.showTitles();
-                    
-                    System.out.print("\nTitle of note to be pinned: ");
-                    String titleToBePinned = input.nextLine();
-                    clipBoard.pinNote(titleToBePinned);
-                    
-                    try
-                    {
+                            throw new IllegalStateException("Clipboard empty!");
+                        
+                        clipBoard.showTitles();
+                        
+                        System.out.print("\nTitle of note to be pinned: ");
+                        String titleToBePinned = input.nextLine();
+                        
+                        clipBoard.pinNote(titleToBePinned);
+                        
                         if (!clipBoard.isNotePinned(titleToBePinned))
                             throw new FailedPinException("Pin failed");
-                    } catch (FailedPinException ex)
+                    } catch (IllegalStateException stateex)
                     {
-                        System.err.print(ex.getMessage());
-                        ex.printStackTrace();
+                        System.err.println(stateex.getMessage());
+                    } catch (NoSuchElementException notfoundex)
+                    {
+                        System.err.println("Note not found!");
+                    } catch (FailedPinException pinex)
+                    {
+                        System.err.println(pinex.getMessage());
                     }
-                    
+    
+                    Thread.sleep(400);
                     break;
                 case 8:
                     System.out.println();
-                    Thread.sleep(300);
                     try
                     {
                         if (clipBoard.getPinnedNotes().size() == 0)
-                            throw new IllegalArgumentException();
-                    } catch (IllegalArgumentException iargex)
+                            throw new IllegalStateException("\nThere aren't any pinned notes!");
+                        
+                        clipBoard.showPinned();
+                        
+                        System.out.println("\nTitle of note to be unpinned: ");
+                        String titleToBeUnpinned = input.nextLine();
+                        
+                        clipBoard.unpinNote(titleToBeUnpinned);
+                    } catch (IllegalStateException stateex)
                     {
-                        System.err.print("\nNo pinned notes");
-                        break;
+                        System.err.println(stateex.getMessage());
+                    } catch (NoSuchElementException notfoundex)
+                    {
+                        System.err.println("Note not found!");
                     }
     
-                    clipBoard.showPinned();
-                    
-                    System.out.print("\nTitle of note to be unpinned: ");
-                    String titleToBeUnpinned = input.nextLine();
-                    clipBoard.unpinNote(titleToBeUnpinned);
+                    Thread.sleep(400);
                     break;
                 case 9:
                     System.out.println();
-                    Thread.sleep(300);
                     try
                     {
                         if (clipBoard.getAllNotes().size() == 0)
-                            throw new IllegalArgumentException("Clipboard empty!");
-                    } catch (IllegalArgumentException argex)
-                    {
-                        System.err.print(argex.getMessage());
-                        break;
-                    }
-                    
-                    clipBoard.showTitles();
-                    
-                    System.out.print("\nTitle of note to be archived: ");
-                    String titleToBeArchived = input.nextLine();
-                    
-                    clipBoard.archiveNote(titleToBeArchived);
-                    
-                    Thread.sleep(300);
-                    try
-                    {
+                            throw new IllegalStateException("Clipboard empty!");
+                        
+                        clipBoard.showTitles();
+                        
+                        System.out.print("\nTitle of note to be archived: ");
+                        String titleToBeArchived = input.nextLine();
+                        
+                        clipBoard.archiveNote(titleToBeArchived);
+                        
                         if (clipBoard.isNoteArchived(titleToBeArchived))
                             System.out.print("\nNote archived");
                         else
                             throw new FailedArchiveException("\nArchive failed");
+                    } catch (IllegalStateException stateex)
+                    {
+                        System.err.println(stateex.getMessage());
                     } catch (FailedArchiveException farchex)
                     {
-                        System.err.print(farchex.getMessage());
+                        System.err.println(farchex.getMessage());
                     }
-                    
+    
+                    Thread.sleep(400);
                     break;
                 case 10:
-                    Thread.sleep(300);
                     try
                     {
                         if (clipBoard.getAllNotes().size() == 0)
-                            throw new IllegalArgumentException("Clipboard empty!");
-                    } catch (IllegalArgumentException argex)
+                            throw new IllegalStateException("\nClipboard empty!\n");
+                        
+                        clipBoard.showTitles();
+                        
+                        System.out.print("\nTitle of note to be deleted: ");
+                        String titleToBeDeleted = input.nextLine();
+                        
+                        clipBoard.deleteNote(titleToBeDeleted);
+                    } catch (NoSuchElementException notfoundex)
                     {
-                        System.err.print(argex.getMessage());
-                        break;
+                        System.err.println("Note not found!");
+                    } catch (IllegalStateException stateex)
+                    {
+                        System.err.print(stateex.getMessage());
                     }
-                    
-                    clipBoard.showTitles();
-                    
-                    System.out.print("\nTitle of note to be deleted: ");
-                    String titleToBeDeleted = input.nextLine();
+    
+                    Thread.sleep(400);
+                    break;
+                case 11:
+                    flag = false;
                     
                     try
                     {
-                        clipBoard.deleteNote(titleToBeDeleted);
-                    } catch (NullPointerException nullex)
+                        clipBoard.clearAllNotes();
+                    } catch (IllegalStateException stateex)
                     {
-                        System.err.println("There are no notes matching this title!");
+                        System.err.println("\n" + stateex.getMessage());
+                        flag = true;
+                        Thread.sleep(400);
+                        break;
                     }
-                    break;
-                case 11:
-                    clipBoard.clearAllNotes();
                     
-                    Thread.sleep(300);
-                    if (clipBoard.getAllNotes().size() == 0)
-                        System.out.print("\nNotes cleared");
+                    if (clipBoard.getAllNotes().size() == 0 && flag)
+                        System.out.println("\nNotes cleared");
+                    
                     break;
                 case 12:
-                    clipBoard.clearArchive();
+                    flag = false;
                     
-                    Thread.sleep(300);
-                    if (clipBoard.getArchivedNotes().size() == 0)
-                        System.out.print("\nArchive cleared");
+                    try
+                    {
+                        clipBoard.clearArchive();
+                    } catch (IllegalStateException stateex)
+                    {
+                        System.err.println("\n" + stateex.getMessage());
+                        flag = true;
+                        Thread.sleep(400);
+                        break;
+                    }
+                    
+                    if (clipBoard.getArchivedNotes().size() == 0 && flag)
+                        System.out.println("\nArchive cleared");
+                    
                     break;
                 case 0:
+                    if (input != null)
+                        input.close();
+                    
                     System.exit(0);
+                    break;
+                default:
                     break;
             }
         }

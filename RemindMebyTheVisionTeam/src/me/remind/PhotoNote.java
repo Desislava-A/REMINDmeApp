@@ -46,13 +46,13 @@ public class PhotoNote extends Note
         this.fileName = fileName;
     }
     
-    public String getFileName()
+    protected String getFileName()
     {
         return fileName;
     }
     
     @Override
-    public String getTitleWithType()
+    protected String getTitleWithType()
     {
         return "[PhotoNote]" + "\n\t" + getTitle();
     }
@@ -64,7 +64,7 @@ public class PhotoNote extends Note
     }
     
     @Override
-    public void showNote()
+    protected void showNote()
     {
         try
         {

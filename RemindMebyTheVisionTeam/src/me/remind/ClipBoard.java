@@ -3,41 +3,41 @@ package me.remind;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class ClipBoard implements Enumeration<Note>
+public class ClipBoard implements Iterable<Note>
 {
-    private List<Note> allNotes;
-    private List<Remindable> remindableNotes;
-    private List<ListNote> listNotes;
-    private List<Note> archivedNotes;
+    private LinkedList<Note> allNotes;
+    private Set<Remindable> remindableNotes;
+    private Set<ListNote> listNotes;
+    private Set<Note> archivedNotes;
     private Set<Note> pinnedNotes;
     private static int iteratorIndex;
     private static int index;
     
     public ClipBoard()
     {
-        setAllNotes(new ArrayList<>());
-        setRemindableNotes(new ArrayList<>());
-        setArchivedNotes(new ArrayList<>());
-        setListNotes(new ArrayList<>());
+        setAllNotes(new LinkedList<>());
+        setRemindableNotes(new LinkedHashSet<>());
+        setArchivedNotes(new LinkedHashSet<>());
+        setListNotes(new LinkedHashSet<>());
         setPinnedNotes(new LinkedHashSet<>());
     }
     
-    public List<Note> getAllNotes()
+    public LinkedList<Note> getAllNotes()
     {
-        return new ArrayList<>(allNotes);
+        return new LinkedList<>(allNotes);
     }
     
-    private void setAllNotes(List<Note> allNotes)
+    private void setAllNotes(LinkedList<Note> allNotes)
     {
         this.allNotes = allNotes;
     }
     
-    public List<Remindable> getRemindableNotes()
+    public Set<Remindable> getRemindableNotes()
     {
-        return new ArrayList<>(remindableNotes);
+        return new LinkedHashSet<>(remindableNotes);
     }
     
-    private void setRemindableNotes(List<Remindable> remindableNotes)
+    private void setRemindableNotes(Set<Remindable> remindableNotes)
     {
         this.remindableNotes = remindableNotes;
     }
@@ -52,22 +52,22 @@ public class ClipBoard implements Enumeration<Note>
         this.pinnedNotes = pinnedNotes;
     }
     
-    private void setArchivedNotes(List<Note> archivedNotes)
+    private void setArchivedNotes(Set<Note> archivedNotes)
     {
         this.archivedNotes = archivedNotes;
     }
     
-    public List<Note> getArchivedNotes()
+    public Set<Note> getArchivedNotes()
     {
-        return new ArrayList<>(archivedNotes);
+        return new LinkedHashSet<>(archivedNotes);
     }
     
-    public List<ListNote> getListNotes()
+    public Set<ListNote> getListNotes()
     {
-        return new ArrayList<>(listNotes);
+        return new LinkedHashSet<>(listNotes);
     }
     
-    private void setListNotes(List<ListNote> listNotes)
+    private void setListNotes(Set<ListNote> listNotes)
     {
         this.listNotes = listNotes;
     }
@@ -79,7 +79,7 @@ public class ClipBoard implements Enumeration<Note>
     {
         TextNote textNote = new TextNote(title, deadline, priority);
         
-        allNotes.add(textNote);
+        allNotes.addLast(textNote);
         remindableNotes.add(textNote);
     }
     
@@ -90,7 +90,7 @@ public class ClipBoard implements Enumeration<Note>
     {
         ListNote listNote = new ListNote(title, deadline, priority);
         
-        allNotes.add(listNote);
+        allNotes.addLast(listNote);
         remindableNotes.add(listNote);
         listNotes.add(listNote);
     }
@@ -104,7 +104,7 @@ public class ClipBoard implements Enumeration<Note>
         PhotoNote photoNote = new PhotoNote(title, deadline, priority,
                 filePath, description);
         
-        allNotes.add(photoNote);
+        allNotes.addLast(photoNote);
     }
     
     /**
@@ -114,7 +114,7 @@ public class ClipBoard implements Enumeration<Note>
     {
         VoiceNote voiceNote = new VoiceNote(title, deadline, priority, audioFile);
         
-        allNotes.add(voiceNote);
+        allNotes.addLast(voiceNote);
         remindableNotes.add(voiceNote);
     }
     
@@ -127,7 +127,8 @@ public class ClipBoard implements Enumeration<Note>
     {
         allNotes.stream()
                 .filter(note -> note.getTitle().equals(title))
-                .findAny().ifPresentOrElse(Note::showNote, null);
+                .findAny()
+                .orElseThrow(NoSuchElementException::new);
     }
     
     /**
@@ -176,6 +177,15 @@ public class ClipBoard implements Enumeration<Note>
     }
     
     /**
+     * Method that prints all archived notes' titles
+     */
+    protected void showArchive()
+    {
+        System.out.println("\n[Archive]");
+        archivedNotes.forEach(note -> System.out.println("\t " + note.getTitle()));
+    }
+    
+    /**
      * Method that prints all pinned notes' titles
      * Invoked prior to pinning a certain note
      */
@@ -183,15 +193,6 @@ public class ClipBoard implements Enumeration<Note>
     {
         System.out.println("\n[Pinned]");
         pinnedNotes.forEach(note -> System.out.println("\t" + note.getTitle()));
-    }
-    
-    /**
-     * Method that prints all archived notes' titles
-     */
-    protected void showArchive()
-    {
-        System.out.println("\n[Archive]");
-        archivedNotes.forEach(note -> System.out.println("\t " + note.getTitle()));
     }
     
     /**
@@ -238,7 +239,7 @@ public class ClipBoard implements Enumeration<Note>
         pinnedNotes.remove(pinnedNotes.stream()
                 .filter(pinned -> pinned.getTitle().equals(title))
                 .findAny()
-                .orElse(null));
+                .orElseThrow(NoSuchElementException::new));
     }
     
     /**
@@ -249,15 +250,22 @@ public class ClipBoard implements Enumeration<Note>
     protected void archiveNote(String title)
     {
         allNotes.stream()
-                .filter(note -> note.getTitle().equals(title))
-                .findAny()
-                .ifPresent(note ->
+                .filter(note ->
                 {
-                    allNotes.remove(note);
+                    if (note.getTitle().equals(title))
+                    {
+                        allNotes.remove(note);
+                        
+                        if (note.isPinned())
+                            pinnedNotes.remove(note);
+                        
+                        return true;
+                    }
                     
-                    if (note.isPinned())
-                        pinnedNotes.remove(note);
-                });
+                    return false;
+                })
+                .findAny()
+                .orElseThrow(NoSuchElementException::new);
     }
     
     /**
@@ -270,7 +278,7 @@ public class ClipBoard implements Enumeration<Note>
         listNotes.stream()
                 .filter(note -> note.getTitle().equals(title))
                 .findAny()
-                .orElse(null)
+                .orElseThrow(NoSuchElementException::new)
                 .promptToChangeStatus();
     }
     
@@ -299,21 +307,26 @@ public class ClipBoard implements Enumeration<Note>
         AtomicBoolean isList = new AtomicBoolean(false);
         
         allNotes.stream()
-                .filter(note -> note.getTitle().equals(title))
-                .findAny()
-                .ifPresentOrElse(note ->
+                .filter(note ->
                 {
-                    if (note instanceof ListNote)
-                        isList.set(true);
-                    
-                    if (note.isPinned())
-                        isPinned.set(true);
-                    
-                    if (note instanceof Remindable)
-                        isRemindable.set(true);
-                    
-                    allNotes.remove(note);
-                }, null);
+                    if (note.getTitle().equals(title)) ;
+                    {
+                        if (note instanceof ListNote)
+                            isList.set(true);
+                        
+                        if (note.isPinned())
+                            isPinned.set(true);
+                        
+                        if (note instanceof Remindable)
+                            isRemindable.set(true);
+                        
+                        allNotes.remove(note);
+                        
+                        return true;
+                    }
+                })
+                .findAny()
+                .orElseThrow(NoSuchElementException::new);
         
         if (isList.get())
             listNotes.remove(listNotes.stream()
@@ -342,7 +355,7 @@ public class ClipBoard implements Enumeration<Note>
             archivedNotes.clear();
             remindableNotes.clear();
         } else
-            System.out.println("Clipboard is already empty!");
+            throw new IllegalStateException("Clipboard is already empty!");
     }
     
     /**
@@ -353,7 +366,7 @@ public class ClipBoard implements Enumeration<Note>
         if (archivedNotes.size() > 0)
             archivedNotes.clear();
         else
-            System.err.println("Archive is already empty!");
+            throw new IllegalStateException("Archive is already empty!");
     }
     
     /**
@@ -363,41 +376,11 @@ public class ClipBoard implements Enumeration<Note>
     {
         if (remindableNotes.size() > 0)
             remindableNotes.clear();
-        else
-            System.err.println("\nNo reminders to clear!");
     }
     
     @Override
-    public boolean hasMoreElements()
+    public Iterator<Note> iterator()
     {
-        return allNotes.get(iteratorIndex) != null;
-    }
-    
-    @Override
-    public Note nextElement()
-    {
-        return allNotes.get(iteratorIndex++);
-    }
-    
-    public Iterator<Note> asIterator()
-    {
-        iteratorIndex = 0;
-        
-        Iterator<Note> it = new Iterator<Note>()
-        {
-            @Override
-            public boolean hasNext()
-            {
-                return hasMoreElements();
-            }
-            
-            @Override
-            public Note next()
-            {
-                return nextElement();
-            }
-        };
-        
-        return it;
+        return allNotes.iterator();
     }
 }

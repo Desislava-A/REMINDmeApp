@@ -68,7 +68,7 @@ public class Menus
                 input.next();
             }
             
-        } while (choice < 0 || choice > 5);
+        } while (choice < 0 || choice > 4);
         
         return choice;
     }
@@ -78,7 +78,8 @@ public class Menus
         int choice = -1;
         
         System.out.println("\n1.Reminder on");
-        System.out.println("2.Reminder off\n");
+        System.out.println("2.Reminder off");
+        System.out.println("0.Exit\n");
         
         Scanner input = new Scanner(System.in);
         do
@@ -87,7 +88,6 @@ public class Menus
             
             
             // Using input.hasNextInt() handles input mismatch errors
-            
             if (input.hasNextInt())
                 choice = input.nextInt();
             else

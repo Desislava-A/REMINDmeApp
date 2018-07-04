@@ -48,14 +48,13 @@ public class Main
             switch (Menus.mainMenu())
             {
                 case 1:
-                    System.out.println();
                     try
                     {
                         if (clipBoard.getAllNotes().size() == 0)
                             throw new IllegalStateException("Clipboard empty!");
                     } catch (IllegalStateException stateex)
                     {
-                        System.err.println(stateex.getMessage());
+                        System.err.println("\n" + stateex.getMessage());
                         Thread.sleep(400);
                         break;
                     }
@@ -69,14 +68,13 @@ public class Main
                     clipBoard.getAllNotes().get(index - 1).showNote();
                     break;
                 case 2:
-                    System.out.println();
                     try
                     {
                         if (clipBoard.getRemindableNotes().size() == 0)
                             throw new IllegalStateException("No reminders!");
                     } catch (IllegalStateException stateex)
                     {
-                        System.err.println(stateex.getMessage());
+                        System.err.println("\n" + stateex.getMessage());
                         Thread.sleep(400);
                         break;
                     }
@@ -85,14 +83,13 @@ public class Main
                     input.nextLine();
                     break;
                 case 3:
-                    System.out.println();
                     try
                     {
                         if (clipBoard.getArchivedNotes().size() == 0)
                             throw new IllegalStateException("No archived notes!");
                     } catch (IllegalStateException stateex)
                     {
-                        System.err.println(stateex.getMessage());
+                        System.err.println("\n" + stateex.getMessage());
                         Thread.sleep(400);
                         break;
                     }
@@ -216,7 +213,6 @@ public class Main
                     }
                     break;
                 case 5:
-                    System.out.println();
                     try
                     {
                         if (clipBoard.getAllNotes().size() == 0)
@@ -228,7 +224,7 @@ public class Main
                         clipBoard.search(title);
                     } catch (IllegalStateException stateex)
                     {
-                        System.err.print(stateex.getMessage());
+                        System.err.print("\n" + stateex.getMessage());
                     } catch (NoSuchElementException notfoundex)
                     {
                         System.err.println("Note not found!");
@@ -289,11 +285,10 @@ public class Main
                     Thread.sleep(400);
                     break;
                 case 8:
-                    System.out.println();
                     try
                     {
                         if (clipBoard.getPinnedNotes().size() == 0)
-                            throw new IllegalStateException("\nThere aren't any pinned notes!");
+                            throw new IllegalStateException("There aren't any pinned notes!");
                         
                         clipBoard.showPinned();
                         
@@ -303,7 +298,7 @@ public class Main
                         clipBoard.unpinNote(titleToBeUnpinned);
                     } catch (IllegalStateException stateex)
                     {
-                        System.err.println(stateex.getMessage());
+                        System.err.println("\n" + stateex.getMessage());
                     } catch (NoSuchElementException notfoundex)
                     {
                         System.err.println("Note not found!");

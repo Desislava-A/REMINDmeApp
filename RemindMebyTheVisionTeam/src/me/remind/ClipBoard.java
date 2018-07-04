@@ -11,8 +11,8 @@ public class ClipBoard implements Enumeration<Note>
     private List<VoiceNote> voiceRecords;
     private List<Note> archivedNotes;
     private Set<Note> pinnedNotes;
-    private static int iteratorIndex = 0;
-    private static int indexGetter = 0;
+    private static int iteratorIndex;
+    private static int index;
     
     public ClipBoard()
     {
@@ -165,9 +165,9 @@ public class ClipBoard implements Enumeration<Note>
             pinnedNotes.forEach(Note::getTitleWithType);
         }
         
-        indexGetter = 1;
+        index = 1;
         System.out.println("\n[All notes]");
-        allNotes.forEach(note -> System.out.println(indexGetter++ + "." +
+        allNotes.forEach(note -> System.out.println(index++ + "." +
                 note.getTitleWithType()));
     }
     

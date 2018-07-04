@@ -13,31 +13,32 @@ public class PhotoNote extends Note
     
     private BufferedImage image;
     private String fileName;
-    private String text;
+    private String description;
     
     public PhotoNote(String title, Date deadline, Priority priority,
-                     String shortText, String fileName)
+                     String fileName, String description)
     {
         this(title, deadline, priority, fileName);
-        setText(shortText);
+        setDescription(description);
     }
     
     public PhotoNote(String title, Date deadline, Priority priority, String fileName)
     {
         super(title, deadline, priority);
         setFileName(fileName);
-        setText(null);
+        setDescription(null);
     }
     
-    private void setText(String shortText)
+    private void setDescription(String description)
     {
-        if (shortText == null)
+        if (description == null)
             return;
         
-        if (shortText.length() < MIN_SHORTTXT_LENGHT || shortText.length() > MAX_SHORTTXT_LENGHT)
+        if (description.length() < MIN_SHORTTXT_LENGHT ||
+                description.length() > MAX_SHORTTXT_LENGHT)
             return;
         
-        this.text = shortText;
+        this.description = description;
     }
     
     private void setFileName(String fileName)

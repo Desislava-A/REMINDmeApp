@@ -67,7 +67,7 @@ public class VoiceNote extends Note implements Remindable
     @Override
     public String toString()
     {
-        return "[VoiceNote]" + "\n\t" + getTitle();
+        return getTitle();
     }
     
     @Override

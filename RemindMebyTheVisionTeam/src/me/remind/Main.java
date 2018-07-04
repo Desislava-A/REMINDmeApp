@@ -10,6 +10,11 @@ public class Main
         Scanner input = new Scanner(System.in);
         
         ClipBoard clipBoard = new ClipBoard();
+    
+        String title = null;
+        String fileName = null;
+        String description = null;
+        Calendar deadline = null;
         
         while (true)
         {
@@ -79,10 +84,6 @@ public class Main
                             {
                                 case 1:
                                 {
-                                    String title;
-                                    
-                                    Calendar deadline = Calendar.getInstance();
-                                    
                                     System.out.print("\nTitle: ");
                                     title = input.nextLine();
                                     System.out.print("Deadline in days: ");
@@ -95,8 +96,6 @@ public class Main
                                 }
                                 case 2:
                                 {
-                                    String title;
-    
                                     System.out.print("\nTitle: ");
                                     title = input.nextLine();
     
@@ -113,10 +112,8 @@ public class Main
                             {
                                 case 1:
                                 {
-                                    String title;
-    
-                                    Calendar deadline = Calendar.getInstance();
-    
+                                    deadline = Calendar.getInstance();
+                                    
                                     System.out.print("\nTitle: ");
                                     title = input.nextLine();
                                     System.out.print("Deadline in days: ");
@@ -129,8 +126,6 @@ public class Main
                                 }
                                 case 2:
                                 {
-                                    String title;
-    
                                     System.out.print("\nTitle: ");
                                     title = input.nextLine();
     
@@ -150,11 +145,8 @@ public class Main
                             {
                                 case 1:
                                 {
-                                    String title;
-                                    String fileName;
-    
-                                    Calendar deadline = Calendar.getInstance();
-    
+                                    deadline = Calendar.getInstance();
+                                    
                                     System.out.print("\nTitle: ");
                                     title = input.nextLine();
                                     System.out.print("Deadline in days: ");
@@ -169,9 +161,6 @@ public class Main
                                 }
                                 case 2:
                                 {
-                                    String title;
-                                    String fileName;
-    
                                     System.out.print("\nTitle: ");
                                     title = input.nextLine();
                                     System.out.print("File name: ");
@@ -192,16 +181,12 @@ public class Main
                             {
                                 case 1:
                                 {
-                                    String title;
-                                    String fileName;
-                                    String description;
-    
-                                    Calendar deadline1 = Calendar.getInstance();
-    
+                                    deadline = Calendar.getInstance();
+                                    
                                     System.out.print("\nTitle: ");
                                     title = input.nextLine();
                                     System.out.print("Deadline in days: ");
-                                    deadline1.add(Calendar.DATE, input.nextInt());
+                                    deadline.add(Calendar.DATE, input.nextInt());
                                     input.nextLine();
                                     System.out.print("File name: ");
                                     fileName = input.nextLine();
@@ -214,10 +199,6 @@ public class Main
                                 }
                                 case 2:
                                 {
-                                    String title;
-                                    String fileName;
-                                    String description;
-    
                                     System.out.print("\nTitle: ");
                                     title = input.nextLine();
                                     System.out.print("File name: ");
@@ -238,6 +219,32 @@ public class Main
                     break;
                 case 5:
                     System.out.println();
+                    try
+                    {
+                        if (clipBoard.getAllNotes().size() == 0)
+                            throw new IllegalArgumentException("Clipboard empty!");
+                    } catch (IllegalArgumentException argex)
+                    {
+                        System.err.print(argex.getMessage());
+                        break;
+                    }
+    
+                    System.out.print("\nTitle to search: ");
+                    title = input.nextLine();
+                    
+                    Thread.sleep(300);
+                    try
+                    {
+                        clipBoard.search(title);
+                    } catch (NullPointerException nullex)
+                    {
+                        System.err.println(nullex.getMessage());
+                        break;
+                    }
+                    
+                    break;
+                case 6:
+                    System.out.println();
                     Thread.sleep(300);
                     try
                     {
@@ -252,11 +259,11 @@ public class Main
                     clipBoard.showListTitles();
     
                     System.out.print("\nWhich title to edit: ");
-                    String title = input.nextLine();
+                    title = input.nextLine();
     
                     clipBoard.promptToCheckListItems(title);
                     break;
-                case 6:
+                case 7:
                     System.out.println();
                     Thread.sleep(300);
                     try
@@ -286,7 +293,7 @@ public class Main
                     }
                     
                     break;
-                case 7:
+                case 8:
                     System.out.println();
                     Thread.sleep(300);
                     try
@@ -305,7 +312,7 @@ public class Main
                     String titleToBeUnpinned = input.nextLine();
                     clipBoard.unpinNote(titleToBeUnpinned);
                     break;
-                case 8:
+                case 9:
                     System.out.println();
                     Thread.sleep(300);
                     try
@@ -338,20 +345,39 @@ public class Main
                     }
                     
                     break;
-                case 9:
+                case 10:
+                    Thread.sleep(300);
+                    try
+                    {
+                        if (clipBoard.getAllNotes().size() == 0)
+                            throw new IllegalArgumentException("Clipboard empty!");
+                    } catch (IllegalArgumentException argex)
+                    {
+                        System.err.print(argex.getMessage());
+                        break;
+                    }
+                    
+                    clipBoard.showTitles();
+                    
                     System.out.print("\nTitle of note to be deleted: ");
                     String titleToBeDeleted = input.nextLine();
                     
-                    clipBoard.deleteNote(titleToBeDeleted);
+                    try
+                    {
+                        clipBoard.deleteNote(titleToBeDeleted);
+                    } catch (NullPointerException nullex)
+                    {
+                        System.err.println("There are no notes matching this title!");
+                    }
                     break;
-                case 10:
+                case 11:
                     clipBoard.clearAllNotes();
                     
                     Thread.sleep(300);
                     if (clipBoard.getAllNotes().size() == 0)
                         System.out.print("\nNotes cleared");
                     break;
-                case 11:
+                case 12:
                     clipBoard.clearArchive();
                     
                     Thread.sleep(300);

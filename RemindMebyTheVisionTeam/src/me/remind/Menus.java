@@ -15,13 +15,14 @@ public class Menus
         System.out.println("2.Reminders");
         System.out.println("3.Archive");
         System.out.println("4.Add note");
-        System.out.println("5.Edit list note items");
-        System.out.println("6.Pin note");
-        System.out.println("7.Unpin note");
-        System.out.println("8.Archive note");
-        System.out.println("9.Delete note");
-        System.out.println("10.Clear all");
-        System.out.println("11.Clear archive");
+        System.out.println("5.Search note");
+        System.out.println("6.Edit list note items");
+        System.out.println("7.Pin note");
+        System.out.println("8.Unpin note");
+        System.out.println("9.Archive note");
+        System.out.println("10.Delete note");
+        System.out.println("11.Clear all");
+        System.out.println("12.Clear archive");
         System.out.println("0.Exit");
         
         Scanner input = new Scanner(System.in);
@@ -38,7 +39,7 @@ public class Menus
                 input.next();
             }
             
-        } while (choice < 0 || choice > 11);
+        } while (choice < 0 || choice > 12);
         
         return choice;
     }

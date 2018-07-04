@@ -1,14 +1,13 @@
 package me.remind;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ClipBoard implements Enumeration<Note>
 {
     private List<Note> allNotes;
     private List<Remindable> remindableNotes;
     private List<ListNote> listNotes;
-    private List<PhotoNote> images;
-    private List<VoiceNote> voiceRecords;
     private List<Note> archivedNotes;
     private Set<Note> pinnedNotes;
     private static int iteratorIndex;
@@ -20,8 +19,6 @@ public class ClipBoard implements Enumeration<Note>
         setRemindableNotes(new ArrayList<>());
         setArchivedNotes(new ArrayList<>());
         setListNotes(new ArrayList<>());
-        setImages(new ArrayList<>());
-        setVoiceRecords(new ArrayList<>());
         setPinnedNotes(new LinkedHashSet<>());
     }
     
@@ -43,26 +40,6 @@ public class ClipBoard implements Enumeration<Note>
     private void setRemindableNotes(List<Remindable> remindableNotes)
     {
         this.remindableNotes = remindableNotes;
-    }
-    
-    private void setImages(List<PhotoNote> images)
-    {
-        this.images = images;
-    }
-    
-    public List<PhotoNote> getImages()
-    {
-        return new ArrayList<>(images);
-    }
-    
-    private void setVoiceRecords(List<VoiceNote> voiceRecords)
-    {
-        this.voiceRecords = voiceRecords;
-    }
-    
-    public List<VoiceNote> getVoiceRecords()
-    {
-        return new ArrayList<>(voiceRecords);
     }
     
     public Set<Note> getPinnedNotes()
@@ -128,7 +105,6 @@ public class ClipBoard implements Enumeration<Note>
                 filePath, description);
         
         allNotes.add(photoNote);
-        images.add(photoNote);
     }
     
     /**
@@ -140,18 +116,18 @@ public class ClipBoard implements Enumeration<Note>
         
         allNotes.add(voiceNote);
         remindableNotes.add(voiceNote);
-        voiceRecords.add(voiceNote);
     }
     
     /**
      * Method that prints the contents of a note
+     *
      * @param title - the title to search
      */
     protected void search(String title)
     {
-        for (Note note: allNotes)
-            if (note.getTitle().equals(title))
-                note.showNote();
+        allNotes.stream()
+                .filter(note -> note.getTitle().equals(title))
+                .findAny().ifPresentOrElse(Note::showNote, null);
     }
     
     /**
@@ -186,7 +162,8 @@ public class ClipBoard implements Enumeration<Note>
      */
     protected void showTitles()
     {
-        allNotes.forEach(Note::printTitle);
+        System.out.println("\n[Titles]");
+        allNotes.forEach(note -> System.out.println("\t" + note.getTitle()));
     }
     
     /**
@@ -225,11 +202,8 @@ public class ClipBoard implements Enumeration<Note>
      */
     protected boolean isNotePinned(String title)
     {
-        for (Note note: pinnedNotes)
-            if (note.getTitle().equals(title))
-                return true;
-        
-        return false;
+        return pinnedNotes.stream()
+                .anyMatch(note -> note.getTitle().equals(title));
     }
     
     /**
@@ -239,12 +213,19 @@ public class ClipBoard implements Enumeration<Note>
      */
     protected void pinNote(String title)
     {
-        for (Note note: allNotes)
-            if (note.getTitle().equals(title))
-            {
-                note.setPinned(true);
-                pinnedNotes.add(note);
-            }
+        pinnedNotes.add(allNotes.stream()
+                .filter(note ->
+                {
+                    if (note.getTitle().equals(title))
+                    {
+                        note.setPinned(true);
+                        return true;
+                    }
+                    
+                    return false;
+                })
+                .findAny()
+                .orElseThrow(NoSuchElementException::new));
     }
     
     /**
@@ -254,9 +235,10 @@ public class ClipBoard implements Enumeration<Note>
      */
     protected void unpinNote(String title)
     {
-        for (Note note: pinnedNotes)
-            if (note.getTitle().equals(title))
-                pinnedNotes.remove(note);
+        pinnedNotes.remove(pinnedNotes.stream()
+                .filter(pinned -> pinned.getTitle().equals(title))
+                .findAny()
+                .orElse(null));
     }
     
     /**
@@ -266,14 +248,16 @@ public class ClipBoard implements Enumeration<Note>
      */
     protected void archiveNote(String title)
     {
-        for (Note note: allNotes)
-        {
-            if (note.getTitle().equals(title))
-            {
-                archivedNotes.add(note);
-                allNotes.remove(note);
-            }
-        }
+        allNotes.stream()
+                .filter(note -> note.getTitle().equals(title))
+                .findAny()
+                .ifPresent(note ->
+                {
+                    allNotes.remove(note);
+                    
+                    if (note.isPinned())
+                        pinnedNotes.remove(note);
+                });
     }
     
     /**
@@ -283,9 +267,11 @@ public class ClipBoard implements Enumeration<Note>
      */
     protected void promptToCheckListItems(String title)
     {
-        for (ListNote list: listNotes)
-            if (list.getTitle().equals(title))
-                list.promptToChangeStatus();
+        listNotes.stream()
+                .filter(note -> note.getTitle().equals(title))
+                .findAny()
+                .orElse(null)
+                .promptToChangeStatus();
     }
     
     /**
@@ -296,11 +282,8 @@ public class ClipBoard implements Enumeration<Note>
      */
     protected boolean isNoteArchived(String title)
     {
-        for (Note note: archivedNotes)
-            if (note.getTitle().equals(title))
-                return true;
-        
-        return false;
+        return archivedNotes.stream()
+                .anyMatch(note -> note.getTitle().equals(title));
     }
     
     /**
@@ -311,55 +294,41 @@ public class ClipBoard implements Enumeration<Note>
      */
     protected void deleteNote(String title)
     {
-        boolean isRecord = false;
-        boolean isImage = false;
-        boolean isPinned = false;
-        boolean isRemindable = false;
-        boolean isList = false;
+        AtomicBoolean isPinned = new AtomicBoolean(false);
+        AtomicBoolean isRemindable = new AtomicBoolean(false);
+        AtomicBoolean isList = new AtomicBoolean(false);
         
-        for (Note note: allNotes)
-            if (note.getTitle().equals(title))
-            {
-                if (note instanceof VoiceNote)
-                    isRecord = true;
-                else if (note instanceof PhotoNote)
-                    isImage = true;
-                else if (note instanceof ListNote)
-                    isList = true;
-                
-                if (note.isPinned())
-                    isPinned = true;
-                
-                if (note instanceof Remindable)
-                    isRemindable = true;
-                
-                allNotes.remove(note);
-            }
+        allNotes.stream()
+                .filter(note -> note.getTitle().equals(title))
+                .findAny()
+                .ifPresentOrElse(note ->
+                {
+                    if (note instanceof ListNote)
+                        isList.set(true);
+                    
+                    if (note.isPinned())
+                        isPinned.set(true);
+                    
+                    if (note instanceof Remindable)
+                        isRemindable.set(true);
+                    
+                    allNotes.remove(note);
+                }, null);
         
-        if (isList)
-            for (ListNote note: listNotes)
-                if (note.getTitle().equals(title))
-                    pinnedNotes.remove(note);
+        if (isList.get())
+            listNotes.remove(listNotes.stream()
+                    .filter(note -> note.getTitle().equals(title))
+                    .findAny());
         
-        if (isPinned)
-            for (Note note: pinnedNotes)
-                if (note.getTitle().equals(title))
-                    pinnedNotes.remove(note);
+        if (isPinned.get())
+            pinnedNotes.remove(pinnedNotes.stream()
+                    .filter(note -> note.getTitle().equals(title))
+                    .findAny());
         
-        if (isRecord)
-            for (VoiceNote record: voiceRecords)
-                if (record.getTitle().equals(title))
-                    voiceRecords.remove(record);
-        
-        if (isImage)
-            for (PhotoNote img: images)
-                if (img.getTitle().equals(title))
-                    images.remove(img);
-        
-        if (isRemindable)
-            for (Remindable note: remindableNotes)
-                if (note.toString().equals(title))
-                    remindableNotes.remove(note);
+        if (isRemindable.get())
+            remindableNotes.remove(remindableNotes.stream()
+                    .filter(note -> note.toString().equals(title))
+                    .findAny());
     }
     
     /**
@@ -367,11 +336,13 @@ public class ClipBoard implements Enumeration<Note>
      */
     protected void clearAllNotes()
     {
-        allNotes.clear();
-        archivedNotes.clear();
-        remindableNotes.clear();
-        images.clear();
-        voiceRecords.clear();
+        if (allNotes.size() > 0)
+        {
+            allNotes.clear();
+            archivedNotes.clear();
+            remindableNotes.clear();
+        } else
+            System.out.println("Clipboard is already empty!");
     }
     
     /**
@@ -379,7 +350,10 @@ public class ClipBoard implements Enumeration<Note>
      */
     protected void clearArchive()
     {
-        archivedNotes.clear();
+        if (archivedNotes.size() > 0)
+            archivedNotes.clear();
+        else
+            System.err.println("Archive is already empty!");
     }
     
     /**
@@ -387,7 +361,10 @@ public class ClipBoard implements Enumeration<Note>
      */
     protected void clearReminders()
     {
-        remindableNotes.clear();
+        if (remindableNotes.size() > 0)
+            remindableNotes.clear();
+        else
+            System.err.println("\nNo reminders to clear!");
     }
     
     @Override

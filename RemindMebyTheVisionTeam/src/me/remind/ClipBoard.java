@@ -1,73 +1,72 @@
 package me.remind;
 
+import org.apache.commons.collections4.list.SetUniqueList;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ClipBoard implements Iterable<Note>
 {
-    private LinkedList<Note> allNotes;
-    private Set<Remindable> remindableNotes;
-    private Set<ListNote> listNotes;
-    private Set<Note> archivedNotes;
-    private Set<Note> pinnedNotes;
-    private static int iteratorIndex;
+    private SetUniqueList<Note> allNotes;
+    private SetUniqueList<Remindable> remindableNotes;
+    private SetUniqueList<ListNote> listNotes;
+    private SetUniqueList<Note> archivedNotes;
+    private SetUniqueList<Note> pinnedNotes;
     private static int index;
     
     public ClipBoard()
     {
-        setAllNotes(new LinkedList<>());
-        setRemindableNotes(new LinkedHashSet<>());
-        setArchivedNotes(new LinkedHashSet<>());
-        setListNotes(new LinkedHashSet<>());
-        setPinnedNotes(new LinkedHashSet<>());
+        setAllNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
+        setRemindableNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
+        setArchivedNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
+        setListNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
+        setPinnedNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
     }
     
-    public LinkedList<Note> getAllNotes()
+    public SetUniqueList<Note> getAllNotes()
     {
-        return new LinkedList<>(allNotes);
+        return SetUniqueList.setUniqueList(new ArrayList<>(allNotes));
     }
     
-    private void setAllNotes(LinkedList<Note> allNotes)
+    private void setAllNotes(SetUniqueList<Note> allNotes)
     {
         this.allNotes = allNotes;
     }
     
-    public Set<Remindable> getRemindableNotes()
+    public SetUniqueList<Remindable> getRemindableNotes()
     {
-        return new LinkedHashSet<>(remindableNotes);
+        return SetUniqueList.setUniqueList(new ArrayList<>(remindableNotes));
     }
     
-    private void setRemindableNotes(Set<Remindable> remindableNotes)
+    private void setRemindableNotes(SetUniqueList<Remindable> remindableNotes)
     {
         this.remindableNotes = remindableNotes;
     }
     
-    public Set<Note> getPinnedNotes()
+    public SetUniqueList<Note> getPinnedNotes()
     {
-        return new LinkedHashSet<>(pinnedNotes);
+        return SetUniqueList.setUniqueList(new ArrayList<>(pinnedNotes));
     }
     
-    private void setPinnedNotes(Set<Note> pinnedNotes)
+    private void setPinnedNotes(SetUniqueList<Note> pinnedNotes)
     {
         this.pinnedNotes = pinnedNotes;
     }
     
-    private void setArchivedNotes(Set<Note> archivedNotes)
+    private void setArchivedNotes(SetUniqueList<Note> archivedNotes)
     {
         this.archivedNotes = archivedNotes;
     }
     
-    public Set<Note> getArchivedNotes()
+    public SetUniqueList<Note> getArchivedNotes()
     {
-        return new LinkedHashSet<>(archivedNotes);
+        return SetUniqueList.setUniqueList(new ArrayList<>(archivedNotes));
     }
     
-    public Set<ListNote> getListNotes()
+    public SetUniqueList<ListNote> getListNotes()
     {
-        return new LinkedHashSet<>(listNotes);
+        return SetUniqueList.setUniqueList(new ArrayList<>(listNotes));
     }
     
-    private void setListNotes(Set<ListNote> listNotes)
+    private void setListNotes(SetUniqueList<ListNote> listNotes)
     {
         this.listNotes = listNotes;
     }
@@ -79,7 +78,7 @@ public class ClipBoard implements Iterable<Note>
     {
         TextNote textNote = new TextNote(title, deadline, priority);
         
-        allNotes.addLast(textNote);
+        allNotes.add(textNote);
         remindableNotes.add(textNote);
     }
     
@@ -90,7 +89,7 @@ public class ClipBoard implements Iterable<Note>
     {
         ListNote listNote = new ListNote(title, deadline, priority);
         
-        allNotes.addLast(listNote);
+        allNotes.add(listNote);
         remindableNotes.add(listNote);
         listNotes.add(listNote);
     }
@@ -104,7 +103,7 @@ public class ClipBoard implements Iterable<Note>
         PhotoNote photoNote = new PhotoNote(title, deadline, priority,
                 filePath, description);
         
-        allNotes.addLast(photoNote);
+        allNotes.add(photoNote);
     }
     
     /**
@@ -114,7 +113,7 @@ public class ClipBoard implements Iterable<Note>
     {
         VoiceNote voiceNote = new VoiceNote(title, deadline, priority, audioFile);
         
-        allNotes.addLast(voiceNote);
+        allNotes.add(voiceNote);
         remindableNotes.add(voiceNote);
     }
     
@@ -302,9 +301,11 @@ public class ClipBoard implements Iterable<Note>
      */
     protected void deleteNote(String title)
     {
-        AtomicBoolean isPinned = new AtomicBoolean(false);
-        AtomicBoolean isRemindable = new AtomicBoolean(false);
-        AtomicBoolean isList = new AtomicBoolean(false);
+        /* the following one element arrays are created because of the
+           inability to use non final variables in a lambda expression */
+        final boolean[] isPinned = {false};
+        final boolean[] isRemindable = {false};
+        final boolean[] isList = {false};
         
         allNotes.stream()
                 .filter(note ->
@@ -312,13 +313,13 @@ public class ClipBoard implements Iterable<Note>
                     if (note.getTitle().equals(title)) ;
                     {
                         if (note instanceof ListNote)
-                            isList.set(true);
+                            isList[0] = true;
                         
                         if (note.isPinned())
-                            isPinned.set(true);
+                            isPinned[0] = true;
                         
                         if (note instanceof Remindable)
-                            isRemindable.set(true);
+                            isRemindable[0] = true;
                         
                         allNotes.remove(note);
                         
@@ -328,17 +329,17 @@ public class ClipBoard implements Iterable<Note>
                 .findAny()
                 .orElseThrow(NoSuchElementException::new);
         
-        if (isList.get())
+        if (isList[0])
             listNotes.remove(listNotes.stream()
                     .filter(note -> note.getTitle().equals(title))
                     .findAny());
         
-        if (isPinned.get())
+        if (isPinned[0])
             pinnedNotes.remove(pinnedNotes.stream()
                     .filter(note -> note.getTitle().equals(title))
                     .findAny());
         
-        if (isRemindable.get())
+        if (isRemindable[0])
             remindableNotes.remove(remindableNotes.stream()
                     .filter(note -> note.toString().equals(title))
                     .findAny());

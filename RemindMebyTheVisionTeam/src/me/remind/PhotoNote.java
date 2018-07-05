@@ -1,43 +1,44 @@
 package me.remind;
 
+import org.joda.time.DateTime;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Date;
 
-public class PhotoNote extends Note implements Viewable
+public class PhotoNote extends Note
 {
     public static final int MIN_SHORTTXT_LENGHT = 3;
     public static final int MAX_SHORTTXT_LENGHT = 40;
     
     private BufferedImage image;
     private String fileName;
-    private String text;
+    private String description;
     
-    public PhotoNote(String title, Date deadline, Priority priority,
-                     String shortText, String fileName)
+    public PhotoNote(String title, DateTime deadline, Priority priority,
+                     String fileName, String description)
     {
         this(title, deadline, priority, fileName);
-        setText(shortText);
+        setDescription(description);
     }
     
-    public PhotoNote(String title, Date deadline, Priority priority, String fileName)
+    public PhotoNote(String title, DateTime deadline, Priority priority, String fileName)
     {
         super(title, deadline, priority);
         setFileName(fileName);
-        setText(null);
+        setDescription(null);
     }
     
-    private void setText(String shortText)
+    private void setDescription(String description)
     {
-        if (shortText == null)
+        if (description == null)
             return;
         
-        if (shortText.length() < MIN_SHORTTXT_LENGHT || shortText.length() > MAX_SHORTTXT_LENGHT)
+        if (description.length() < MIN_SHORTTXT_LENGHT ||
+                description.length() > MAX_SHORTTXT_LENGHT)
             return;
         
-        this.text = shortText;
+        this.description = description;
     }
     
     private void setFileName(String fileName)
@@ -45,25 +46,42 @@ public class PhotoNote extends Note implements Viewable
         this.fileName = fileName;
     }
     
-    public String getFileName()
+    protected String getFileName()
     {
         return fileName;
     }
     
     @Override
+    protected String getTitleWithTypeAndPriority()
+    {
+        return "[PhotoNote] {Priority: " + getPriority().toString().toLowerCase() + "}" +
+                "\n\t\t" + getTitle();
+    }
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        return obj instanceof PhotoNote &&
+                ((PhotoNote) obj).getTitle().equals(getTitle()) &&
+                ((PhotoNote) obj).fileName.equals(fileName) &&
+                ((PhotoNote) obj).getPriority().equals(getPriority()) &&
+                ((PhotoNote) obj).description.equals(description);
+    }
+    
+    @Override
+    public int hashCode()
+    {
+        return fileName.hashCode();
+    }
+    
+    @Override
     public String toString()
     {
-        return getTitle();
+        return "[PhotoNote]" + "\n\t" + getTitle();
     }
     
     @Override
-    public void showNote()
-    {
-        System.out.println(this.toString());
-    }
-    
-    @Override
-    public void view()
+    protected void showNote()
     {
         try
         {

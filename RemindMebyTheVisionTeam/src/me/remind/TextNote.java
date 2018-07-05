@@ -1,6 +1,7 @@
 package me.remind;
 
-import java.util.Date;
+import org.joda.time.DateTime;
+
 import java.util.Scanner;
 
 public class TextNote extends Note implements Remindable
@@ -13,9 +14,9 @@ public class TextNote extends Note implements Remindable
         initialize();
     }
     
-    public TextNote(String title, Date deadline, Priority priority)
+    public TextNote(String title, DateTime deadline, Priority priority)
     {
-        super(title, deadline);
+        super(title, deadline, priority);
         initialize();
     }
     
@@ -27,19 +28,47 @@ public class TextNote extends Note implements Remindable
         Scanner input = new Scanner(System.in);
         
         System.out.print("\nText: ");
-        text =  input.nextLine();
+        text = input.nextLine();
+    }
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        return obj instanceof TextNote &&
+                ((TextNote) obj).getTitle().equals(getTitle()) &&
+                ((TextNote) obj).text.equals(text) &&
+                ((TextNote) obj).getPriority().equals(getPriority());
+    }
+    
+    @Override
+    public int hashCode()
+    {
+        return text.hashCode();
+    }
+    
+    @Override
+    public String getTitleWithTypeAndPriority()
+    {
+        return "[TextNote] {Priority: " + getPriority().toString().toLowerCase() + "}" +
+                "\n\t\t" + getTitle();
+    }
+    
+    @Override
+    public String toString()
+    {
+        return getTitle();
     }
     
     @Override
     public void showNote()
     {
-        System.out.print(text);
+        System.out.println("[TextNote]");
+        System.out.print("\t" + text);
     }
     
     @Override
     public void remind()
     {
-        showNote();
-        System.out.println(" [Reminder set in " + getDaysToDeadline() + " days]");
+        System.out.print(" ->[Reminder set in " + getHoursToDeadline() + " hours]\n");
     }
 }

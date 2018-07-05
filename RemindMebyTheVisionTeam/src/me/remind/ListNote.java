@@ -1,5 +1,6 @@
 package me.remind;
 
+import org.joda.time.DateTime;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,13 +23,14 @@ public class ListNote extends Note implements Remindable
         super(title);
     }
     
-    public ListNote(String title, Date deadline, Priority priority, List<String> checkBoxesList)
+    public ListNote(String title, DateTime deadline, Priority priority,
+                    List<Item> checkBoxesList)
     {
         this(title, deadline, priority);
         initializeList();
     }
     
-    public ListNote(String title, Date deadline, Priority priority)
+    public ListNote(String title, DateTime deadline, Priority priority)
     {
         super(title, deadline, priority);
         initializeList();
@@ -41,7 +43,6 @@ public class ListNote extends Note implements Remindable
     
     /**
      * Method to initialize the ListNote fields
-     * All items are initialized with Check status "UNCHECKED"
      */
     private void initializeList()
     {
@@ -63,16 +64,14 @@ public class ListNote extends Note implements Remindable
                 lines.add(newLine);
             }
             
+            // initializing all items as "unchecked"
             List<Item> checkBoxesAndText = lines.stream()
                     .map(line ->
                     {
-                        
                         Item listNote = new Item();
                         listNote.setItemText(line);
                         listNote.setCheck(Check.UNCHECKED);
                         return listNote;
-                        
-                        
                     }).collect(Collectors.toList());
             
             checkBoxesList = checkBoxesAndText;
@@ -82,7 +81,7 @@ public class ListNote extends Note implements Remindable
         }
     }
     
-    private void listAllItemsFromList()
+    private void listAllCheckboxItems()
     {
         System.out.println("\n[List]");
         checkBoxesList.forEach(x -> System.out.println("\t" + x.toString()));
@@ -98,11 +97,9 @@ public class ListNote extends Note implements Remindable
         try
         {
             // when done with marking items checked, type "-1" to terminate the process
-            
-            
             while (true)
             {
-                listAllItemsFromList();
+                listAllCheckboxItems();
                 System.out.print("\nSelect which index status to change: ");
                 
                 int index = Integer.parseInt(br.readLine());
@@ -127,21 +124,43 @@ public class ListNote extends Note implements Remindable
     }
     
     @Override
+    public String getTitleWithTypeAndPriority()
+    {
+        return "[ListNote] {Priority: " + getPriority().toString().toLowerCase() + "}" +
+                "\n\t\t" + getTitle();
+    }
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        return obj instanceof ListNote &&
+                ((ListNote) obj).getTitle().equals(getTitle()) &&
+                ((ListNote) obj).getPriority().equals(getPriority()) &&
+                ((ListNote) obj).checkBoxesList.equals(checkBoxesList);
+    }
+    
+    @Override
+    public int hashCode()
+    {
+        return checkBoxesList.hashCode();
+    }
+    
+    @Override
     public String toString()
     {
-        return "List note title: " + super.getTitle();
+        return getTitle();
     }
     
     @Override
     public void showNote()
     {
-        getCheckBoxesList().forEach(System.out::println);
+        System.out.println("\n[List]");
+        getCheckBoxesList().forEach(x -> System.out.println("\t" + x));
     }
     
     @Override
     public void remind()
     {
-        showNote();
-        System.out.print("->[Reminder set in " + getDaysToDeadline() + "]");
+        System.out.print(" ->[Reminder set in " + getHoursToDeadline() + " hours]\n");
     }
 }

@@ -45,6 +45,18 @@ public class Item
     }
     
     @Override
+    public boolean equals(Object obj)
+    {
+        return obj instanceof Item && ((Item) obj).itemText.equals(itemText);
+    }
+    
+    @Override
+    public int hashCode()
+    {
+        return itemText.hashCode();
+    }
+    
+    @Override
     public String toString()
     {
         StringBuilder sb = new StringBuilder();

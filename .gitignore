@@ -3,6 +3,10 @@
 
 # User-specific stuff
 
-**/.idea/**/workspace.xml
+**/.idea/workspace.xml
+**/.idea/compiler.xml
+**/.idea/tasks.xml
+**/.idea/misc.xml
+**/*.iml
 
-**/.idea/**/tasks.xml
+

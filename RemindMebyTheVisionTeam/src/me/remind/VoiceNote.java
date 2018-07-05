@@ -1,23 +1,23 @@
 package me.remind;
 
+import org.joda.time.DateTime;
 import javax.sound.sampled.*;
 import java.io.IOException;
-import java.util.Date;
 
-public class VoiceNote extends Note implements Remindable, Playable
+public class VoiceNote extends Note implements Remindable
 {
     private String fileName;
     private AudioInputStream inputStream;
     private Clip audioClip;
     
-    public VoiceNote(String title, Date deadline, Priority priority, String fileName)
+    public VoiceNote(String title, DateTime deadline, Priority priority, String fileName)
     {
         super(title, deadline, priority);
         setFileName(fileName);
         initializeVoiceFile(fileName);
     }
     
-    private String getFileName()
+    public String getFileName()
     {
         return fileName;
     }
@@ -37,6 +37,10 @@ public class VoiceNote extends Note implements Remindable, Playable
         this.audioClip = audioClip;
     }
     
+    /**
+     * Audio file initializer
+     * @param fileName - files are situated in res/sounds/
+     */
     private void initializeVoiceFile(final String fileName)
     {
         try
@@ -59,6 +63,28 @@ public class VoiceNote extends Note implements Remindable, Playable
     }
     
     @Override
+    public String getTitleWithTypeAndPriority()
+    {
+        return "[VoiceNote] {Priority: " + getPriority().toString().toLowerCase() + "}" +
+                "\n\t\t" + getTitle();
+    }
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        return obj instanceof VoiceNote &&
+                ((VoiceNote) obj).getTitle().equals(getTitle()) &&
+                ((VoiceNote) obj).getPriority().equals(getPriority()) &&
+                ((VoiceNote) obj).fileName.equals(fileName);
+    }
+    
+    @Override
+    public int hashCode()
+    {
+        return fileName.hashCode();
+    }
+    
+    @Override
     public String toString()
     {
         return getTitle();
@@ -66,19 +92,6 @@ public class VoiceNote extends Note implements Remindable, Playable
     
     @Override
     public void showNote()
-    {
-        System.out.println("Sound note title: " + getTitle());
-    }
-    
-    @Override
-    public void remind()
-    {
-        showNote();
-        System.out.print("->[Reminder set in " + getDaysToDeadline() + "]");
-    }
-    
-    @Override
-    public void play()
     {
         try
         {
@@ -90,8 +103,14 @@ public class VoiceNote extends Note implements Remindable, Playable
         {
             lineex.printStackTrace();
         }
-        
+    
         audioClip.setFramePosition(0);
         audioClip.start();
+    }
+    
+    @Override
+    public void remind()
+    {
+        System.out.print(" ->[Reminder set in " + getHoursToDeadline() + " hours]\n");
     }
 }

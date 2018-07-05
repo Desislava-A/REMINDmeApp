@@ -2,5 +2,5 @@ package me.remind;
 
 public enum Priority
 {
-    CRITICAL, NORMAL, NONE
+    CRITICAL, NORMAL, NONE,
 }

@@ -1,6 +1,5 @@
 package me.remind;
 
-public interface Remindable
-{
+public interface Remindable {
     void remind();
 }

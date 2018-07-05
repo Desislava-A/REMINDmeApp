@@ -66,6 +66,21 @@ public class VoiceNote extends Note implements Remindable
     }
     
     @Override
+    public boolean equals(Object obj)
+    {
+        return obj instanceof VoiceNote &&
+                ((VoiceNote) obj).getTitle().equals(getTitle()) &&
+                ((VoiceNote) obj).getPriority().equals(getPriority()) &&
+                ((VoiceNote) obj).fileName.equals(fileName);
+    }
+    
+    @Override
+    public int hashCode()
+    {
+        return fileName.hashCode();
+    }
+    
+    @Override
     public String toString()
     {
         return getTitle();

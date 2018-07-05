@@ -1,6 +1,7 @@
 package me.remind;
 
 import org.joda.time.DateTime;
+
 import java.util.Scanner;
 
 public class TextNote extends Note implements Remindable
@@ -28,6 +29,21 @@ public class TextNote extends Note implements Remindable
         
         System.out.print("\nText: ");
         text = input.nextLine();
+    }
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        return obj instanceof TextNote &&
+                ((TextNote) obj).getTitle().equals(getTitle()) &&
+                ((TextNote) obj).text.equals(text) &&
+                ((TextNote) obj).getPriority().equals(getPriority());
+    }
+    
+    @Override
+    public int hashCode()
+    {
+        return text.hashCode();
     }
     
     @Override

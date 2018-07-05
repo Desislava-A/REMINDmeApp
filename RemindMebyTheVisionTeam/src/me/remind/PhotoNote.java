@@ -59,6 +59,22 @@ public class PhotoNote extends Note
     }
     
     @Override
+    public boolean equals(Object obj)
+    {
+        return obj instanceof PhotoNote &&
+                ((PhotoNote) obj).getTitle().equals(getTitle()) &&
+                ((PhotoNote) obj).fileName.equals(fileName) &&
+                ((PhotoNote) obj).getPriority().equals(getPriority()) &&
+                ((PhotoNote) obj).description.equals(description);
+    }
+    
+    @Override
+    public int hashCode()
+    {
+        return fileName.hashCode();
+    }
+    
+    @Override
     public String toString()
     {
         return "[PhotoNote]" + "\n\t" + getTitle();

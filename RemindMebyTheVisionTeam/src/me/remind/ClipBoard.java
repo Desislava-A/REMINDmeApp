@@ -7,7 +7,6 @@ import java.util.*;
 
 public class ClipBoard implements Iterable<Note>
 {
-    private SortedMap<Integer, Note> allNotesWithPriorityLevels;
     private SetUniqueList<Note> allNotes;
     private SetUniqueList<Remindable> remindableNotes;
     private SetUniqueList<ListNote> listNotes;
@@ -17,18 +16,11 @@ public class ClipBoard implements Iterable<Note>
     
     public ClipBoard()
     {
-        allNotesWithPriorityLevels = new TreeMap<>();
-        
         setAllNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
         setRemindableNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
         setArchivedNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
         setListNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
         setPinnedNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
-    }
-    
-    public SortedMap<Integer, Note> getAllNotesWithPriorityLevels()
-    {
-        return new TreeMap<>(allNotesWithPriorityLevels);
     }
     
     public SetUniqueList<Note> getAllNotes()
@@ -89,7 +81,9 @@ public class ClipBoard implements Iterable<Note>
         TextNote textNote = new TextNote(title, deadline, priority);
         
         allNotes.add(textNote);
-        remindableNotes.add(textNote);
+        
+        if (deadline != null)
+            remindableNotes.add(textNote);
     }
     
     /**
@@ -100,8 +94,10 @@ public class ClipBoard implements Iterable<Note>
         ListNote listNote = new ListNote(title, deadline, priority);
         
         allNotes.add(listNote);
-        remindableNotes.add(listNote);
         listNotes.add(listNote);
+        
+        if (deadline != null)
+            remindableNotes.add(listNote);
     }
     
     /**
@@ -124,7 +120,9 @@ public class ClipBoard implements Iterable<Note>
         VoiceNote voiceNote = new VoiceNote(title, deadline, priority, audioFile);
         
         allNotes.add(voiceNote);
-        remindableNotes.add(voiceNote);
+        
+        if (deadline != null)
+            remindableNotes.add(voiceNote);
     }
     
     /**

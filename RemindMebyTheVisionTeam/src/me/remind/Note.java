@@ -85,6 +85,9 @@ public abstract class Note
         this.pinned = pinned;
     }
     
+    /**
+     * Converts milliseconds to hours -> used as output for reminders
+     */
     protected long getHoursToDeadline()
     {
         return TimeUnit.MILLISECONDS.toHours(

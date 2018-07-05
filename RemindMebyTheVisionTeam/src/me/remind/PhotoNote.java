@@ -1,10 +1,10 @@
 package me.remind;
 
+import org.joda.time.DateTime;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Date;
 
 public class PhotoNote extends Note
 {
@@ -15,14 +15,14 @@ public class PhotoNote extends Note
     private String fileName;
     private String description;
     
-    public PhotoNote(String title, Date deadline, Priority priority,
+    public PhotoNote(String title, DateTime deadline, Priority priority,
                      String fileName, String description)
     {
         this(title, deadline, priority, fileName);
         setDescription(description);
     }
     
-    public PhotoNote(String title, Date deadline, Priority priority, String fileName)
+    public PhotoNote(String title, DateTime deadline, Priority priority, String fileName)
     {
         super(title, deadline, priority);
         setFileName(fileName);
@@ -52,9 +52,10 @@ public class PhotoNote extends Note
     }
     
     @Override
-    protected String getTitleWithType()
+    protected String getTitleWithTypeAndPriority()
     {
-        return "[PhotoNote]" + "\n\t" + getTitle();
+        return "[PhotoNote] {Priority: " + getPriority().toString().toLowerCase() + "}" +
+                "\n\t\t" + getTitle();
     }
     
     @Override

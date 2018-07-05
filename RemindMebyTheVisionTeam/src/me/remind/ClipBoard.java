@@ -1,10 +1,13 @@
 package me.remind;
 
 import org.apache.commons.collections4.list.SetUniqueList;
+import org.joda.time.DateTime;
+
 import java.util.*;
 
 public class ClipBoard implements Iterable<Note>
 {
+    private SortedMap<Integer, Note> allNotesWithPriorityLevels;
     private SetUniqueList<Note> allNotes;
     private SetUniqueList<Remindable> remindableNotes;
     private SetUniqueList<ListNote> listNotes;
@@ -14,11 +17,18 @@ public class ClipBoard implements Iterable<Note>
     
     public ClipBoard()
     {
+        allNotesWithPriorityLevels = new TreeMap<>();
+        
         setAllNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
         setRemindableNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
         setArchivedNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
         setListNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
         setPinnedNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
+    }
+    
+    public SortedMap<Integer, Note> getAllNotesWithPriorityLevels()
+    {
+        return new TreeMap<>(allNotesWithPriorityLevels);
     }
     
     public SetUniqueList<Note> getAllNotes()
@@ -74,7 +84,7 @@ public class ClipBoard implements Iterable<Note>
     /**
      * Method that constructs a textNote object and adds it to the data structures
      */
-    protected void addTextNote(String title, Date deadline, Priority priority)
+    protected void addTextNote(String title, DateTime deadline, Priority priority)
     {
         TextNote textNote = new TextNote(title, deadline, priority);
         
@@ -85,7 +95,7 @@ public class ClipBoard implements Iterable<Note>
     /**
      * Method that constructs a listNote object and adds it to the data structures
      */
-    protected void addListNote(String title, Date deadline, Priority priority)
+    protected void addListNote(String title, DateTime deadline, Priority priority)
     {
         ListNote listNote = new ListNote(title, deadline, priority);
         
@@ -97,7 +107,7 @@ public class ClipBoard implements Iterable<Note>
     /**
      * Method that constructs a photoNote object
      */
-    protected void addPhotoNote(String title, Date deadline, Priority priority,
+    protected void addPhotoNote(String title, DateTime deadline, Priority priority,
                                 String filePath, String description)
     {
         PhotoNote photoNote = new PhotoNote(title, deadline, priority,
@@ -109,7 +119,7 @@ public class ClipBoard implements Iterable<Note>
     /**
      * Method that constructs a voiceNote object
      */
-    protected void addVoiceNote(String title, Date deadline, Priority priority, String audioFile)
+    protected void addVoiceNote(String title, DateTime deadline, Priority priority, String audioFile)
     {
         VoiceNote voiceNote = new VoiceNote(title, deadline, priority, audioFile);
         
@@ -137,14 +147,14 @@ public class ClipBoard implements Iterable<Note>
     {
         if (pinnedNotes.size() > 0)
         {
-            System.out.println("\n[Pinned]");
-            pinnedNotes.forEach(Note::getTitleWithType);
+            System.out.println("\n[Pinned]\n");
+            pinnedNotes.forEach(Note::getTitleWithTypeAndPriority);
         }
         
         index = 1;
-        System.out.println("\n[All notes]");
+        System.out.println("\n[All notes]\n");
         allNotes.forEach(note -> System.out.println(index++ + "." +
-                note.getTitleWithType()));
+                note.getTitleWithTypeAndPriority()));
     }
     
     /**
@@ -152,8 +162,12 @@ public class ClipBoard implements Iterable<Note>
      */
     protected void showReminders()
     {
-        System.out.println("\n[Reminders]");
-        remindableNotes.forEach(reminder -> System.out.println("\t" + reminder.toString()));
+        System.out.println("\n[Reminders]\n");
+        remindableNotes.forEach(reminder ->
+        {
+            System.out.print("\t" + reminder.toString());
+            reminder.remind();
+        });
     }
     
     /**
@@ -162,7 +176,7 @@ public class ClipBoard implements Iterable<Note>
      */
     protected void showTitles()
     {
-        System.out.println("\n[Titles]");
+        System.out.println("\n[Titles]\n");
         allNotes.forEach(note -> System.out.println("\t" + note.getTitle()));
     }
     
@@ -171,7 +185,7 @@ public class ClipBoard implements Iterable<Note>
      */
     protected void showListTitles()
     {
-        System.out.println("\n[Titles]");
+        System.out.println("\n[Titles]\n");
         listNotes.forEach(note -> System.out.println("\t" + note.getTitle()));
     }
     
@@ -180,7 +194,7 @@ public class ClipBoard implements Iterable<Note>
      */
     protected void showArchive()
     {
-        System.out.println("\n[Archive]");
+        System.out.println("\n[Archive]\n");
         archivedNotes.forEach(note -> System.out.println("\t " + note.getTitle()));
     }
     
@@ -190,7 +204,7 @@ public class ClipBoard implements Iterable<Note>
      */
     protected void showPinned()
     {
-        System.out.println("\n[Pinned]");
+        System.out.println("\n[Pinned]\n");
         pinnedNotes.forEach(note -> System.out.println("\t" + note.getTitle()));
     }
     

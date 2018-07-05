@@ -1,6 +1,6 @@
 package me.remind;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 import java.util.concurrent.TimeUnit;
 
 public abstract class Note
@@ -10,7 +10,7 @@ public abstract class Note
     public static final int DEADLINE_LENGTH = 10;
     
     private String title;
-    private Date deadline;
+    private DateTime deadline;
     private Priority priority;
     private boolean pinned;
     
@@ -23,12 +23,12 @@ public abstract class Note
         this(title, null);
     }
     
-    public Note(String title, Date deadline)
+    public Note(String title, DateTime deadline)
     {
         this(title, deadline, Priority.NONE);
     }
     
-    public Note(String title, Date deadline, Priority priority)
+    public Note(String title, DateTime deadline, Priority priority)
     {
         setTitle(title);
         setDeadline(deadline);
@@ -49,12 +49,12 @@ public abstract class Note
         this.title = title;
     }
     
-    protected Date getDeadline()
+    protected DateTime getDeadline()
     {
         return deadline;
     }
     
-    private void setDeadline(Date deadline)
+    private void setDeadline(DateTime deadline)
     {
         this.deadline = deadline;
     }
@@ -85,10 +85,10 @@ public abstract class Note
         this.pinned = pinned;
     }
     
-    protected long getDaysToDeadline()
+    protected long getHoursToDeadline()
     {
-        return TimeUnit.MILLISECONDS.toDays(deadline.getTime() -
-                System.currentTimeMillis()) + 1;
+        return TimeUnit.MILLISECONDS.toHours(
+                deadline.minus(System.currentTimeMillis()).toDateTime().getMillis());
     }
     
     protected void printTitle()
@@ -98,5 +98,5 @@ public abstract class Note
     
     protected abstract void showNote();
     
-    protected abstract String getTitleWithType();
+    protected abstract String getTitleWithTypeAndPriority();
 }

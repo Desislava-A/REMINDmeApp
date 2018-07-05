@@ -1,5 +1,7 @@
 package me.remind;
 
+import org.joda.time.DateTime;
+
 import java.util.Calendar;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -9,7 +11,9 @@ public class Main
     private static String title = null;
     private static String fileName = null;
     private static String description = null;
+    private static Priority priority = null;
     private static Calendar deadline = null;
+    private static DateTime dateTime = null;
     private static boolean flag = false;
     private static final Scanner input = new Scanner(System.in);
     
@@ -38,6 +42,27 @@ public class Main
         description = input.nextLine();
     }
     
+    private static void getPriority()
+    {
+        System.out.print("Priority: ");
+        String priorityStr = input.nextLine();
+    
+        switch (priorityStr.trim().toLowerCase())
+        {
+            case "critical":
+                priority = Priority.CRITICAL;
+                break;
+            case "normal":
+                priority = Priority.NORMAL;
+                break;
+            case "none":
+                priority = Priority.NONE;
+                break;
+            default:
+                break;
+        }
+    }
+    
     public static void main(String[] args) throws InterruptedException
     {
         ClipBoard clipBoard = new ClipBoard();
@@ -52,20 +77,30 @@ public class Main
                     {
                         if (clipBoard.getAllNotes().size() == 0)
                             throw new IllegalStateException("Clipboard empty!");
+    
+                        clipBoard.showAllNotes();
+    
+                        System.out.print("\nSelect note number: ");
+                        int index = input.nextInt();
+                        input.nextLine();
+    
+                        System.out.println();
+                        if (index < 1 || index > clipBoard.getAllNotes().size())
+                            throw new IllegalArgumentException("Index not in boundaries!");
+    
+                        clipBoard.getAllNotes().get(index - 1).showNote();
+                        input.nextLine();
+                        System.out.println();
                     } catch (IllegalStateException stateex)
                     {
                         System.err.println("\n" + stateex.getMessage());
-                        Thread.sleep(400);
                         break;
+                    } catch (IllegalArgumentException argex)
+                    {
+                        System.err.println("\n" + argex.getMessage());
                     }
-                    
-                    clipBoard.showAllNotes();
-                    
-                    System.out.print("\nSelect note number: ");
-                    int index = input.nextInt();
-                    input.nextLine();
-                    
-                    clipBoard.getAllNotes().get(index - 1).showNote();
+    
+                    Thread.sleep(400);
                     break;
                 case 2:
                     try
@@ -107,19 +142,23 @@ public class Main
                             {
                                 case 1:
                                 {
+                                    deadline = Calendar.getInstance();
+                                    
                                     getTitle();
                                     getDeadline();
+                                    getPriority();
                                     
-                                    clipBoard.addTextNote(title, deadline.getTime(),
-                                            Priority.NONE);
+                                    dateTime = new DateTime(deadline.getTimeInMillis());
+                                    
+                                    clipBoard.addTextNote(title, dateTime, priority);
                                     break;
                                 }
                                 case 2:
                                 {
                                     getTitle();
+                                    getPriority();
                                     
-                                    clipBoard.addTextNote(title, null,
-                                            Priority.NONE);
+                                    clipBoard.addTextNote(title, null, priority);
                                     break;
                                 }
                             }
@@ -135,17 +174,19 @@ public class Main
                                     
                                     getTitle();
                                     getDeadline();
+                                    getPriority();
+    
+                                    dateTime = new DateTime(deadline.getTimeInMillis());
                                     
-                                    clipBoard.addListNote(title, deadline.getTime(),
-                                            Priority.NONE);
+                                    clipBoard.addListNote(title, dateTime, priority);
                                     break;
                                 }
                                 case 2:
                                 {
                                     getTitle();
+                                    getPriority();
                                     
-                                    clipBoard.addListNote(title, null,
-                                            Priority.NONE);
+                                    clipBoard.addListNote(title, null, priority);
                                     break;
                                 }
                                 case 0:
@@ -162,19 +203,22 @@ public class Main
                                     
                                     getTitle();
                                     getDeadline();
+                                    getPriority();
                                     getFileName();
+    
+                                    dateTime = new DateTime(deadline.getTimeInMillis());
                                     
-                                    clipBoard.addVoiceNote(title, deadline.getTime(),
-                                            Priority.NONE, fileName);
+                                    clipBoard.addVoiceNote(title, dateTime, priority, fileName);
                                     break;
                                 }
                                 case 2:
                                 {
                                     getTitle();
+                                    getPriority();
                                     getFileName();
                                     
                                     clipBoard.addVoiceNote(title, null,
-                                            Priority.NONE, fileName);
+                                            priority, fileName);
                                     break;
                                 }
                                 case 0:
@@ -190,20 +234,24 @@ public class Main
                                     
                                     getTitle();
                                     getDeadline();
+                                    getPriority();
                                     getFileName();
                                     getImgDescription();
+    
+                                    dateTime = new DateTime(deadline.getTimeInMillis());
                                     
-                                    clipBoard.addPhotoNote(title, null, Priority.NONE,
+                                    clipBoard.addPhotoNote(title, dateTime, priority,
                                             fileName, description);
                                     break;
                                 }
                                 case 2:
                                 {
                                     getTitle();
+                                    getPriority();
                                     getFileName();
                                     getImgDescription();
                                     
-                                    clipBoard.addPhotoNote(title, null, Priority.NONE,
+                                    clipBoard.addPhotoNote(title, null, priority,
                                             fileName, description);
                                     break;
                                 }

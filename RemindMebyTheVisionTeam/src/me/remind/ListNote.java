@@ -1,5 +1,6 @@
 package me.remind;
 
+import org.joda.time.DateTime;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,13 +23,13 @@ public class ListNote extends Note implements Remindable
         super(title);
     }
     
-    public ListNote(String title, Date deadline, Priority priority, List<String> checkBoxesList)
+    public ListNote(String title, DateTime deadline, Priority priority, List<String> checkBoxesList)
     {
         this(title, deadline, priority);
         initializeList();
     }
     
-    public ListNote(String title, Date deadline, Priority priority)
+    public ListNote(String title, DateTime deadline, Priority priority)
     {
         super(title, deadline, priority);
         initializeList();
@@ -125,9 +126,10 @@ public class ListNote extends Note implements Remindable
     }
     
     @Override
-    public String getTitleWithType()
+    public String getTitleWithTypeAndPriority()
     {
-        return "[ListNote]" + "\n\t" + getTitle();
+        return "[ListNote] {Priority: " + getPriority().toString().toLowerCase() + "}" +
+                "\n\t\t" + getTitle();
     }
     
     @Override
@@ -146,7 +148,6 @@ public class ListNote extends Note implements Remindable
     @Override
     public void remind()
     {
-        showNote();
-        System.out.print("->[Reminder set in " + getDaysToDeadline() + "]");
+        System.out.print(" ->[Reminder set in " + getHoursToDeadline() + " hours]\n");
     }
 }

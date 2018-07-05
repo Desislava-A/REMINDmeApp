@@ -1,8 +1,8 @@
 package me.remind;
 
+import org.joda.time.DateTime;
 import javax.sound.sampled.*;
 import java.io.IOException;
-import java.util.Date;
 
 public class VoiceNote extends Note implements Remindable
 {
@@ -10,7 +10,7 @@ public class VoiceNote extends Note implements Remindable
     private AudioInputStream inputStream;
     private Clip audioClip;
     
-    public VoiceNote(String title, Date deadline, Priority priority, String fileName)
+    public VoiceNote(String title, DateTime deadline, Priority priority, String fileName)
     {
         super(title, deadline, priority);
         setFileName(fileName);
@@ -59,9 +59,10 @@ public class VoiceNote extends Note implements Remindable
     }
     
     @Override
-    public String getTitleWithType()
+    public String getTitleWithTypeAndPriority()
     {
-        return "[VoiceNote]" + "\n\t" + getTitle();
+        return "[VoiceNote] {Priority: " + getPriority().toString().toLowerCase() + "}" +
+                "\n\t\t" + getTitle();
     }
     
     @Override
@@ -91,7 +92,6 @@ public class VoiceNote extends Note implements Remindable
     @Override
     public void remind()
     {
-        showNote();
-        System.out.print("->[Reminder set in " + getDaysToDeadline() + "]");
+        System.out.print(" ->[Reminder set in " + getHoursToDeadline() + " hours]\n");
     }
 }

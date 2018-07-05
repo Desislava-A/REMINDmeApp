@@ -10,7 +10,8 @@ public class Menus
     public static int mainMenu()
     {
         int choice = -1;
-        
+    
+        System.out.println();
         System.out.println("1.All notes");
         System.out.println("2.Reminders");
         System.out.println("3.Archive");

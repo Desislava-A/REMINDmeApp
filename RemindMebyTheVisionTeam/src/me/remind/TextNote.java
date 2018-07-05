@@ -1,6 +1,6 @@
 package me.remind;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 import java.util.Scanner;
 
 public class TextNote extends Note implements Remindable
@@ -13,9 +13,9 @@ public class TextNote extends Note implements Remindable
         initialize();
     }
     
-    public TextNote(String title, Date deadline, Priority priority)
+    public TextNote(String title, DateTime deadline, Priority priority)
     {
-        super(title, deadline);
+        super(title, deadline, priority);
         initialize();
     }
     
@@ -31,9 +31,10 @@ public class TextNote extends Note implements Remindable
     }
     
     @Override
-    public String getTitleWithType()
+    public String getTitleWithTypeAndPriority()
     {
-        return "[TextNote]" + "\n\t" + getTitle();
+        return "[TextNote] {Priority: " + getPriority().toString().toLowerCase() + "}" +
+                "\n\t\t" + getTitle();
     }
     
     @Override
@@ -52,7 +53,6 @@ public class TextNote extends Note implements Remindable
     @Override
     public void remind()
     {
-        showNote();
-        System.out.println(" [Reminder set in " + getDaysToDeadline() + " days]");
+        System.out.print(" ->[Reminder set in " + getHoursToDeadline() + " hours]\n");
     }
 }

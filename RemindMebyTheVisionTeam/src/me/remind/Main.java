@@ -45,23 +45,40 @@ public class Main
     
     private static void getPriority()
     {
-        System.out.print("Priority: ");
-        String priorityStr = input.nextLine();
-    
-        switch (priorityStr.trim().toLowerCase())
-        {
-            case "critical":
-                priority = Priority.CRITICAL;
-                break;
-            case "normal":
-                priority = Priority.NORMAL;
-                break;
-            case "none":
-                priority = Priority.NONE;
-                break;
-            default:
-                break;
-        }
+        String testPriorityInput = "test";
+        Boolean incorrectPriorityInput= true;
+
+        do {
+            System.out.println();
+            System.out.println("Priority choice.");
+            System.out.println("Please choose one of the following:");
+            System.out.println("          NORMAL, CRITICAL or NONE.\n");
+            System.out.print("Priority: ");
+            String priorityStr = input.nextLine();
+
+            testPriorityInput=priorityStr.trim().toLowerCase();
+
+
+            switch (testPriorityInput) {
+                case "critical":
+                    priority = Priority.CRITICAL;
+                    incorrectPriorityInput=false;
+                    break;
+                case "normal":
+                    priority = Priority.NORMAL;
+                    incorrectPriorityInput=false;
+                    break;
+                case "none":
+                    priority = Priority.NONE;
+                    incorrectPriorityInput=false;
+                    break;
+                default:
+                    break;
+            }
+
+        } while (incorrectPriorityInput);
+
+
     }
     
     public static void main(String[] args) throws InterruptedException {

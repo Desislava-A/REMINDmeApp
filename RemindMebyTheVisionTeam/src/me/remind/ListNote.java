@@ -1,6 +1,5 @@
 package me.remind;
 
-import org.apache.commons.collections4.list.SetUniqueList;
 import org.joda.time.DateTime;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -44,7 +43,6 @@ public class ListNote extends Note implements Remindable
     
     /**
      * Method to initialize the ListNote fields
-     * All items are initialized with Check status "UNCHECKED"
      */
     private void initializeList()
     {
@@ -66,6 +64,7 @@ public class ListNote extends Note implements Remindable
                 lines.add(newLine);
             }
             
+            // initializing all items as "unchecked"
             List<Item> checkBoxesAndText = lines.stream()
                     .map(line ->
                     {
@@ -82,7 +81,7 @@ public class ListNote extends Note implements Remindable
         }
     }
     
-    private void listAllItemsFromList()
+    private void listAllCheckboxItems()
     {
         System.out.println("\n[List]");
         checkBoxesList.forEach(x -> System.out.println("\t" + x.toString()));
@@ -100,7 +99,7 @@ public class ListNote extends Note implements Remindable
             // when done with marking items checked, type "-1" to terminate the process
             while (true)
             {
-                listAllItemsFromList();
+                listAllCheckboxItems();
                 System.out.print("\nSelect which index status to change: ");
                 
                 int index = Integer.parseInt(br.readLine());

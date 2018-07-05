@@ -37,6 +37,10 @@ public class VoiceNote extends Note implements Remindable
         this.audioClip = audioClip;
     }
     
+    /**
+     * Audio file initializer
+     * @param fileName - files are situated in res/sounds/
+     */
     private void initializeVoiceFile(final String fileName)
     {
         try

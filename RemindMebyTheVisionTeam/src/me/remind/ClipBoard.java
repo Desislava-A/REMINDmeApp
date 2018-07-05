@@ -82,6 +82,7 @@ public class ClipBoard implements Iterable<Note>
         
         allNotes.add(textNote);
         
+        // notes without deadlines aren't added to the remindables data structure
         if (deadline != null)
             remindableNotes.add(textNote);
     }
@@ -143,6 +144,7 @@ public class ClipBoard implements Iterable<Note>
      */
     protected void showAllNotes()
     {
+        // if there are no pinned notes, the pinned section isn't shown
         if (pinnedNotes.size() > 0)
         {
             System.out.println("\n[Pinned]\n");
@@ -170,7 +172,6 @@ public class ClipBoard implements Iterable<Note>
     
     /**
      * Method that prints all notes' titles
-     * Invoked prior to various different structural changes within the app
      */
     protected void showTitles()
     {

@@ -14,6 +14,8 @@
 	 - [ ] **Mark what is DONE and PIN the most important tasks.**
 
   - **Class Diagram:** 
+  
+  ![Class Diagram](REMIND_ME_APP_CLASS_DIAGRAM.png)
 
 
 

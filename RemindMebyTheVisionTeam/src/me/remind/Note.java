@@ -1,6 +1,7 @@
 package me.remind;
 
 import org.joda.time.DateTime;
+
 import java.util.concurrent.TimeUnit;
 
 public abstract class Note
@@ -16,16 +17,6 @@ public abstract class Note
     
     public Note()
     {
-    }
-    
-    public Note(String title)
-    {
-        this(title, null);
-    }
-    
-    public Note(String title, DateTime deadline)
-    {
-        this(title, deadline, Priority.NONE);
     }
     
     public Note(String title, DateTime deadline, Priority priority)

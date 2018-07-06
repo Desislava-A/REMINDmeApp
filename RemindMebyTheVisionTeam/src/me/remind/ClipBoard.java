@@ -3,6 +3,7 @@ package me.remind;
 import org.apache.commons.collections4.list.SetUniqueList;
 import org.joda.time.DateTime;
 
+import java.io.IOException;
 import java.util.*;
 
 public class ClipBoard implements Iterable<Note>
@@ -23,7 +24,7 @@ public class ClipBoard implements Iterable<Note>
         setPinnedNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
     }
     
-    public SetUniqueList<Note> getAllNotes()
+    protected SetUniqueList<Note> getAllNotes()
     {
         return SetUniqueList.setUniqueList(new ArrayList<>(allNotes));
     }
@@ -33,7 +34,7 @@ public class ClipBoard implements Iterable<Note>
         this.allNotes = allNotes;
     }
     
-    public SetUniqueList<Remindable> getRemindableNotes()
+    protected SetUniqueList<Remindable> getRemindableNotes()
     {
         return SetUniqueList.setUniqueList(new ArrayList<>(remindableNotes));
     }
@@ -43,7 +44,7 @@ public class ClipBoard implements Iterable<Note>
         this.remindableNotes = remindableNotes;
     }
     
-    public SetUniqueList<Note> getPinnedNotes()
+    protected SetUniqueList<Note> getPinnedNotes()
     {
         return SetUniqueList.setUniqueList(new ArrayList<>(pinnedNotes));
     }
@@ -58,12 +59,12 @@ public class ClipBoard implements Iterable<Note>
         this.archivedNotes = archivedNotes;
     }
     
-    public SetUniqueList<Note> getArchivedNotes()
+    protected SetUniqueList<Note> getArchivedNotes()
     {
         return SetUniqueList.setUniqueList(new ArrayList<>(archivedNotes));
     }
     
-    public SetUniqueList<ListNote> getListNotes()
+    protected SetUniqueList<ListNote> getListNotes()
     {
         return SetUniqueList.setUniqueList(new ArrayList<>(listNotes));
     }
@@ -75,8 +76,11 @@ public class ClipBoard implements Iterable<Note>
     
     /**
      * Method that constructs a textNote object and adds it to the data structures
+     *
+     * @throws IOException - regarding the buffered reader
      */
     protected void addTextNote(String title, DateTime deadline, Priority priority)
+            throws IOException
     {
         TextNote textNote = new TextNote(title, deadline, priority);
         
@@ -89,6 +93,7 @@ public class ClipBoard implements Iterable<Note>
     
     /**
      * Method that constructs a listNote object and adds it to the data structures
+     *
      */
     protected void addListNote(String title, DateTime deadline, Priority priority)
     {
@@ -103,6 +108,7 @@ public class ClipBoard implements Iterable<Note>
     
     /**
      * Method that constructs a photoNote object
+     *
      */
     protected void addPhotoNote(String title, DateTime deadline, Priority priority,
                                 String filePath, String description)
@@ -115,6 +121,7 @@ public class ClipBoard implements Iterable<Note>
     
     /**
      * Method that constructs a voiceNote object
+     *
      */
     protected void addVoiceNote(String title, DateTime deadline, Priority priority, String audioFile)
     {
@@ -151,6 +158,7 @@ public class ClipBoard implements Iterable<Note>
             pinnedNotes.forEach(Note::getTitleWithTypeAndPriority);
         }
         
+        // before initiating the printing of all notes, always reset the static index field
         index = 1;
         System.out.println("\n[All notes]\n");
         allNotes.forEach(note -> System.out.println(index++ + "." +
@@ -242,7 +250,7 @@ public class ClipBoard implements Iterable<Note>
     }
     
     /**
-     * Method that unpins a note by title
+     * Method that unpins a note if an object with a matching title is found
      *
      * @param title - the title of the note to be unpinned
      */
@@ -255,7 +263,7 @@ public class ClipBoard implements Iterable<Note>
     }
     
     /**
-     * Method that archives a note by title
+     * Method that archives a note if an object with a matching title is found
      *
      * @param title - the title of the note to be archived
      */
@@ -281,7 +289,7 @@ public class ClipBoard implements Iterable<Note>
     }
     
     /**
-     * Method that searches for a note and prompts to change its inner items' status
+     * Searching for a ListNote object by given title to invoke the prompt method
      *
      * @param title - the tile of the note to be checked
      */
@@ -307,8 +315,8 @@ public class ClipBoard implements Iterable<Note>
     }
     
     /**
-     * Method that deltetes a note by title
-     * If present, deletes the object in the other data structures
+     * Method that deltetes a note if an object with a matching title is found
+     * If present in any other data structure, also deletes it from there
      *
      * @param title - the title of the note to be deleted
      */
@@ -323,7 +331,7 @@ public class ClipBoard implements Iterable<Note>
         allNotes.stream()
                 .filter(note ->
                 {
-                    if (note.getTitle().equals(title)) ;
+                    if (note.getTitle().equals(title))
                     {
                         if (note instanceof ListNote)
                             isList[0] = true;
@@ -338,6 +346,8 @@ public class ClipBoard implements Iterable<Note>
                         
                         return true;
                     }
+                    
+                    return false;
                 })
                 .findAny()
                 .orElseThrow(NoSuchElementException::new);
@@ -359,7 +369,7 @@ public class ClipBoard implements Iterable<Note>
     }
     
     /**
-     * Method to clear the main data structure
+     * Method that clears the main data structure
      */
     protected void clearAllNotes()
     {
@@ -373,7 +383,7 @@ public class ClipBoard implements Iterable<Note>
     }
     
     /**
-     * Method to clear the archive data structure
+     * Method that clears the archive data structure
      */
     protected void clearArchive()
     {
@@ -384,14 +394,21 @@ public class ClipBoard implements Iterable<Note>
     }
     
     /**
-     * Method to clear the remindables data structure
+     * Method that clears the remindables data structure
      */
     protected void clearReminders()
     {
         if (remindableNotes.size() > 0)
             remindableNotes.clear();
+        else
+            throw new IllegalStateException("Reminders is already empty!");
     }
     
+    /**
+     * The main clipboard iterator
+     *
+     * @return - the iterator object of the main data structure allNotes
+     */
     @Override
     public Iterator<Note> iterator()
     {

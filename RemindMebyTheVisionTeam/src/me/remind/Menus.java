@@ -7,26 +7,29 @@ import java.util.Scanner;
  */
 public class Menus
 {
+    private static final Scanner input = new Scanner(System.in);
+    
     public static int mainMenu()
     {
         int choice = -1;
-    
-        System.out.println();
-        System.out.println("1.All notes");
-        System.out.println("2.Reminders");
-        System.out.println("3.Archive");
-        System.out.println("4.Add note");
-        System.out.println("5.Search note");
-        System.out.println("6.Edit list note items");
-        System.out.println("7.Pin note");
-        System.out.println("8.Unpin note");
-        System.out.println("9.Archive note");
-        System.out.println("10.Delete note");
-        System.out.println("11.Clear all");
-        System.out.println("12.Clear archive");
-        System.out.println("0.Exit");
         
-        Scanner input = new Scanner(System.in);
+        System.out.println();
+        System.out.println(".---------------------------------.");
+        System.out.println("| 1.All notes                     |");
+        System.out.println("| 2.Reminders                     |");
+        System.out.println("| 3.Archive                       |");
+        System.out.println("| 4.Add note                      |");
+        System.out.println("| 5.Search note                   |");
+        System.out.println("| 6.Edit list note items          |");
+        System.out.println("| 7.Pin note                      |");
+        System.out.println("| 8.Unpin note                    |");
+        System.out.println("| 9.Archive note                  |");
+        System.out.println("| 10.Delete note                  |");
+        System.out.println("| 11.Clear all                    |");
+        System.out.println("| 12.Clear archive                |");
+        System.out.println("| 0.Exit                          |");
+        System.out.println(".---------------------------------.");
+        
         do
         {
             System.out.print("\nChoice: ");
@@ -37,7 +40,7 @@ public class Menus
             else
             {
                 System.err.println("Please choose a number from the menu options");
-                input.next();
+                input.nextLine();
             }
             
         } while (choice < 0 || choice > 12);
@@ -55,7 +58,6 @@ public class Menus
         System.out.println("4.Add photo note");
         System.out.println("0.Exit");
         
-        Scanner input = new Scanner(System.in);
         do
         {
             System.out.print("\nChoice: ");
@@ -66,7 +68,7 @@ public class Menus
             else
             {
                 System.err.println("Please choose a number from the menu options!");
-                input.next();
+                input.nextLine();
             }
             
         } while (choice < 0 || choice > 4);
@@ -82,23 +84,25 @@ public class Menus
         System.out.println("2.Reminder off");
         System.out.println("0.Exit\n");
         
-        Scanner input = new Scanner(System.in);
         do
         {
             System.out.print("Choice: ");
             
-            
-            // Using input.hasNextInt() handles input mismatch errors
             if (input.hasNextInt())
                 choice = input.nextInt();
             else
             {
                 System.err.println("Please choose a number from the menu options!");
-                input.next();
+                input.nextLine();
             }
             
         } while (choice < 0 || choice > 3);
         
         return choice;
+    }
+    
+    protected static void closeStream()
+    {
+        input.close();
     }
 }

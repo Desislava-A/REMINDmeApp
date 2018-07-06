@@ -1,6 +1,7 @@
 package me.remind;
 
 import org.joda.time.DateTime;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,8 +10,8 @@ import java.util.stream.Collectors;
 
 public class ListNote extends Note implements Remindable
 {
-    public static final int EXIT_PROMPT = -1;
-    public static final int MIN_LIST_SIZE_LENGTH = 0;
+    public static final int EXIT_INDEX = -1;
+    public static final int MIN_LIST_SIZE = 0;
     
     private List<Item> checkBoxesList;
     
@@ -18,27 +19,21 @@ public class ListNote extends Note implements Remindable
     {
     }
     
-    public ListNote(String title)
-    {
-        super(title);
-    }
-    
-    public ListNote(String title, DateTime deadline, Priority priority,
-                    List<Item> checkBoxesList)
-    {
-        this(title, deadline, priority);
-        initializeList();
-    }
-    
     public ListNote(String title, DateTime deadline, Priority priority)
     {
         super(title, deadline, priority);
+        setCheckBoxesList(new ArrayList<>());
         initializeList();
     }
     
-    public List<Item> getCheckBoxesList()
+    protected List<Item> getCheckBoxesList()
     {
         return new ArrayList<>(checkBoxesList);
+    }
+    
+    private void setCheckBoxesList(List<Item> checkBoxesList)
+    {
+        this.checkBoxesList = checkBoxesList;
     }
     
     /**
@@ -90,7 +85,7 @@ public class ListNote extends Note implements Remindable
     /**
      * Method that prompts for checking different items from a list note by index
      */
-    public void promptToChangeStatus()
+    protected void promptToChangeStatus()
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
@@ -104,13 +99,16 @@ public class ListNote extends Note implements Remindable
                 
                 int index = Integer.parseInt(br.readLine());
                 
-                if ((index < MIN_LIST_SIZE_LENGTH || index > checkBoxesList.size()) &&
-                        index != EXIT_PROMPT)
+                if ((index < MIN_LIST_SIZE || index > checkBoxesList.size()) &&
+                        index != EXIT_INDEX)
                     return;
-                else if (index == EXIT_PROMPT)
+                else if (index == EXIT_INDEX)
                     return;
                 else
                 {
+                    // on select, always changing the check field to the opposite value
+                    /* substracting 1 because the output ordering starts with 1;
+                            => the actual index of the element is minus one */
                     if (checkBoxesList.get(index - 1).getCheck() == Check.UNCHECKED)
                         checkBoxesList.get(index - 1).setCheck(Check.CHECKED);
                     else
@@ -124,7 +122,7 @@ public class ListNote extends Note implements Remindable
     }
     
     @Override
-    public String getTitleWithTypeAndPriority()
+    protected String getTitleWithTypeAndPriority()
     {
         return "[ListNote] {Priority: " + getPriority().toString().toLowerCase() + "}" +
                 "\n\t\t" + getTitle();
@@ -152,7 +150,7 @@ public class ListNote extends Note implements Remindable
     }
     
     @Override
-    public void showNote()
+    protected void showNote()
     {
         System.out.println("\n[List]");
         getCheckBoxesList().forEach(x -> System.out.println("\t" + x));

@@ -2,19 +2,15 @@ package me.remind;
 
 import org.joda.time.DateTime;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class TextNote extends Note implements Remindable
 {
     private String text;
     
-    public TextNote(String title)
-    {
-        super(title);
-        initialize();
-    }
-    
-    public TextNote(String title, DateTime deadline, Priority priority)
+    public TextNote(String title, DateTime deadline, Priority priority) throws IOException
     {
         super(title, deadline, priority);
         initialize();
@@ -22,13 +18,14 @@ public class TextNote extends Note implements Remindable
     
     /**
      * Method to initialize the TextNote field
+     *
      */
-    private void initialize()
+    private void initialize() throws IOException
     {
-        Scanner input = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
         System.out.print("\nText: ");
-        text = input.nextLine();
+        text = br.readLine();
     }
     
     @Override
@@ -47,7 +44,7 @@ public class TextNote extends Note implements Remindable
     }
     
     @Override
-    public String getTitleWithTypeAndPriority()
+    protected String getTitleWithTypeAndPriority()
     {
         return "[TextNote] {Priority: " + getPriority().toString().toLowerCase() + "}" +
                 "\n\t\t" + getTitle();
@@ -60,7 +57,7 @@ public class TextNote extends Note implements Remindable
     }
     
     @Override
-    public void showNote()
+    protected void showNote()
     {
         System.out.println("[TextNote]");
         System.out.print("\t" + text);

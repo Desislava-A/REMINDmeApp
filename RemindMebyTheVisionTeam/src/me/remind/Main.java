@@ -1,191 +1,217 @@
 package me.remind;
 
 import org.joda.time.DateTime;
-
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class Main
 {
-    private static String title = null;
-    private static String fileName = null;
-    private static String description = null;
+    private static StringBuilder title = new StringBuilder();
+    private static StringBuilder fileName = new StringBuilder();
+    private static StringBuilder description = new StringBuilder();
     private static Priority priority = null;
     private static Calendar deadline = null;
     private static DateTime dateTime = null;
     private static boolean flag = false;
-    private static final Scanner input = new Scanner(System.in);
     
-    private static void getTitle()
+    private static final BufferedReader br =
+            new BufferedReader(new InputStreamReader(System.in));
+    
+    private static void getTitle() throws IOException
     {
         System.out.print("\nTitle: ");
-        title = input.nextLine();
+        title.append(br.readLine());
     }
     
-    private static void getDeadline()
+    private static void getDeadline() throws IOException
     {
         System.out.print("Deadline in days: ");
-        deadline.add(Calendar.DATE, input.nextInt());
-        input.nextLine();
+        deadline.add(Calendar.DATE, Integer.parseInt(br.readLine()));
+        br.readLine();
     }
     
-    private static void getFileName()
+    private static void getFileName() throws IOException
     {
         System.out.print("File name: ");
-        fileName = input.nextLine();
+        fileName.append(br.readLine());
     }
     
-    private static void getImgDescription()
+    private static void getImgDescription() throws IOException
     {
         System.out.print("Image description: ");
-        description = input.nextLine();
+        description.append(br.readLine());
     }
     
-    private static void getPriority()
+    private static void getPriority() throws IOException
     {
-        String testPriorityInput = "test";
-        Boolean incorrectPriorityInput= true;
-
-        do {
-            System.out.println();
-            System.out.println("Priority choice.");
-            System.out.println("Please choose one of the following:");
-            System.out.println("          NORMAL, CRITICAL or NONE.\n");
-            System.out.print("Priority: ");
-            String priorityStr = input.nextLine();
-
-            testPriorityInput=priorityStr.trim().toLowerCase();
-
-
-            switch (testPriorityInput) {
+        String testPriorityInput = null;
+        boolean incorrectPriorityInput = true;
+        
+        do
+        {
+            System.out.println("\n[Priority choice]");
+            System.out.println("Please choose one of the following: ");
+            System.out.println("\t->[none, normal or critical]\n");
+            System.out.print("\nPriority: ");
+            String priorityStr = br.readLine();
+            
+            testPriorityInput = priorityStr.trim().toLowerCase();
+            
+            switch (testPriorityInput)
+            {
                 case "critical":
                     priority = Priority.CRITICAL;
-                    incorrectPriorityInput=false;
+                    incorrectPriorityInput = false;
                     break;
                 case "normal":
                     priority = Priority.NORMAL;
-                    incorrectPriorityInput=false;
+                    incorrectPriorityInput = false;
                     break;
                 case "none":
                     priority = Priority.NONE;
-                    incorrectPriorityInput=false;
+                    incorrectPriorityInput = false;
                     break;
                 default:
                     break;
             }
-
         } while (incorrectPriorityInput);
-
-
     }
     
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException
+    {
         ClipBoard clipBoard = new ClipBoard();
-
-        while (true) {
+        
+        while (true)
+        {
             System.out.println();
-            switch (Menus.mainMenu()) {
+            switch (Menus.mainMenu())
+            {
                 case 1:
-                    try {
+                    try
+                    {
                         if (clipBoard.getAllNotes().size() == 0)
                             throw new IllegalStateException("Clipboard empty!");
-
+                        
                         clipBoard.showAllNotes();
-
+                        
                         System.out.print("\nSelect note number: ");
-                        int index = input.nextInt();
-                        input.nextLine();
-
+                        int index = Integer.parseInt(br.readLine());
+                        br.readLine();
+                        
                         System.out.println();
                         if (index < 1 || index > clipBoard.getAllNotes().size())
                             throw new IllegalArgumentException("Index not in boundaries!");
-
+                        
                         clipBoard.getAllNotes().get(index - 1).showNote();
-                        input.nextLine();
+                        br.readLine();
                         System.out.println();
-                    } catch (IllegalStateException stateex) {
+                    } catch (IllegalStateException stateex)
+                    {
                         System.err.println("\n" + stateex.getMessage());
                         break;
-                    } catch (IllegalArgumentException argex) {
+                    } catch (IllegalArgumentException argex)
+                    {
                         System.err.println("\n" + argex.getMessage());
                     }
-
+                    
                     Thread.sleep(400);
                     break;
                 case 2:
-                    try {
+                    try
+                    {
                         if (clipBoard.getRemindableNotes().size() == 0)
                             throw new IllegalStateException("No reminders!");
-                    } catch (IllegalStateException stateex) {
+                    } catch (IllegalStateException stateex)
+                    {
                         System.err.println("\n" + stateex.getMessage());
                         Thread.sleep(400);
                         break;
                     }
-
+                    
                     clipBoard.showReminders();
-                    input.nextLine();
+                    br.readLine();
                     break;
                 case 3:
-                    try {
+                    try
+                    {
                         if (clipBoard.getArchivedNotes().size() == 0)
                             throw new IllegalStateException("No archived notes!");
-                    } catch (IllegalStateException stateex) {
+                    } catch (IllegalStateException stateex)
+                    {
                         System.err.println("\n" + stateex.getMessage());
                         Thread.sleep(400);
                         break;
                     }
-
+                    
                     clipBoard.showArchive();
-                    input.nextLine();
+                    br.readLine();
                     break;
                 case 4:
                     System.out.println();
-                    switch (Menus.addSubMenu()) {
-                        case 1: {
-                            switch (Menus.hasReminderMenu()) {
-                                case 1: {
+                    switch (Menus.addSubMenu())
+                    {
+                        case 1:
+                        {
+                            switch (Menus.hasReminderMenu())
+                            {
+                                case 1:
+                                {
                                     deadline = Calendar.getInstance();
-
+                                    
                                     getTitle();
                                     getDeadline();
                                     getPriority();
-
+                                    
                                     dateTime = new DateTime(deadline.getTimeInMillis());
-
-                                    clipBoard.addTextNote(title, dateTime, priority);
+                                    
+                                    clipBoard.addTextNote(title.toString(), dateTime, priority);
+                                    
+                                    title.setLength(0);
                                     break;
                                 }
-                                case 2: {
+                                case 2:
+                                {
                                     getTitle();
                                     getPriority();
-
-                                    clipBoard.addTextNote(title, null, priority);
+                                    
+                                    clipBoard.addTextNote(title.toString(), null, priority);
+                                    
+                                    title.setLength(0);
                                     break;
                                 }
                             }
                             break;
                         }
-                        case 2: {
-                            switch (Menus.hasReminderMenu()) {
-                                case 1: {
+                        case 2:
+                        {
+                            switch (Menus.hasReminderMenu())
+                            {
+                                case 1:
+                                {
                                     deadline = Calendar.getInstance();
-
+                                    
                                     getTitle();
                                     getDeadline();
                                     getPriority();
-
+                                    
                                     dateTime = new DateTime(deadline.getTimeInMillis());
-
-                                    clipBoard.addListNote(title, dateTime, priority);
+                                    
+                                    clipBoard.addListNote(title.toString(), dateTime, priority);
+                                    
+                                    title.setLength(0);
                                     break;
                                 }
-                                case 2: {
+                                case 2:
+                                {
                                     getTitle();
                                     getPriority();
-
-                                    clipBoard.addListNote(title, null, priority);
+                                    
+                                    clipBoard.addListNote(title.toString(), null, priority);
+                                    
+                                    title.setLength(0);
                                     break;
                                 }
                                 case 0:
@@ -194,27 +220,37 @@ public class Main
                             break;
                         }
                         case 3:
-                            switch (Menus.hasReminderMenu()) {
-                                case 1: {
+                            switch (Menus.hasReminderMenu())
+                            {
+                                case 1:
+                                {
                                     deadline = Calendar.getInstance();
-
+                                    
                                     getTitle();
                                     getDeadline();
                                     getPriority();
                                     getFileName();
-
+                                    
                                     dateTime = new DateTime(deadline.getTimeInMillis());
-
-                                    clipBoard.addVoiceNote(title, dateTime, priority, fileName);
+                                    
+                                    clipBoard.addVoiceNote(title.toString(), dateTime,
+                                            priority, fileName.toString());
+                                    
+                                    title.setLength(0);
+                                    fileName.setLength(0);
                                     break;
                                 }
-                                case 2: {
+                                case 2:
+                                {
                                     getTitle();
                                     getPriority();
                                     getFileName();
-
-                                    clipBoard.addVoiceNote(title, null,
-                                            priority, fileName);
+                                    
+                                    clipBoard.addVoiceNote(title.toString(), null,
+                                            priority, fileName.toString());
+                                    
+                                    title.setLength(0);
+                                    fileName.setLength(0);
                                     break;
                                 }
                                 case 0:
@@ -222,179 +258,207 @@ public class Main
                             }
                             break;
                         case 4:
-
-                        {       //PhotoNote doesn't implement Remindable
+                        {
+                            // PhotoNote doesn't implement Remindable
                             getTitle();
                             getPriority();
                             getFileName();
                             getImgDescription();
-
-                            clipBoard.addPhotoNote(title, null, priority,
-                                    fileName, description);
-
+                            
+                            clipBoard.addPhotoNote(title.toString(), null, priority,
+                                    fileName.toString(), description.toString());
+                            
+                            title.setLength(0);
+                            fileName.setLength(0);
+                            description.setLength(0);
+                            break;
                         }
-                        break;
                         case 5:
-                            try {
+                            try
+                            {
                                 if (clipBoard.getAllNotes().size() == 0)
                                     throw new IllegalStateException("Clipboard empty!");
-
+                                
                                 System.out.print("\nTitle to search: ");
-                                title = input.nextLine();
-
-                                clipBoard.search(title);
-                            } catch (IllegalStateException stateex) {
+                                title.append(br.readLine());
+                                
+                                clipBoard.search(title.toString());
+                            } catch (IllegalStateException stateex)
+                            {
                                 System.err.print("\n" + stateex.getMessage());
-                            } catch (NoSuchElementException notfoundex) {
+                            } catch (NoSuchElementException notfoundex)
+                            {
                                 System.err.println("Note not found!");
                             }
-
+                            
                             Thread.sleep(400);
                             break;
                         case 6:
                             System.out.println();
-                            try {
+                            try
+                            {
                                 if (clipBoard.getListNotes().size() == 0)
                                     throw new IllegalStateException("No list notes!");
-
+                                
                                 clipBoard.showListTitles();
-
+                                
                                 System.out.println("\nWhich title to edit: ");
-                                title = input.nextLine();
-
-                                clipBoard.promptToCheckListItems(title);
-                            } catch (IllegalStateException stateex) {
+                                title.append(br.readLine());
+                                
+                                clipBoard.promptToCheckListItems(title.toString());
+                            } catch (IllegalStateException stateex)
+                            {
                                 System.err.println(stateex.getMessage());
-                            } catch (NoSuchElementException notfoundex) {
+                            } catch (NoSuchElementException notfoundex)
+                            {
                                 System.err.println("Note not found!");
                             }
-
+                            
                             Thread.sleep(400);
                             break;
                         case 7:
                             System.out.println();
-                            try {
+                            try
+                            {
                                 if (clipBoard.getAllNotes().size() == 0)
                                     throw new IllegalStateException("Clipboard empty!");
-
+                                
                                 clipBoard.showTitles();
-
+                                
                                 System.out.print("\nTitle of note to be pinned: ");
-                                String titleToBePinned = input.nextLine();
-
+                                String titleToBePinned = br.readLine();
+                                
                                 clipBoard.pinNote(titleToBePinned);
-
+                                
                                 if (!clipBoard.isNotePinned(titleToBePinned))
                                     throw new FailedPinException("Pin failed");
-                            } catch (IllegalStateException stateex) {
+                            } catch (IllegalStateException stateex)
+                            {
                                 System.err.println(stateex.getMessage());
-                            } catch (NoSuchElementException notfoundex) {
+                            } catch (NoSuchElementException notfoundex)
+                            {
                                 System.err.println("Note not found!");
-                            } catch (FailedPinException pinex) {
+                            } catch (FailedPinException pinex)
+                            {
                                 System.err.println(pinex.getMessage());
                             }
-
+                            
                             Thread.sleep(400);
                             break;
                         case 8:
-                            try {
+                            try
+                            {
                                 if (clipBoard.getPinnedNotes().size() == 0)
                                     throw new IllegalStateException("There aren't any pinned notes!");
-
+                                
                                 clipBoard.showPinned();
-
+                                
                                 System.out.println("\nTitle of note to be unpinned: ");
-                                String titleToBeUnpinned = input.nextLine();
-
+                                String titleToBeUnpinned = br.readLine();
+                                
                                 clipBoard.unpinNote(titleToBeUnpinned);
-                            } catch (IllegalStateException stateex) {
+                            } catch (IllegalStateException stateex)
+                            {
                                 System.err.println("\n" + stateex.getMessage());
-                            } catch (NoSuchElementException notfoundex) {
+                            } catch (NoSuchElementException notfoundex)
+                            {
                                 System.err.println("Note not found!");
                             }
-
+                            
                             Thread.sleep(400);
                             break;
                         case 9:
                             System.out.println();
-                            try {
+                            try
+                            {
                                 if (clipBoard.getAllNotes().size() == 0)
                                     throw new IllegalStateException("Clipboard empty!");
-
+                                
                                 clipBoard.showTitles();
-
+                                
                                 System.out.print("\nTitle of note to be archived: ");
-                                String titleToBeArchived = input.nextLine();
-
+                                String titleToBeArchived = br.readLine();
+                                
                                 clipBoard.archiveNote(titleToBeArchived);
-
+                                
                                 if (clipBoard.isNoteArchived(titleToBeArchived))
                                     System.out.print("\nNote archived");
                                 else
                                     throw new FailedArchiveException("\nArchive failed");
-                            } catch (IllegalStateException stateex) {
+                            } catch (IllegalStateException stateex)
+                            {
                                 System.err.println(stateex.getMessage());
-                            } catch (FailedArchiveException farchex) {
+                            } catch (FailedArchiveException farchex)
+                            {
                                 System.err.println(farchex.getMessage());
                             }
-
+                            
                             Thread.sleep(400);
                             break;
                         case 10:
-                            try {
+                            try
+                            {
                                 if (clipBoard.getAllNotes().size() == 0)
                                     throw new IllegalStateException("\nClipboard empty!\n");
-
+                                
                                 clipBoard.showTitles();
-
+                                
                                 System.out.print("\nTitle of note to be deleted: ");
-                                String titleToBeDeleted = input.nextLine();
-
+                                String titleToBeDeleted = br.readLine();
+                                
                                 clipBoard.deleteNote(titleToBeDeleted);
-                            } catch (NoSuchElementException notfoundex) {
+                            } catch (NoSuchElementException notfoundex)
+                            {
                                 System.err.println("Note not found!");
-                            } catch (IllegalStateException stateex) {
+                            } catch (IllegalStateException stateex)
+                            {
                                 System.err.print(stateex.getMessage());
                             }
-
+                            
                             Thread.sleep(400);
                             break;
                         case 11:
+                            /* flag used to handle "Notes cleared" showing even
+                               after entering the catch block and breaking ? */
                             flag = false;
-
-                            try {
+                            
+                            try
+                            {
                                 clipBoard.clearAllNotes();
-                            } catch (IllegalStateException stateex) {
+                            } catch (IllegalStateException stateex)
+                            {
                                 System.err.println("\n" + stateex.getMessage());
                                 flag = true;
                                 Thread.sleep(400);
                                 break;
                             }
-
+                            
                             if (clipBoard.getAllNotes().size() == 0 && flag)
                                 System.out.println("\nNotes cleared");
-
+                            
                             break;
                         case 12:
                             flag = false;
-
-                            try {
+                            
+                            try
+                            {
                                 clipBoard.clearArchive();
-                            } catch (IllegalStateException stateex) {
+                            } catch (IllegalStateException stateex)
+                            {
                                 System.err.println("\n" + stateex.getMessage());
                                 flag = true;
                                 Thread.sleep(400);
                                 break;
                             }
-
+                            
                             if (clipBoard.getArchivedNotes().size() == 0 && flag)
                                 System.out.println("\nArchive cleared");
-
+                            
                             break;
                         case 0:
-                            if (input != null)
-                                input.close();
-
+                            br.close();
+                            Menus.closeStream();
+                            
                             System.exit(0);
                             break;
                         default:

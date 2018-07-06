@@ -18,7 +18,7 @@ public class Item
         setCheck(check);
     }
     
-    public Check getCheck()
+    protected Check getCheck()
     {
         return check;
     }
@@ -39,7 +39,7 @@ public class Item
         this.itemText = itemText;
     }
     
-    public String getItemText()
+    protected String getItemText()
     {
         return itemText;
     }

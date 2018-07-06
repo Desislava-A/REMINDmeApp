@@ -1,6 +1,7 @@
 package me.remind;
 
 import org.joda.time.DateTime;
+
 import javax.sound.sampled.*;
 import java.io.IOException;
 
@@ -17,7 +18,7 @@ public class VoiceNote extends Note implements Remindable
         initializeVoiceFile(fileName);
     }
     
-    public String getFileName()
+    protected String getFileName()
     {
         return fileName;
     }
@@ -27,7 +28,7 @@ public class VoiceNote extends Note implements Remindable
         this.fileName = audioFilePath;
     }
     
-    private  void setInputStream(AudioInputStream inputStream)
+    private void setInputStream(AudioInputStream inputStream)
     {
         this.inputStream = inputStream;
     }
@@ -39,6 +40,7 @@ public class VoiceNote extends Note implements Remindable
     
     /**
      * Audio file initializer
+     *
      * @param fileName - files are situated in res/sounds/
      */
     private void initializeVoiceFile(final String fileName)
@@ -46,7 +48,7 @@ public class VoiceNote extends Note implements Remindable
         try
         {
             setInputStream(AudioSystem.getAudioInputStream(Main.class.getResourceAsStream(
-                            "/res/sounds/" + fileName)));
+                    "/res/sounds/" + fileName)));
             setAudioClip(AudioSystem.getClip());
         } catch (LineUnavailableException lineex)
         {
@@ -63,7 +65,7 @@ public class VoiceNote extends Note implements Remindable
     }
     
     @Override
-    public String getTitleWithTypeAndPriority()
+    protected String getTitleWithTypeAndPriority()
     {
         return "[VoiceNote] {Priority: " + getPriority().toString().toLowerCase() + "}" +
                 "\n\t\t" + getTitle();
@@ -91,7 +93,7 @@ public class VoiceNote extends Note implements Remindable
     }
     
     @Override
-    public void showNote()
+    protected void showNote()
     {
         try
         {
@@ -103,7 +105,7 @@ public class VoiceNote extends Note implements Remindable
         {
             lineex.printStackTrace();
         }
-    
+        
         audioClip.setFramePosition(0);
         audioClip.start();
     }

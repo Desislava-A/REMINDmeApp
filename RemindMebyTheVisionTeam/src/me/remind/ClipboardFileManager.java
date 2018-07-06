@@ -28,10 +28,10 @@ public class ClipboardFileManager implements Serializable {
 
         FileInputStream inputStream = null;
         File file = new File("clipboard");
+        if (file.length() == 0) {
+            return new ClipBoard();
+        }
         inputStream = new FileInputStream(file);
-//        if (file.length() == 0) {
-//            return new ClipBoard();
-//        }
         ObjectInputStream oos = new ObjectInputStream(inputStream);
 
         return (ClipBoard) oos.readObject();

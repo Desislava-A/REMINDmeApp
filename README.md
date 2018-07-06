@@ -1,5 +1,7 @@
 # REMINDmeApp
 
+![UI-MENU-MOCK-UP](REMINDme-APP-UI-MENU-MOCK-UP-SCREENSHOTS/Slide4.PNG)
+
 - **The Team:**
 
 | Team name | Member 1 | Member 2 | Member 3 |
@@ -12,8 +14,16 @@
 	 - [ ] **Make , store , prioritize, search and archive notes for every task you would like to follow.**
 	 - [ ] **Get reminder when a deadline is approaching.**
 	 - [ ] **Mark what is DONE and PIN the most important tasks.**
-
-  - **Class Diagram:** 
+	 
+- **Make notes on the go. REMIND.ME APP offers four NOTE format options:**	 
+	 -   Text note
+	 -   Note with list of items with check boxes
+	 -   Voice note with audio file
+	 -   Photo note with image file
+  
+  
+    
+- **Class Diagram:** 
   
   ![Class Diagram](REMIND_ME_APP_CLASS_DIAGRAM--NOTITLE.png)
 

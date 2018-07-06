@@ -15,7 +15,7 @@
 
   - **Class Diagram:** 
   
-  ![Class Diagram](REMIND_ME_APP_CLASS_DIAGRAM.png)
+  ![Class Diagram](REMIND_ME_APP_CLASS_DIAGRAM--NOTITLE.png)
 
 
 

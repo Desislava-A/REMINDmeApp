@@ -1,6 +1,7 @@
 package me.remind;
 
-public enum Check
-{
+import java.io.Serializable;
+
+public enum Check implements Serializable {
     CHECKED, UNCHECKED
 }

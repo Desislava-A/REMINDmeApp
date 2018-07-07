@@ -4,9 +4,8 @@
 # User-specific stuff
 
 **/.idea/workspace.xml
+**/.idea/checkstyle-idea.xml
 **/.idea/compiler.xml
 **/.idea/tasks.xml
 **/.idea/misc.xml
 **/*.iml
-
-

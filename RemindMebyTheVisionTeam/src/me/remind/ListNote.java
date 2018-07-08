@@ -19,7 +19,7 @@ public class ListNote extends Note implements Remindable
     {
     }
     
-    public ListNote(String title, DateTime deadline, Priority priority)
+    public ListNote(String title, DateTime deadline, Priority priority) throws IOException
     {
         super(title, deadline, priority);
         setCheckBoxesList(new ArrayList<>());
@@ -39,24 +39,34 @@ public class ListNote extends Note implements Remindable
     /**
      * Method to initialize the ListNote fields
      */
-    private void initializeList()
+    private void initializeList() throws IOException
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
         // When done adding new lines, type "ok" to terminate the adding process
-        try
-        {
+
             Queue<String> lines = new LinkedList<>();
             
-            String newLine = "";
-            while (true)
+            String newLine ="";
+
+        System.out.println();
+
+        System.out.println("Please input new item");
+        System.out.println("For ending the item press: [ENTER]");
+        System.out.println("For ending list note press: 0");
+
+        while (true)
             {
                 newLine = br.readLine();
-                
-                if (newLine.equals("ok"))
+                if(newLine.equals("0")){
                     break;
-                
-                lines.add(newLine);
+            }
+
+            else{
+                    lines.add(newLine);
+                }
+
+
             }
             
             // initializing all items as "unchecked"
@@ -70,10 +80,7 @@ public class ListNote extends Note implements Remindable
                     }).collect(Collectors.toList());
             
             checkBoxesList = checkBoxesAndText;
-        } catch (IOException ioex)
-        {
-            ioex.printStackTrace();
-        }
+
     }
     
     private void listAllCheckboxItems()
@@ -85,12 +92,11 @@ public class ListNote extends Note implements Remindable
     /**
      * Method that prompts for checking different items from a list note by index
      */
-    protected void promptToChangeStatus()
+    protected void promptToChangeStatus()throws IOException
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
-        try
-        {
+
             // when done with marking items checked, type "-1" to terminate the process
             while (true)
             {
@@ -115,10 +121,7 @@ public class ListNote extends Note implements Remindable
                         checkBoxesList.get(index - 1).setCheck(Check.UNCHECKED);
                 }
             }
-        } catch (IOException ioex)
-        {
-            ioex.printStackTrace();
-        }
+
     }
     
     @Override

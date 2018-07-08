@@ -1,6 +1,6 @@
 # REMINDmeApp
 
-![UI-MENU-MOCK-UP](REMINDme-APP-UI-MENU-MOCK-UP-SCREENSHOTS/Slide4.PNG)
+![UI-MENU-MOCK-UP](Remind-me--project-Front-image.png)
 
 - **The Team:**
 

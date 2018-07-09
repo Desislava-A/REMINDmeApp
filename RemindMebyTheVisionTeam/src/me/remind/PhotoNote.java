@@ -84,6 +84,7 @@ public class PhotoNote extends Note
     @Override
     protected void showNote() throws IOException
     {
+        // initializing the buffered image; files are located in /res/images
         image = ImageIO.read(this.getClass().getResource("/res/images/" + fileName));
         
         ImageIcon imageIcon = new ImageIcon(image);

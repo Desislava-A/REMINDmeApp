@@ -51,8 +51,9 @@ public abstract class Note implements Serializable
             return;
         
         if (title.length() < MIN_TITLE_LENGTH || title.length() > MAX_TITLE_LENGTH)
+            return;
             
-            this.title = title;
+        this.title = title;
     }
     
     protected Priority getPriority()

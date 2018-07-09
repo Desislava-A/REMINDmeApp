@@ -13,7 +13,6 @@ public class Main
     private static Priority priority = null;
     private static Calendar deadline = null;
     private static DateTime dateTime = null;
-    private static boolean flag = false;
     private static ClipboardFileManager cfm = new ClipboardFileManager();
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     
@@ -230,7 +229,7 @@ public class Main
                             Note changeList = list.get(index - 1);
                             try
                             {
-                                clipBoard.promptToCheckListItems(((ListNote) changeList));
+                                clipBoard.promptToCheckListItems(changeList);
                             } catch (InvalidObjectException ex)
                             {
                                 System.err.println("\n" + ex.getMessage());
@@ -426,12 +425,15 @@ public class Main
                         break;
                     }
                     
-                    System.out.println("[Titles found from search]");
-                    result.forEach(note -> System.out.println("\t" +
-                            note.getTitle() + "\n"));
+                    if (result.size() > 0)
+                    {
+                        System.out.println("\n[Titles found from search]");
+                        result.forEach(note -> System.out.println("\t" +
+                                note.getTitle() + "\n"));
+                    } else
+                        System.out.println("\nNo matches found...");
                     
                     br.readLine();
-                    Thread.sleep(400);
                     break;
                 // 5.Showing archived notes
                 case 5:
@@ -449,41 +451,31 @@ public class Main
                     break;
                 //6. Clear all saved notes
                 case 6:
-                    /* flag used to handle "Notes cleared" showing even
-                       after entering the catch block and breaking ? */
-                    flag = false;
-                    
                     try
                     {
                         clipBoard.clearAllNotes();
+                        
+                        if (clipBoard.getAllNotes().size() == 0)
+                            System.out.println("\nNotes cleared");
                     } catch (IllegalStateException stateex)
                     {
                         System.err.println("\n" + stateex.getMessage());
-                        flag = true;
-                        Thread.sleep(400);
-                        break;
                     }
-                    
-                    if (clipBoard.getAllNotes().size() == 0 && flag)
-                        System.out.println("\nNotes cleared");
+                    Thread.sleep(400);
                     break;
                 // 7.Clear the archive
                 case 7:
-                    flag = false;
-                    
                     try
                     {
                         clipBoard.clearArchive();
+                        
+                        if (clipBoard.getArchivedNotes().size() == 0)
+                            System.out.println("\nArchive cleared");
                     } catch (IllegalStateException stateex)
                     {
                         System.err.println("\n" + stateex.getMessage());
-                        flag = true;
-                        Thread.sleep(400);
-                        break;
                     }
-                    
-                    if (clipBoard.getArchivedNotes().size() == 0 && flag)
-                        System.out.println("\nArchive cleared");
+                    Thread.sleep(400);
                     break;
                 // Closing the stream and exiting the app
                 case 0:

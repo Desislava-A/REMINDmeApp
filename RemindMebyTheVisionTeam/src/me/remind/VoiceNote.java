@@ -6,7 +6,7 @@ import javax.sound.sampled.*;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
-public class VoiceNote extends Note implements Remindable
+public class VoiceNote extends RemindableNote
 {
     private String fileName;
     private DateTime deadline;
@@ -42,18 +42,6 @@ public class VoiceNote extends Note implements Remindable
         this.audioClip = audioClip;
     }
     
-    @Override
-    public void setDeadline(DateTime deadline)
-    {
-        this.deadline = deadline;
-    }
-    
-    @Override
-    public DateTime getDeadline()
-    {
-        return deadline;
-    }
-    
     /**
      * Audio file initializer
      *
@@ -72,14 +60,16 @@ public class VoiceNote extends Note implements Remindable
     @Override
     protected String getTitleWithTypeAndPriority()
     {
-        return "[VoiceNote] {Priority: " + getPriority().toString().toLowerCase() + "}" +
+        return "[VoiceNote] {Priority: " + getPriority()
+                .toString().toLowerCase() + "}" +
                 "\n\t\t" + getTitle();
     }
     
     @Override
     public boolean equals(Object obj)
     {
-        return obj instanceof VoiceNote && ((VoiceNote) obj).getUid().equals(this.getUid());
+        return obj instanceof VoiceNote && ((VoiceNote) obj)
+                .getFileName().equals(getFileName());
     }
     
     @Override
@@ -110,12 +100,5 @@ public class VoiceNote extends Note implements Remindable
         
         audioClip.setFramePosition(0);
         audioClip.start();
-    }
-    
-    
-    @Override
-    public void remind()
-    {
-        System.out.print(" ->[Reminder set in " + getHoursToDeadline(deadline) + " hours]\n");
     }
 }

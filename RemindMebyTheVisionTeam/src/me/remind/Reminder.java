@@ -11,29 +11,29 @@ public class Reminder
 {
     private static final int HOURS_TO_REMIND = 24;
     
-    public String remindMessage(Note note)
+    public String remindMessage(RemindableNote note)
     {
         return "Don't forget about this in 24 hours: " + note.toString();
     }
     
-    public String nowMessage(Note note)
+    public String nowMessage(RemindableNote note)
     {
         return note.toString() + " is due now!";
     }
     
     public void remindOneDayBefore(ClipBoard clipboard)
     {
-        clipboard.getAllNotes().keySet().stream()
-                .filter(note -> ((Remindable) note).getHoursToDeadline(
-                        ((Remindable) note).getDeadline()) == HOURS_TO_REMIND)
+        clipboard.getRemindableNotes().keySet().stream()
+                .filter(note -> note.getHoursToDeadline(
+                        note.getDeadline()) == HOURS_TO_REMIND)
                 .forEach(this::remindMessage);
     }
     
     public void remindNow(ClipBoard clipboard)
     {
-        clipboard.getAllNotes().keySet().forEach(note ->
+        clipboard.getRemindableNotes().keySet().forEach(note ->
         {
-            DateTime deadline = ((Remindable) note).getDeadline();
+            DateTime deadline = note.getDeadline();
             
             if (TimeUnit.MILLISECONDS.toSeconds(
                     deadline.minus(System.currentTimeMillis())

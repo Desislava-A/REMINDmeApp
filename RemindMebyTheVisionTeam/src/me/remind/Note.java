@@ -17,10 +17,6 @@ public abstract class Note implements Serializable
     private boolean pinned;
     private boolean archived;
     
-    public Note()
-    {
-    }
-    
     public Note(String title, Priority priority)
     {
         setUid(UUID.randomUUID());

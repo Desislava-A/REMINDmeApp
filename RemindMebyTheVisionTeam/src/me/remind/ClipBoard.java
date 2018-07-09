@@ -20,7 +20,7 @@ public class ClipBoard implements Iterable<Note>, Serializable
     private static final long serialVersionUID = 1L;
     
     private Map<Note, String> allNotes;
-    private Map<Note, String> remindableNotes;
+    private Map<RemindableNote, String> remindableNotes;
     private Map<Note, String> archivedNotes;
     private Map<Note, String> pinnedNotes;
     private static ClipboardFileManager cfm = new ClipboardFileManager();
@@ -43,12 +43,12 @@ public class ClipBoard implements Iterable<Note>, Serializable
         this.allNotes = allNotes;
     }
     
-    protected Map<Note, String> getRemindableNotes()
+    protected Map<RemindableNote, String> getRemindableNotes()
     {
         return remindableNotes;
     }
     
-    private void setRemindableNotes(Map<Note, String> remindableNotes)
+    private void setRemindableNotes(Map<RemindableNote, String> remindableNotes)
     {
         this.remindableNotes = remindableNotes;
     }
@@ -192,7 +192,7 @@ public class ClipBoard implements Iterable<Note>, Serializable
         remindableNotes.keySet().forEach(note ->
         {
             System.out.print("\t" + note.toString());
-            ((Remindable) note).remind();
+            note.remind();
         });
     }
     
@@ -295,8 +295,9 @@ public class ClipBoard implements Iterable<Note>, Serializable
         if (note.isPinned())
             pinnedNotes.remove(note, note.getUid());
         
-        if (((Remindable) note).getDeadline() != null)
-            remindableNotes.remove(note, note.getUid());
+        if (note instanceof RemindableNote)
+            if (((RemindableNote) note).getDeadline() != null)
+                remindableNotes.remove(note, note.getUid());
         
         cfm.serialize(this);
     }
@@ -369,7 +370,7 @@ public class ClipBoard implements Iterable<Note>, Serializable
      * @param note     the targeted Remindable type object
      * @param deadline the new deadline to be set
      */
-    protected void editDeadline(Remindable note, DateTime deadline) throws IOException
+    protected void editDeadline(RemindableNote note, DateTime deadline) throws IOException
     {
         note.setDeadline(deadline);
         cfm.serialize(this);

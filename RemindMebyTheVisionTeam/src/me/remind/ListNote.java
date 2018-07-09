@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ListNote extends Note implements Remindable
+public class ListNote extends RemindableNote
 {
     public static final int EXIT_INDEX = -1;
     public static final int MIN_LIST_SIZE = 0;
@@ -16,16 +16,11 @@ public class ListNote extends Note implements Remindable
     private List<Item> checkBoxesList;
     private DateTime deadline;
     
-    public ListNote()
-    {
-    }
-    
     public ListNote(String title, DateTime deadline, Priority priority)
             throws IOException
     {
         super(title, priority);
         setDeadline(deadline);
-        setCheckBoxesList(new ArrayList<>());
         initializeList();
     }
     
@@ -47,27 +42,30 @@ public class ListNote extends Note implements Remindable
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
         // When done adding new lines, type "ok" to terminate the adding process
-        Queue<String> lines = new LinkedList<>();
+        List<String> lines = new ArrayList<>();
         
         String newLine = "";
-        while (!newLine.equals("ok"))
+        while (true)
         {
             newLine = br.readLine();
             
+            if (newLine.equals("ok"))
+                return;
+            
             lines.add(newLine);
+            
+            // initializing all items as "unchecked"
+            List<Item> checkBoxesAndText = lines.stream()
+                    .map(line ->
+                    {
+                        Item listNote = new Item();
+                        listNote.setItemText(line);
+                        listNote.setCheck(Check.NOT_CHECKED);
+                        return listNote;
+                    }).collect(Collectors.toList());
+            
+            checkBoxesList = checkBoxesAndText;
         }
-        
-        // initializing all items as "unchecked"
-        List<Item> checkBoxesAndText = lines.stream()
-                .map(line ->
-                {
-                    Item listNote = new Item();
-                    listNote.setItemText(line);
-                    listNote.setCheck(Check.NOT_CHECKED);
-                    return listNote;
-                }).collect(Collectors.toList());
-        
-        checkBoxesList = checkBoxesAndText;
     }
     
     private void listAllCheckboxItems()
@@ -112,7 +110,8 @@ public class ListNote extends Note implements Remindable
     @Override
     protected String getTitleWithTypeAndPriority()
     {
-        return "[ListNote] {Priority: " + getPriority().toString().toLowerCase() + "}" +
+        return "[ListNote] {Priority: " + getPriority()
+                .toString().toLowerCase() + "}" +
                 "\n\t\t" + getTitle();
     }
     
@@ -120,7 +119,8 @@ public class ListNote extends Note implements Remindable
     public boolean equals(Object obj)
     {
         return obj instanceof ListNote &&
-                ((ListNote) obj).getUid().equals(this.getUid());
+                ((ListNote) obj).getCheckBoxesList()
+                        .equals(getCheckBoxesList());
     }
     
     @Override
@@ -140,23 +140,5 @@ public class ListNote extends Note implements Remindable
     {
         System.out.println("\n[List]");
         getCheckBoxesList().forEach(x -> System.out.println("\t" + x));
-    }
-    
-    @Override
-    public void remind()
-    {
-        System.out.print(" ->[Reminder set in " + getHoursToDeadline(deadline) + " hours]\n");
-    }
-    
-    @Override
-    public void setDeadline(DateTime deadline)
-    {
-        this.deadline = deadline;
-    }
-    
-    @Override
-    public DateTime getDeadline()
-    {
-        return deadline;
     }
 }

@@ -13,7 +13,6 @@ public class Main
     private static Priority priority = null;
     private static Calendar deadline = null;
     private static DateTime dateTime = null;
-    private static boolean flag = false;
     private static ClipboardFileManager cfm = new ClipboardFileManager();
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     
@@ -121,6 +120,7 @@ public class Main
                         // Show notes
                         case 1:
                             list.get(index - 1).showNote();
+                            br.readLine();
                             Thread.sleep(400);
                             break;
                         // 2.Edit notes
@@ -165,18 +165,18 @@ public class Main
                                     break;
                                 // 3.The deadline field
                                 case 3:
-                                    if (selected instanceof Remindable)
+                                    if (selected instanceof RemindableNote)
                                     {
                                         System.out.println("\nPrevious deadline is set for " +
-                                                ((Remindable) selected).getHoursToDeadline(
-                                                        ((Remindable) selected).getDeadline()) + " hours");
+                                                ((RemindableNote) selected).getHoursToDeadline(
+                                                        ((RemindableNote) selected).getDeadline()) + " hours");
                                         getDeadline();
-                                        clipBoard.editDeadline((Remindable) selected,
+                                        clipBoard.editDeadline((RemindableNote) selected,
                                                 new DateTime(deadline.getTimeInMillis()));
                                         
                                         System.out.println("\nNew deadline set for " +
-                                                ((Remindable) selected).getHoursToDeadline(
-                                                        ((Remindable) selected).getDeadline()) + " hours");
+                                                ((RemindableNote) selected).getHoursToDeadline(
+                                                        ((RemindableNote) selected).getDeadline()) + " hours");
                                     }
                                     Thread.sleep(400);
                                     break;
@@ -449,41 +449,31 @@ public class Main
                     break;
                 //6. Clear all saved notes
                 case 6:
-                    /* flag used to handle "Notes cleared" showing even
-                       after entering the catch block and breaking ? */
-                    flag = false;
-                    
                     try
                     {
                         clipBoard.clearAllNotes();
+                        
+                        if (clipBoard.getAllNotes().size() == 0)
+                            System.out.println("\nNotes cleared");
                     } catch (IllegalStateException stateex)
                     {
                         System.err.println("\n" + stateex.getMessage());
-                        flag = true;
-                        Thread.sleep(400);
-                        break;
                     }
-                    
-                    if (clipBoard.getAllNotes().size() == 0 && flag)
-                        System.out.println("\nNotes cleared");
+                    Thread.sleep(400);
                     break;
                 // 7.Clear the archive
                 case 7:
-                    flag = false;
-                    
                     try
                     {
                         clipBoard.clearArchive();
+                        
+                        if (clipBoard.getArchivedNotes().size() == 0)
+                            System.out.println("\nArchive cleared");
                     } catch (IllegalStateException stateex)
                     {
                         System.err.println("\n" + stateex.getMessage());
-                        flag = true;
-                        Thread.sleep(400);
-                        break;
                     }
-                    
-                    if (clipBoard.getArchivedNotes().size() == 0 && flag)
-                        System.out.println("\nArchive cleared");
+                    Thread.sleep(400);
                     break;
                 // Closing the stream and exiting the app
                 case 0:

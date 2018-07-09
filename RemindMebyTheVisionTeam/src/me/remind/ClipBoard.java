@@ -24,7 +24,7 @@ public class ClipBoard implements Iterable<Note>, Serializable {
         setPinnedNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
     }
 
-    protected SetUniqueList<Note> getAllNotes() {
+    public SetUniqueList<Note> getAllNotes() {
         return SetUniqueList.setUniqueList(new ArrayList<>(allNotes));
     }
 
@@ -269,7 +269,7 @@ public class ClipBoard implements Iterable<Note>, Serializable {
      *
      * @param title - the tile of the note to be checked
      */
-    protected void promptToCheckListItems(String title) {
+    protected void promptToCheckListItems(String title) throws IOException {
         listNotes.stream()
                 .filter(note -> note.getTitle().equals(title))
                 .findAny()

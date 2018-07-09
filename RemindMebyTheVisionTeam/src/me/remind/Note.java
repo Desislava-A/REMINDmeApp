@@ -36,7 +36,7 @@ public abstract class Note implements Serializable {
         this.title = title;
     }
 
-    protected DateTime getDeadline() {
+    public DateTime getDeadline() {
         return deadline;
     }
 

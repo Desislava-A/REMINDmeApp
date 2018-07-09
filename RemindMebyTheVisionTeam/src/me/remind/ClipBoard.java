@@ -137,7 +137,7 @@ public class ClipBoard implements Iterable<Note>, Serializable {
      */
     protected void showAllNotes() {
         // if there are no pinned notes, the pinned section isn't shown
-        if (pinnedNotes.size() > 0) {
+        if (!pinnedNotes.isEmpty()) {
             System.out.println("\n[Pinned]\n");
             pinnedNotes.forEach(Note::getTitleWithTypeAndPriority);
         }
@@ -345,7 +345,7 @@ public class ClipBoard implements Iterable<Note>, Serializable {
      * Method that clears the main data structure
      */
     protected void clearAllNotes() throws IOException {
-        if (allNotes.size() > 0) {
+        if (!allNotes.isEmpty()) {
             allNotes.clear();
             archivedNotes.clear();
             remindableNotes.clear();
@@ -358,7 +358,7 @@ public class ClipBoard implements Iterable<Note>, Serializable {
      * Method that clears the archive data structure
      */
     protected void clearArchive() throws IOException {
-        if (archivedNotes.size() > 0)
+        if (!archivedNotes.isEmpty())
             archivedNotes.clear();
         else
             throw new IllegalStateException("Archive is already empty!");
@@ -369,7 +369,7 @@ public class ClipBoard implements Iterable<Note>, Serializable {
      * Method that clears the remindables data structure
      */
     protected void clearReminders() throws IOException {
-        if (remindableNotes.size() > 0)
+        if (!remindableNotes.isEmpty())
             remindableNotes.clear();
         else
             throw new IllegalStateException("Reminders is already empty!");

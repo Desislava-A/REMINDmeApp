@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class Menus
 {
     private static Scanner input = new Scanner(System.in);
-    protected static boolean isCurrentNoteList = false;
     
+    // just making sure this class can't be instantiated
     private Menus()
     {
     }
@@ -58,11 +58,11 @@ public class Menus
         System.out.println("4.Pin/Unpin");
         System.out.println("5.Archive/Restore");
         System.out.println("0.Back");
-    
+        
         do
         {
             System.out.print("\nChoice: ");
-        
+            
             //  Using input.hasNextInt() handles input mismatch errors
             if (input.hasNextInt())
                 choice = input.nextInt();
@@ -71,16 +71,16 @@ public class Menus
                 System.err.println("Please choose a number from the menu options!");
                 input.nextLine();
             }
-        
+            
         } while (choice < 0 || choice > 4);
-    
+        
         return choice;
     }
     
     protected static int editSubMenu()
     {
         int choice = -1;
-    
+        
         System.out.println("\n[What to edit]");
         System.out.println("1.Title");
         System.out.println("2.Text/description");
@@ -104,36 +104,6 @@ public class Menus
             
         } while (choice < 0 || choice > 5);
         
-        return choice;
-    }
-    
-    protected static int editMenuForListNotes()
-    {
-        int choice = -1;
-    
-        System.out.println("\n[What to edit]");
-        System.out.println("1.*Change list items status)");
-        System.out.println("2.Title");
-        System.out.println("3.Text/description");
-        System.out.println("4.Deadline");
-        System.out.println("5.Priority");
-        System.out.println("0.Back");
-    
-        do
-        {
-            System.out.print("\nChoice: ");
-        
-            //  Using input.hasNextInt() handles input mismatch errors
-            if (input.hasNextInt())
-                choice = input.nextInt();
-            else
-            {
-                System.err.println("Please choose a number from the menu options!");
-                input.nextLine();
-            }
-        
-        } while (choice < 0 || choice > 4);
-    
         return choice;
     }
     
@@ -189,5 +159,5 @@ public class Menus
         
         return choice;
     }
-
+    
 }

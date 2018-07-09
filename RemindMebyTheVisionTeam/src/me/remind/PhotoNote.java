@@ -7,8 +7,8 @@ import java.io.IOException;
 
 public class PhotoNote extends Note
 {
-    public static final int MIN_SHORTTXT_LENGHT = 3;
-    public static final int MAX_SHORTTXT_LENGHT = 40;
+    private static final int MIN_SHORTTXT_LENGHT = 3;
+    private static final int MAX_SHORTTXT_LENGHT = 40;
     
     private BufferedImage image;
     private String fileName;

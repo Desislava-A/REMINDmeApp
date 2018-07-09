@@ -9,16 +9,16 @@ import java.util.concurrent.TimeUnit;
  */
 public class Reminder
 {
-    static final int HOURS_TO_REMIND = 24;
+    private static final int HOURS_TO_REMIND = 24;
     
     public String remindMessage(Note note)
     {
-        return "Dont forget about this in 24 hours " + note.toString();
+        return "Don't forget about this in 24 hours: " + note.toString();
     }
     
     public String nowMessage(Note note)
     {
-        return note.toString() + "is due now!";
+        return note.toString() + " is due now!";
     }
     
     public void remindOneDayBefore(ClipBoard clipboard)

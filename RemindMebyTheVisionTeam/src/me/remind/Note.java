@@ -8,9 +8,8 @@ public abstract class Note implements Serializable
 {
     private static final long serialVersionUID = 1L;
     
-    public static final int MIN_TITLE_LENGTH = 3;
-    public static final int MAX_TITLE_LENGTH = 60;
-    public static final int DEADLINE_LENGTH = 10;
+    private static final int MIN_TITLE_LENGTH = 3;
+    private static final int MAX_TITLE_LENGTH = 60;
     
     private UUID uid;
     private String title;
@@ -51,7 +50,9 @@ public abstract class Note implements Serializable
         if (title == null)
             return;
         
-        this.title = title;
+        if (title.length() < MIN_TITLE_LENGTH || title.length() > MAX_TITLE_LENGTH)
+            
+            this.title = title;
     }
     
     protected Priority getPriority()

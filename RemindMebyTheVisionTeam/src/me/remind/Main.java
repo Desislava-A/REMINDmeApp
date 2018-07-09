@@ -121,7 +121,6 @@ public class Main
                         // Show notes
                         case 1:
                             list.get(index - 1).showNote();
-                            System.out.println(list.get(index - 1).getUid());
                             Thread.sleep(400);
                             break;
                         // 2.Edit notes
@@ -131,57 +130,59 @@ public class Main
                             {
                                 // 1.Title field
                                 case 1:
-                                    System.out.println("Previous title: " +
+                                    System.out.print("\nPrevious title: " +
                                             selected.getTitle());
                                     getTitle();
                                     clipBoard.editTitle(selected, title.toString());
                                     
                                     title.setLength(0);
-                                    System.out.println("New title saved\n");
+                                    System.out.println("\nNew title saved");
+                                    Thread.sleep(400);
                                     break;
                                 // 2.TextNote field
                                 case 2:
                                     if (selected instanceof TextNote)
                                     {
-                                        System.out.println("Previous text: " +
+                                        System.out.println("\nPrevious text: " +
                                                 ((TextNote) selected).getText());
                                         System.out.print("New text: ");
                                         clipBoard.editText(selected, br.readLine());
                                         
-                                        System.out.println("Text edited and saved\n");
+                                        System.out.println("\nText edited and saved");
                                         Thread.sleep(400);
                                         break;
                                     } else if (selected instanceof PhotoNote)
                                     {
-                                        System.out.println("Previous image description: " +
+                                        System.out.println("\nPrevious image description: " +
                                                 ((PhotoNote) selected).getDescription());
                                         getImgDescription();
-                                        clipBoard.editDescription(selected,
-                                                description.toString());
+                                        clipBoard.editDescription(selected, description.toString());
                                         
                                         description.setLength(0);
-                                        System.out.println("New description saved\n");
+                                        System.out.println("\nNew description saved");
                                     }
+                                    Thread.sleep(400);
                                     break;
                                 // 3.The deadline field
                                 case 3:
                                     if (selected instanceof Remindable)
                                     {
-                                        System.out.println("Previous deadline is set for " +
+                                        System.out.println("\nPrevious deadline is set for " +
                                                 ((Remindable) selected).getHoursToDeadline(
                                                         ((Remindable) selected).getDeadline()) + " hours");
                                         getDeadline();
                                         clipBoard.editDeadline((Remindable) selected,
                                                 new DateTime(deadline.getTimeInMillis()));
                                         
-                                        System.out.println("New deadline set for " +
+                                        System.out.println("\nNew deadline set for " +
                                                 ((Remindable) selected).getHoursToDeadline(
                                                         ((Remindable) selected).getDeadline()) + " hours");
                                     }
+                                    Thread.sleep(400);
                                     break;
                                 // 4.The priority field
                                 case 4:
-                                    System.out.println("Previous priority: " +
+                                    System.out.println("\nPrevious priority: " +
                                             selected.getPriority().toString().toLowerCase());
                                     getPriority();
                                     clipBoard.editPriority(selected, priority);
@@ -215,11 +216,11 @@ public class Main
                             if (archiveOrRestore.isArchived())
                             {
                                 clipBoard.restoreNoteFromArchive(archiveOrRestore);
-                                System.out.println("Note restored!\n");
+                                System.out.println("\nNote restored!");
                             } else
                             {
                                 clipBoard.archiveNote(archiveOrRestore);
-                                System.out.println("Note archived!\n");
+                                System.out.println("\nNote archived!");
                             }
                             Thread.sleep(400);
                             break;

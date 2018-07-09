@@ -74,7 +74,7 @@ public class ClipBoard implements Iterable<Note>, Serializable
     }
     
     /**
-     * Method that constructs a textNote object and adds it to the data structures
+     * Method that constructs a textNote object
      */
     protected void addTextNote(String title, DateTime deadline, Priority priority)
             throws IOException
@@ -93,7 +93,8 @@ public class ClipBoard implements Iterable<Note>, Serializable
     /**
      * Method that constructs a ListNote object
      */
-    protected void addListNote(String title, DateTime deadline, Priority priority) throws IOException
+    protected void addListNote(String title, DateTime deadline, Priority priority)
+            throws IOException
     {
         ListNote listNote = new ListNote(title, deadline, priority);
         
@@ -309,6 +310,7 @@ public class ClipBoard implements Iterable<Note>, Serializable
     protected void editTitle(Note note, String newTitle) throws IOException
     {
         note.setTitle(newTitle);
+        
         cfm.serialize(this);
     }
     
@@ -325,6 +327,7 @@ public class ClipBoard implements Iterable<Note>, Serializable
             ((TextNote) textNote).setText(text);
         else
             throw new InvalidObjectException("Only text notes have text!");
+        
         cfm.serialize(this);
     }
     
@@ -342,6 +345,7 @@ public class ClipBoard implements Iterable<Note>, Serializable
             ((PhotoNote) photoNote).setDescription(description);
         else
             throw new InvalidObjectException("Only photo notes have descriptions!");
+        
         cfm.serialize(this);
     }
     
@@ -355,6 +359,7 @@ public class ClipBoard implements Iterable<Note>, Serializable
     {
         if (note.getPriority() != priority)
             note.setPriority(priority);
+        
         cfm.serialize(this);
     }
     

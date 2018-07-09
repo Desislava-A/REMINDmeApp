@@ -259,7 +259,7 @@ public class Main
                     clipBoard.showReminders();
                     br.readLine();
                     break;
-                //3. Add menu
+                //4. Add menu
                 case 3:
                     System.out.println();
                     switch (Menus.addSubMenu())

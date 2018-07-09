@@ -32,7 +32,8 @@ public class PhotoNote extends Note
         if (description == null)
             return;
         
-        if (description.length() < MIN_SHORTTXT_LENGHT || description.length() > MAX_SHORTTXT_LENGHT)
+        if (description.length() < MIN_SHORTTXT_LENGHT ||
+                description.length() > MAX_SHORTTXT_LENGHT)
             return;
         
         this.description = description;

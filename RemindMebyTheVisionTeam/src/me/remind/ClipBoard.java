@@ -20,7 +20,7 @@ public class ClipBoard implements Iterable<Note>, Serializable
     private static final long serialVersionUID = 1L;
     
     private Map<Note, String> allNotes;
-    private Map<Remindable, String> remindableNotes;
+    private Map<Note, String> remindableNotes;
     private Map<Note, String> archivedNotes;
     private Map<Note, String> pinnedNotes;
     private static ClipboardFileManager cfm = new ClipboardFileManager();
@@ -43,12 +43,12 @@ public class ClipBoard implements Iterable<Note>, Serializable
         this.allNotes = allNotes;
     }
     
-    protected Map<Remindable, String> getRemindableNotes()
+    protected Map<Note, String> getRemindableNotes()
     {
         return remindableNotes;
     }
     
-    private void setRemindableNotes(Map<Remindable, String> remindableNotes)
+    private void setRemindableNotes(Map<Note, String> remindableNotes)
     {
         this.remindableNotes = remindableNotes;
     }
@@ -192,7 +192,7 @@ public class ClipBoard implements Iterable<Note>, Serializable
         remindableNotes.keySet().forEach(note ->
         {
             System.out.print("\t" + note.toString());
-            note.remind();
+            ((Remindable) note).remind();
         });
     }
     
@@ -273,12 +273,12 @@ public class ClipBoard implements Iterable<Note>, Serializable
      * @param note the ListNote object that will undergo changes
      * @throws InvalidObjectException if the parameter is not a ListNote
      */
-    protected void promptToCheckListItems(Note note) throws IOException
+    protected void promptToCheckListItems(ListNote note) throws IOException
     {
         if (!(note instanceof ListNote))
             throw new InvalidObjectException("Given note is not of type checkbox list");
         
-        ((ListNote) note).promptToChangeStatus();
+        note.promptToChangeStatus();
         
         cfm.serialize(this);
     }

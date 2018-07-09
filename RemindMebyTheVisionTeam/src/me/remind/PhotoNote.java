@@ -1,7 +1,5 @@
 package me.remind;
 
-import org.joda.time.DateTime;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
@@ -16,27 +14,25 @@ public class PhotoNote extends Note
     private String fileName;
     private String description;
     
-    public PhotoNote(String title, DateTime deadline, Priority priority,
-                     String fileName, String description)
+    public PhotoNote(String title, Priority priority, String fileName, String description)
     {
-        this(title, deadline, priority, fileName);
+        this(title, priority, fileName);
         setDescription(description);
     }
     
-    public PhotoNote(String title, DateTime deadline, Priority priority, String fileName)
+    public PhotoNote(String title, Priority priority, String fileName)
     {
-        super(title, deadline, priority);
+        super(title, priority);
         setFileName(fileName);
         setDescription(null);
     }
     
-    private void setDescription(String description)
+    protected void setDescription(String description)
     {
         if (description == null)
             return;
         
-        if (description.length() < MIN_SHORTTXT_LENGHT ||
-                description.length() > MAX_SHORTTXT_LENGHT)
+        if (description.length() < MIN_SHORTTXT_LENGHT || description.length() > MAX_SHORTTXT_LENGHT)
             return;
         
         this.description = description;
@@ -52,10 +48,16 @@ public class PhotoNote extends Note
         return fileName;
     }
     
+    protected String getDescription()
+    {
+        return description;
+    }
+    
     @Override
     protected String getTitleWithTypeAndPriority()
     {
-        return "[PhotoNote] {Priority: " + getPriority().toString().toLowerCase() + "}" +
+        return "[PhotoNote] {Priority: " +
+                getPriority().toString().toLowerCase() + "}" +
                 "\n\t\t" + getTitle();
     }
     
@@ -63,16 +65,13 @@ public class PhotoNote extends Note
     public boolean equals(Object obj)
     {
         return obj instanceof PhotoNote &&
-                ((PhotoNote) obj).getTitle().equals(getTitle()) &&
-                ((PhotoNote) obj).fileName.equals(fileName) &&
-                ((PhotoNote) obj).getPriority().equals(getPriority()) &&
-                ((PhotoNote) obj).description.equals(description);
+                ((PhotoNote) obj).getUid().equals(this.getUid());
     }
     
     @Override
     public int hashCode()
     {
-        return fileName.hashCode();
+        return getUid().hashCode();
     }
     
     @Override
@@ -82,22 +81,16 @@ public class PhotoNote extends Note
     }
     
     @Override
-    protected void showNote()
+    protected void showNote() throws IOException
     {
-        try
-        {
-            image = ImageIO.read(this.getClass().getResource("/res/images/" + fileName));
-        } catch (IOException ioex)
-        {
-            System.err.println(ioex.getMessage());
-            ioex.printStackTrace();
-        }
+        image = ImageIO.read(this.getClass().getResource("/res/images/" + fileName));
         
         ImageIcon imageIcon = new ImageIcon(image);
         JLabel jLabel = new JLabel(imageIcon);
         JFrame frame = new JFrame(getTitle());
         frame.setSize(image.getWidth(), image.getHeight());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setAlwaysOnTop(true);
         
         frame.add(jLabel);
         frame.setVisible(true);

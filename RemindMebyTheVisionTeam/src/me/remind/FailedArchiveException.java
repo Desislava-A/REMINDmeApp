@@ -2,16 +2,8 @@ package me.remind;
 
 public class FailedArchiveException extends Exception
 {
-    private String message;
-    
-    public FailedArchiveException(String message)
+    public FailedArchiveException()
     {
-        this.message = message;
-    }
-    
-    @Override
-    public String getMessage()
-    {
-        return message;
+        super("Note archiving was unsuccessful");
     }
 }

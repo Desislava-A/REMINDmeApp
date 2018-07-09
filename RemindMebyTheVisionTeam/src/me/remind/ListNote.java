@@ -14,14 +14,17 @@ public class ListNote extends Note implements Remindable
     public static final int MIN_LIST_SIZE = 0;
     
     private List<Item> checkBoxesList;
+    private DateTime deadline;
     
     public ListNote()
     {
     }
     
     public ListNote(String title, DateTime deadline, Priority priority)
+            throws IOException
     {
-        super(title, deadline, priority);
+        super(title, priority);
+        setDeadline(deadline);
         setCheckBoxesList(new ArrayList<>());
         initializeList();
     }
@@ -36,44 +39,50 @@ public class ListNote extends Note implements Remindable
         this.checkBoxesList = checkBoxesList;
     }
     
+    @Override
+    public void setDeadline(DateTime deadline)
+    {
+        this.deadline = deadline;
+    }
+    
+    @Override
+    public DateTime getDeadline()
+    {
+        return deadline;
+    }
+    
     /**
      * Method to initialize the ListNote fields
      */
-    private void initializeList()
+    private void initializeList() throws IOException
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
         // When done adding new lines, type "ok" to terminate the adding process
-        try
+        Queue<String> lines = new LinkedList<>();
+        
+        String newLine = "";
+        while (true)
         {
-            Queue<String> lines = new LinkedList<>();
+            newLine = br.readLine();
             
-            String newLine = "";
-            while (true)
-            {
-                newLine = br.readLine();
-                
-                if (newLine.equals("ok"))
-                    break;
-                
-                lines.add(newLine);
-            }
+            if (newLine.equals("ok"))
+                break;
             
-            // initializing all items as "unchecked"
-            List<Item> checkBoxesAndText = lines.stream()
-                    .map(line ->
-                    {
-                        Item listNote = new Item();
-                        listNote.setItemText(line);
-                        listNote.setCheck(Check.UNCHECKED);
-                        return listNote;
-                    }).collect(Collectors.toList());
-            
-            checkBoxesList = checkBoxesAndText;
-        } catch (IOException ioex)
-        {
-            ioex.printStackTrace();
+            lines.add(newLine);
         }
+        
+        // initializing all items as "unchecked"
+        List<Item> checkBoxesAndText = lines.stream()
+                .map(line ->
+                {
+                    Item listNote = new Item();
+                    listNote.setItemText(line);
+                    listNote.setCheck(Check.NOT_CHECKED);
+                    return listNote;
+                }).collect(Collectors.toList());
+        
+        checkBoxesList = checkBoxesAndText;
     }
     
     private void listAllCheckboxItems()
@@ -109,10 +118,10 @@ public class ListNote extends Note implements Remindable
                     // on select, always changing the check field to the opposite value
                     /* substracting 1 because the output ordering starts with 1;
                             => the actual index of the element is minus one */
-                    if (checkBoxesList.get(index - 1).getCheck() == Check.UNCHECKED)
+                    if (checkBoxesList.get(index - 1).getCheck() == Check.NOT_CHECKED)
                         checkBoxesList.get(index - 1).setCheck(Check.CHECKED);
                     else
-                        checkBoxesList.get(index - 1).setCheck(Check.UNCHECKED);
+                        checkBoxesList.get(index - 1).setCheck(Check.NOT_CHECKED);
                 }
             }
         } catch (IOException ioex)
@@ -132,15 +141,13 @@ public class ListNote extends Note implements Remindable
     public boolean equals(Object obj)
     {
         return obj instanceof ListNote &&
-                ((ListNote) obj).getTitle().equals(getTitle()) &&
-                ((ListNote) obj).getPriority().equals(getPriority()) &&
-                ((ListNote) obj).checkBoxesList.equals(checkBoxesList);
+                ((ListNote) obj).getUid().equals(this.getUid());
     }
     
     @Override
     public int hashCode()
     {
-        return checkBoxesList.hashCode();
+        return getUid().hashCode();
     }
     
     @Override
@@ -159,6 +166,6 @@ public class ListNote extends Note implements Remindable
     @Override
     public void remind()
     {
-        System.out.print(" ->[Reminder set in " + getHoursToDeadline() + " hours]\n");
+        System.out.print(" ->[Reminder set in " + getHoursToDeadline(deadline) + " hours]\n");
     }
 }

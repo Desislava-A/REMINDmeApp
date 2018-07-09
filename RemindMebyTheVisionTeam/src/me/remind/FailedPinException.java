@@ -2,16 +2,8 @@ package me.remind;
 
 public class FailedPinException extends Exception
 {
-    private String message;
-    
-    public FailedPinException(String message)
+    public FailedPinException()
     {
-        this.message = message;
-    }
-    
-    @Override
-    public String getMessage()
-    {
-        return message;
+        super("Note pinning was unsuccessful");
     }
 }

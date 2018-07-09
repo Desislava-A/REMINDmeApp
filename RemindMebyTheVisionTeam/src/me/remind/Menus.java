@@ -7,9 +7,14 @@ import java.util.Scanner;
  */
 public class Menus
 {
-    private static final Scanner input = new Scanner(System.in);
+    private static Scanner input = new Scanner(System.in);
+    protected static boolean isCurrentNoteList = false;
     
-    public static int mainMenu()
+    private Menus()
+    {
+    }
+    
+    protected static int mainMenu()
     {
         int choice = -1;
         
@@ -17,16 +22,11 @@ public class Menus
         System.out.println(".---------------------------------.");
         System.out.println("| 1.All notes                     |");
         System.out.println("| 2.Reminders                     |");
-        System.out.println("| 3.Archive                       |");
-        System.out.println("| 4.Add note                      |");
-        System.out.println("| 5.Search note                   |");
-        System.out.println("| 6.Edit list note items          |");
-        System.out.println("| 7.Pin note                      |");
-        System.out.println("| 8.Unpin note                    |");
-        System.out.println("| 9.Archive note                  |");
-        System.out.println("| 10.Delete note                  |");
-        System.out.println("| 11.Clear all                    |");
-        System.out.println("| 12.Clear archive                |");
+        System.out.println("| 3.Add note                      |");
+        System.out.println("| 4.Search note                   |");
+        System.out.println("| 5.Archive                       |");
+        System.out.println("| 6.Clear all                     |");
+        System.out.println("| 7.Clear archive                 |");
         System.out.println("| 0.Exit                          |");
         System.out.println(".---------------------------------.");
         
@@ -48,7 +48,96 @@ public class Menus
         return choice;
     }
     
-    public static int addSubMenu()
+    protected static int selectMainSubMenu()
+    {
+        int choice = -1;
+        
+        System.out.println("1.Show");
+        System.out.println("2.Edit");
+        System.out.println("3.Delete");
+        System.out.println("4.Pin/Unpin");
+        System.out.println("5.Archive/Restore");
+        System.out.println("0.Back");
+    
+        do
+        {
+            System.out.print("\nChoice: ");
+        
+            //  Using input.hasNextInt() handles input mismatch errors
+            if (input.hasNextInt())
+                choice = input.nextInt();
+            else
+            {
+                System.err.println("Please choose a number from the menu options!");
+                input.nextLine();
+            }
+        
+        } while (choice < 0 || choice > 4);
+    
+        return choice;
+    }
+    
+    protected static int editSubMenu()
+    {
+        int choice = -1;
+    
+        System.out.println("\n[What to edit]");
+        System.out.println("1.Title");
+        System.out.println("2.Text/description");
+        System.out.println("3.Deadline");
+        System.out.println("4.Priority");
+        System.out.println("5.*List items status)");
+        System.out.println("0.Back");
+        
+        do
+        {
+            System.out.print("\nChoice: ");
+            
+            //  Using input.hasNextInt() handles input mismatch errors
+            if (input.hasNextInt())
+                choice = input.nextInt();
+            else
+            {
+                System.err.println("Please choose a number from the menu options!");
+                input.nextLine();
+            }
+            
+        } while (choice < 0 || choice > 5);
+        
+        return choice;
+    }
+    
+    protected static int editMenuForListNotes()
+    {
+        int choice = -1;
+    
+        System.out.println("\n[What to edit]");
+        System.out.println("1.*Change list items status)");
+        System.out.println("2.Title");
+        System.out.println("3.Text/description");
+        System.out.println("4.Deadline");
+        System.out.println("5.Priority");
+        System.out.println("0.Back");
+    
+        do
+        {
+            System.out.print("\nChoice: ");
+        
+            //  Using input.hasNextInt() handles input mismatch errors
+            if (input.hasNextInt())
+                choice = input.nextInt();
+            else
+            {
+                System.err.println("Please choose a number from the menu options!");
+                input.nextLine();
+            }
+        
+        } while (choice < 0 || choice > 4);
+    
+        return choice;
+    }
+    
+    protected static int addSubMenu()
     {
         int choice = -1;
         
@@ -56,7 +145,7 @@ public class Menus
         System.out.println("2.Add checkbox list");
         System.out.println("3.Add voice note");
         System.out.println("4.Add photo note");
-        System.out.println("0.Exit");
+        System.out.println("0.Back");
         
         do
         {
@@ -76,13 +165,13 @@ public class Menus
         return choice;
     }
     
-    public static int hasReminderMenu()
+    protected static int hasReminderMenu()
     {
         int choice = -1;
         
         System.out.println("\n1.Reminder on");
         System.out.println("2.Reminder off");
-        System.out.println("0.Exit\n");
+        System.out.println("0.Back\n");
         
         do
         {
@@ -100,9 +189,5 @@ public class Menus
         
         return choice;
     }
-    
-    protected static void closeStream()
-    {
-        input.close();
-    }
+
 }

@@ -1,388 +1,426 @@
 package me.remind;
 
-import org.apache.commons.collections4.list.SetUniqueList;
 import org.joda.time.DateTime;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
+import java.io.InvalidObjectException;
 import java.io.Serializable;
 import java.util.*;
+import java.io.FileNotFoundException;
+import java.util.stream.Collectors;
 
-public class ClipBoard implements Iterable<Note>, Serializable {
-    private SetUniqueList<Note> allNotes;
-    private SetUniqueList<Remindable> remindableNotes;
-    private SetUniqueList<ListNote> listNotes;
-    private SetUniqueList<Note> archivedNotes;
-    private SetUniqueList<Note> pinnedNotes;
-    private static int index;
+/**
+ * The clipboaard is the main connecting class, a container
+ * for the different kinds of notes and their behavior
+ */
+public class ClipBoard implements Iterable<Note>, Serializable
+{
+    private static final long serialVersionUID = 1L;
+    
+    private Map<Note, String> allNotes;
+    private Map<Note, String> remindableNotes;
+    private Map<Note, String> archivedNotes;
+    private Map<Note, String> pinnedNotes;
     private static ClipboardFileManager cfm = new ClipboardFileManager();
-
-    public ClipBoard() {
-        setAllNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
-        setRemindableNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
-        setArchivedNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
-        setListNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
-        setPinnedNotes(SetUniqueList.setUniqueList(new ArrayList<>()));
+    
+    public ClipBoard()
+    {
+        setAllNotes(new LinkedHashMap<>());
+        setRemindableNotes(new LinkedHashMap<>());
+        setArchivedNotes(new LinkedHashMap<>());
+        setPinnedNotes(new LinkedHashMap<>());
     }
-
-    protected SetUniqueList<Note> getAllNotes() {
-        return SetUniqueList.setUniqueList(new ArrayList<>(allNotes));
+    
+    protected Map<Note, String> getAllNotes()
+    {
+        return allNotes;
     }
-
-    private void setAllNotes(SetUniqueList<Note> allNotes) {
+    
+    private void setAllNotes(Map<Note, String> allNotes)
+    {
         this.allNotes = allNotes;
     }
-
-    protected SetUniqueList<Remindable> getRemindableNotes() {
-        return SetUniqueList.setUniqueList(new ArrayList<>(remindableNotes));
+    
+    protected Map<Note, String> getRemindableNotes()
+    {
+        return remindableNotes;
     }
-
-    private void setRemindableNotes(SetUniqueList<Remindable> remindableNotes) {
+    
+    private void setRemindableNotes(Map<Note, String> remindableNotes)
+    {
         this.remindableNotes = remindableNotes;
     }
-
-    protected SetUniqueList<Note> getPinnedNotes() {
-        return SetUniqueList.setUniqueList(new ArrayList<>(pinnedNotes));
+    
+    protected Map<Note, String> getArchivedNotes()
+    {
+        return archivedNotes;
     }
-
-    private void setPinnedNotes(SetUniqueList<Note> pinnedNotes) {
-        this.pinnedNotes = pinnedNotes;
-    }
-
-    private void setArchivedNotes(SetUniqueList<Note> archivedNotes) {
+    
+    private void setArchivedNotes(Map<Note, String> archivedNotes)
+    {
         this.archivedNotes = archivedNotes;
     }
-
-    protected SetUniqueList<Note> getArchivedNotes() {
-        return SetUniqueList.setUniqueList(new ArrayList<>(archivedNotes));
+    
+    protected Map<Note, String> getPinnedNotes()
+    {
+        return pinnedNotes;
     }
-
-    protected SetUniqueList<ListNote> getListNotes() {
-        return SetUniqueList.setUniqueList(new ArrayList<>(listNotes));
+    
+    private void setPinnedNotes(Map<Note, String> pinnedNotes)
+    {
+        this.pinnedNotes = pinnedNotes;
     }
-
-    private void setListNotes(SetUniqueList<ListNote> listNotes) {
-        this.listNotes = listNotes;
-    }
-
+    
     /**
      * Method that constructs a textNote object and adds it to the data structures
-     *
-     * @throws IOException - regarding the buffered reader
      */
     protected void addTextNote(String title, DateTime deadline, Priority priority)
-            throws IOException {
+            throws IOException
+    {
         TextNote textNote = new TextNote(title, deadline, priority);
-
-        allNotes.add(textNote);
-
+        
+        allNotes.put(textNote, textNote.getUid());
+        
         // notes without deadlines aren't added to the remindables data structure
         if (deadline != null)
-            remindableNotes.add(textNote);
+            remindableNotes.put(textNote, textNote.getUid());
+        
         cfm.serialize(this);
     }
-
+    
     /**
-     * Method that constructs a listNote object and adds it to the data structures
+     * Method that constructs a ListNote object
      */
-    protected void addListNote(String title, DateTime deadline, Priority priority) throws IOException {
+    protected void addListNote(String title, DateTime deadline, Priority priority) throws IOException
+    {
         ListNote listNote = new ListNote(title, deadline, priority);
-
-        allNotes.add(listNote);
-        listNotes.add(listNote);
-
+        
+        allNotes.put(listNote, listNote.getUid());
+        
         if (deadline != null)
-            remindableNotes.add(listNote);
+            remindableNotes.put(listNote, listNote.getUid());
+        
         cfm.serialize(this);
     }
-
+    
     /**
-     * Method that constructs a photoNote object
+     * Method that constructs a PhotoNote object
+     *
+     * @throws FileNotFoundException if the image file doesn't exist
      */
-    protected void addPhotoNote(String title, DateTime deadline, Priority priority,
-                                String filePath, String description) throws IOException {
-        PhotoNote photoNote = new PhotoNote(title, deadline, priority,
-                filePath, description);
-
-        allNotes.add(photoNote);
+    protected void addPhotoNote(String title, Priority priority, String filePath,
+                                String description) throws IOException
+    {
+        PhotoNote photoNote = new PhotoNote(title, priority, filePath, description);
+        
+        allNotes.put(photoNote, photoNote.getUid());
+        
         cfm.serialize(this);
     }
-
+    
     /**
      * Method that constructs a voiceNote object
+     *
+     * @throws FileNotFoundException if the voice file doesn't exist
      */
-    protected void addVoiceNote(String title, DateTime deadline, Priority priority, String audioFile) throws IOException {
+    protected void addVoiceNote(String title, DateTime deadline, Priority priority, String audioFile)
+            throws IOException, LineUnavailableException, UnsupportedAudioFileException
+    {
         VoiceNote voiceNote = new VoiceNote(title, deadline, priority, audioFile);
-
-        allNotes.add(voiceNote);
-
+        
+        allNotes.put(voiceNote, voiceNote.getUid());
+        
         if (deadline != null)
-            remindableNotes.add(voiceNote);
+            remindableNotes.put(voiceNote, voiceNote.getUid());
+        
         cfm.serialize(this);
     }
-
+    
     /**
-     * Method that prints the contents of a note
+     * Method that collects all different notes with the same title
      *
-     * @param title - the title to search
+     * @param title - the title that's being searched
+     * @return a list containing all note objects that match the title
      */
-    protected void search(String title) {
-        allNotes.stream()
+    protected List<Note> search(String title)
+    {
+        return allNotes.keySet().stream()
                 .filter(note -> note.getTitle().equals(title))
-                .findAny()
-                .orElseThrow(NoSuchElementException::new);
+                .collect(Collectors.toList());
     }
-
+    
+    /**
+     * Method that prints all pinned notes' titles
+     */
+    protected void showPinnedTitles()
+    {
+        System.out.println("\n[Pinned]\n");
+        pinnedNotes.keySet().forEach(note -> System.out.println("\t" +
+                note.getTitleWithTypeAndPriority()));
+    }
+    
     /**
      * Method that prints the contents of all pinned and unpinned notes
      */
-    protected void showAllNotes() {
+    protected void showAllNotes()
+    {
         // if there are no pinned notes, the pinned section isn't shown
-        if (pinnedNotes.size() > 0) {
-            System.out.println("\n[Pinned]\n");
-            pinnedNotes.forEach(Note::getTitleWithTypeAndPriority);
-        }
-
-        // before initiating the printing of all notes, always reset the static index field
-        index = 1;
+        if (pinnedNotes.size() > 0)
+            showPinnedTitles();
+        
+        /* an anonymous object used to bypass the
+        inability to increment in a lambda expression) */
+        var ref = new Object()
+        {
+            int index = 1;
+        };
+        
         System.out.println("\n[All notes]\n");
-        allNotes.forEach(note -> System.out.println(index++ + "." +
+        allNotes.keySet().forEach(note -> System.out.println(ref.index++ + "." +
                 note.getTitleWithTypeAndPriority()));
     }
-
+    
     /**
      * Method that prints all set reminders
      */
-    protected void showReminders() {
+    protected void showReminders()
+    {
         System.out.println("\n[Reminders]\n");
-        remindableNotes.forEach(reminder ->
+        remindableNotes.keySet().forEach(note ->
         {
-            System.out.print("\t" + reminder.toString());
-            reminder.remind();
+            System.out.print("\t" + note.toString());
+            ((Remindable) note).remind();
         });
     }
-
-    /**
-     * Method that prints all notes' titles
-     */
-    protected void showTitles() {
-        System.out.println("\n[Titles]\n");
-        allNotes.forEach(note -> System.out.println("\t" + note.getTitle()));
-    }
-
-    /**
-     * Method that prints all titles of ListNote objects
-     */
-    protected void showListTitles() {
-        System.out.println("\n[Titles]\n");
-        listNotes.forEach(note -> System.out.println("\t" + note.getTitle()));
-    }
-
+    
     /**
      * Method that prints all archived notes' titles
      */
-    protected void showArchive() {
+    protected void showArchive()
+    {
         System.out.println("\n[Archive]\n");
-        archivedNotes.forEach(note -> System.out.println("\t " + note.getTitle()));
+        archivedNotes.keySet().forEach(note -> System.out.println("\t" +
+                note.getTitleWithTypeAndPriority()));
     }
-
-    /**
-     * Method that prints all pinned notes' titles
-     * Invoked prior to pinning a certain note
-     */
-    protected void showPinned() {
-        System.out.println("\n[Pinned]\n");
-        pinnedNotes.forEach(note -> System.out.println("\t" + note.getTitle()));
-    }
-
-    /**
-     * Method that checks if a note has been successfully pinned
-     *
-     * @param title - the title of the note to be checked
-     * @return - true if a matching title is found
-     */
-    protected boolean isNotePinned(String title) {
-        return pinnedNotes.stream()
-                .anyMatch(note -> note.getTitle().equals(title));
-    }
-
+    
     /**
      * Method that pins a note
      *
-     * @param title - the title of the note to be pinned
+     * @param note the Note object to be pinned
      */
-    protected void pinNote(String title) throws IOException {
-        pinnedNotes.add(allNotes.stream()
-                .filter(note ->
-                {
-                    if (note.getTitle().equals(title)) {
-                        note.setPinned(true);
-                        return true;
-                    }
-
-                    return false;
-                })
-                .findAny()
-                .orElseThrow(NoSuchElementException::new));
+    protected void pinNote(Note note) throws IOException
+    {
+        note.setPinned(true);
+        pinnedNotes.put(note, note.getUid());
+        
         cfm.serialize(this);
     }
-
+    
     /**
-     * Method that unpins a note if an object with a matching title is found
+     * Method that unpins a note
      *
-     * @param title - the title of the note to be unpinned
+     * @param note the note object to be unpinned
      */
-    protected void unpinNote(String title) throws IOException {
-        pinnedNotes.remove(pinnedNotes.stream()
-                .filter(pinned -> pinned.getTitle().equals(title))
-                .findAny()
-                .orElseThrow(NoSuchElementException::new));
+    protected void unpinNote(Note note) throws IOException
+    {
+        if (note.isPinned())
+        {
+            if (pinnedNotes.containsValue(note.getUid()))
+                pinnedNotes.remove(note, note.getUid());
+            
+            note.setPinned(false);
+        }
+        
         cfm.serialize(this);
     }
-
+    
     /**
-     * Method that archives a note if an object with a matching title is found
+     * Method that archives a note
      *
-     * @param title - the title of the note to be archived
+     * @param note the Note object to be archived
      */
-    protected void archiveNote(String title) throws IOException {
-        allNotes.stream()
-                .filter(note ->
-                {
-                    if (note.getTitle().equals(title)) {
-                        allNotes.remove(note);
-
-                        if (note.isPinned())
-                            pinnedNotes.remove(note);
-
-                        return true;
-                    }
-
-                    return false;
-                })
-                .findAny()
-                .orElseThrow(NoSuchElementException::new);
+    protected void archiveNote(Note note) throws IOException
+    {
+        note.setArchived(true);
+        
+        archivedNotes.put(note, note.getUid());
+        allNotes.remove(note, note.getUid());
+        
         cfm.serialize(this);
     }
-
+    
     /**
-     * Searching for a ListNote object by given title to invoke the prompt method
+     * Method that restores a note from the archive
      *
-     * @param title - the tile of the note to be checked
+     * @param note the Note object to be archived
      */
-    protected void promptToCheckListItems(String title) {
-        listNotes.stream()
-                .filter(note -> note.getTitle().equals(title))
-                .findAny()
-                .orElseThrow(NoSuchElementException::new)
-                .promptToChangeStatus();
-    }
-
-    /**
-     * Method that checks if a note has been successfully archived
-     *
-     * @param title - the title of the note to be checked
-     * @return - true if a matching title is found
-     */
-    protected boolean isNoteArchived(String title) {
-        return archivedNotes.stream()
-                .anyMatch(note -> note.getTitle().equals(title));
-    }
-
-    /**
-     * Method that deltetes a note if an object with a matching title is found
-     * If present in any other data structure, also deletes it from there
-     *
-     * @param title - the title of the note to be deleted
-     */
-    protected void deleteNote(String title) throws IOException {
-        /* the following one element arrays are created because of the
-           inability to use non final variables in a lambda expression */
-        final boolean[] isPinned = {false};
-        final boolean[] isRemindable = {false};
-        final boolean[] isList = {false};
-
-        allNotes.stream()
-                .filter(note ->
-                {
-                    if (note.getTitle().equals(title)) {
-                        if (note instanceof ListNote)
-                            isList[0] = true;
-
-                        if (note.isPinned())
-                            isPinned[0] = true;
-
-                        if (note instanceof Remindable)
-                            isRemindable[0] = true;
-
-                        allNotes.remove(note);
-
-                        return true;
-                    }
-
-                    return false;
-                })
-                .findAny()
-                .orElseThrow(NoSuchElementException::new);
-
-        if (isList[0])
-            listNotes.remove(listNotes.stream()
-                    .filter(note -> note.getTitle().equals(title))
-                    .findAny());
-
-        if (isPinned[0])
-            pinnedNotes.remove(pinnedNotes.stream()
-                    .filter(note -> note.getTitle().equals(title))
-                    .findAny());
-
-        if (isRemindable[0])
-            remindableNotes.remove(remindableNotes.stream()
-                    .filter(note -> note.toString().equals(title))
-                    .findAny());
+    protected void restoreNoteFromArchive(Note note) throws IOException
+    {
+        note.setArchived(false);
+        
+        archivedNotes.remove(note, note.getUid());
+        allNotes.put(note, note.getUid());
+        
         cfm.serialize(this);
     }
-
+    
+    /**
+     * Method to initiate a list's checkbox status change
+     *
+     * @param note the ListNote object that will undergo changes
+     * @throws InvalidObjectException if the parameter is not a ListNote
+     */
+    protected void promptToCheckListItems(ListNote note) throws IOException
+    {
+        if (!(note instanceof ListNote))
+            throw new InvalidObjectException("Given note is not of type checkbox list");
+        
+        note.promptToChangeStatus();
+        
+        cfm.serialize(this);
+    }
+    
+    /**
+     * Method that deletes a note from all data structures it's present in
+     *
+     * @param note the Note object to be deleted
+     */
+    protected void deleteNote(Note note) throws IOException
+    {
+        allNotes.remove(note, note.getUid());
+        
+        if (note.isPinned())
+            pinnedNotes.remove(note, note.getUid());
+        
+        if (((Remindable) note).getDeadline() != null)
+            remindableNotes.remove(note, note.getUid());
+        
+        cfm.serialize(this);
+    }
+    
+    /**
+     * Method that edits the title of any note
+     *
+     * @param note     the Note object to be deleted
+     * @param newTitle the new title to be set
+     */
+    protected void editTitle(Note note, String newTitle) throws IOException
+    {
+        note.setTitle(newTitle);
+        cfm.serialize(this);
+    }
+    
+    /**
+     * Method that edits the text of a text note
+     *
+     * @param textNote the Note object to be deleted
+     * @param text     the new text to be set
+     * @throws InvalidObjectException if the given parameter is not the correct type of object
+     */
+    protected void editText(Note textNote, String text) throws IOException
+    {
+        if (textNote instanceof TextNote)
+            ((TextNote) textNote).setText(text);
+        else
+            throw new InvalidObjectException("Only text notes have text!");
+        cfm.serialize(this);
+    }
+    
+    
+    /**
+     * Method that edits the description of a photo note
+     *
+     * @param photoNote   the Note object to be deleted
+     * @param description the new description
+     * @throws InvalidObjectException if the given parameter is not the correct type of object
+     */
+    protected void editDescription(Note photoNote, String description)
+            throws IOException, InvalidObjectException
+    {
+        if (photoNote instanceof PhotoNote)
+            ((PhotoNote) photoNote).setDescription(description);
+        else
+            throw new InvalidObjectException("Only photo notes have descriptions!");
+        cfm.serialize(this);
+    }
+    
+    /**
+     * Method that edits a note's priority
+     *
+     * @param note     the targeted note object
+     * @param priority the new priority to be set
+     */
+    protected void editPriority(Note note, Priority priority) throws IOException
+    {
+        if (note.getPriority() != priority)
+            note.setPriority(priority);
+        cfm.serialize(this);
+    }
+    
+    /**
+     * Method that edits the deadline of a reminder
+     *
+     * @param note     the targeted Remindable type object
+     * @param deadline the new deadline to be set
+     */
+    protected void editDeadline(Remindable note, DateTime deadline) throws IOException
+    {
+        note.setDeadline(deadline);
+        cfm.serialize(this);
+    }
+    
     /**
      * Method that clears the main data structure
      */
-    protected void clearAllNotes() throws IOException {
-        if (allNotes.size() > 0) {
+    protected void clearAllNotes() throws IOException
+    {
+        if (allNotes.size() > 0)
+        {
             allNotes.clear();
             archivedNotes.clear();
             remindableNotes.clear();
         } else
             throw new IllegalStateException("Clipboard is already empty!");
+        
         cfm.serialize(this);
     }
-
+    
     /**
      * Method that clears the archive data structure
      */
-    protected void clearArchive() throws IOException {
+    protected void clearArchive() throws IOException
+    {
         if (archivedNotes.size() > 0)
             archivedNotes.clear();
         else
             throw new IllegalStateException("Archive is already empty!");
+        
         cfm.serialize(this);
     }
-
+    
     /**
      * Method that clears the remindables data structure
      */
-    protected void clearReminders() throws IOException {
+    protected void clearReminders() throws IOException
+    {
         if (remindableNotes.size() > 0)
             remindableNotes.clear();
         else
             throw new IllegalStateException("Reminders is already empty!");
+        
         cfm.serialize(this);
     }
-
+    
     /**
      * The main clipboard iterator
      *
-     * @return - the iterator object of the main data structure allNotes
+     * @return - the iterator object of all the keys in the biggest data structure allNotes
      */
     @Override
-    public Iterator<Note> iterator() {
-        return allNotes.iterator();
+    public Iterator<Note> iterator()
+    {
+        return allNotes.keySet().iterator();
     }
 }

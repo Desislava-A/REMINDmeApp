@@ -4,16 +4,20 @@ import org.joda.time.DateTime;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class VoiceNote extends Note implements Remindable
 {
     private String fileName;
-    private AudioInputStream inputStream;
-    private Clip audioClip;
+    private DateTime deadline;
+    private transient AudioInputStream inputStream;
+    private transient Clip audioClip;
     
     public VoiceNote(String title, DateTime deadline, Priority priority, String fileName)
+            throws IOException, UnsupportedAudioFileException, LineUnavailableException
     {
-        super(title, deadline, priority);
+        super(title, priority);
+        setDeadline(deadline);
         setFileName(fileName);
         initializeVoiceFile(fileName);
     }
@@ -38,30 +42,31 @@ public class VoiceNote extends Note implements Remindable
         this.audioClip = audioClip;
     }
     
+    @Override
+    public void setDeadline(DateTime deadline)
+    {
+        this.deadline = deadline;
+    }
+    
+    @Override
+    public DateTime getDeadline()
+    {
+        return deadline;
+    }
+    
     /**
      * Audio file initializer
      *
      * @param fileName - files are situated in res/sounds/
+     * @throws FileNotFoundException if the audio file doesn't exist
      */
-    private void initializeVoiceFile(final String fileName)
+    private void initializeVoiceFile(final String fileName) throws IOException,
+            UnsupportedAudioFileException, LineUnavailableException
     {
-        try
-        {
-            setInputStream(AudioSystem.getAudioInputStream(Main.class.getResourceAsStream(
-                    "/res/sounds/" + fileName)));
-            setAudioClip(AudioSystem.getClip());
-        } catch (LineUnavailableException lineex)
-        {
-            System.out.println(lineex.getMessage());
-            lineex.printStackTrace();
-        } catch (UnsupportedAudioFileException audioex)
-        {
-            System.out.println(audioex.getMessage());
-            audioex.printStackTrace();
-        } catch (IOException ioex)
-        {
-            ioex.printStackTrace();
-        }
+        setInputStream(AudioSystem.getAudioInputStream(Main.class.getResourceAsStream(
+                "/res/sounds/" + fileName)));
+        
+        setAudioClip(AudioSystem.getClip());
     }
     
     @Override
@@ -74,16 +79,13 @@ public class VoiceNote extends Note implements Remindable
     @Override
     public boolean equals(Object obj)
     {
-        return obj instanceof VoiceNote &&
-                ((VoiceNote) obj).getTitle().equals(getTitle()) &&
-                ((VoiceNote) obj).getPriority().equals(getPriority()) &&
-                ((VoiceNote) obj).fileName.equals(fileName);
+        return obj instanceof VoiceNote && ((VoiceNote) obj).getUid().equals(this.getUid());
     }
     
     @Override
     public int hashCode()
     {
-        return fileName.hashCode();
+        return getUid().hashCode();
     }
     
     @Override
@@ -110,9 +112,10 @@ public class VoiceNote extends Note implements Remindable
         audioClip.start();
     }
     
+    
     @Override
     public void remind()
     {
-        System.out.print(" ->[Reminder set in " + getHoursToDeadline() + " hours]\n");
+        System.out.print(" ->[Reminder set in " + getHoursToDeadline(deadline) + " hours]\n");
     }
 }

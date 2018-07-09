@@ -9,11 +9,40 @@ import java.io.InputStreamReader;
 public class TextNote extends Note implements Remindable
 {
     private String text;
+    private DateTime deadline;
     
-    public TextNote(String title, DateTime deadline, Priority priority) throws IOException
+    public TextNote()
     {
-        super(title, deadline, priority);
+    }
+    
+    public TextNote(String title, DateTime deadline, Priority priority)
+            throws IOException
+    {
+        super(title, priority);
+        setDeadline(deadline);
         initialize();
+    }
+    
+    protected void setText(String text)
+    {
+        this.text = text;
+    }
+    
+    protected String getText()
+    {
+        return text;
+    }
+    
+    @Override
+    public void setDeadline(DateTime deadline)
+    {
+        this.deadline = deadline;
+    }
+    
+    @Override
+    public DateTime getDeadline()
+    {
+        return deadline;
     }
     
     /**
@@ -32,15 +61,13 @@ public class TextNote extends Note implements Remindable
     public boolean equals(Object obj)
     {
         return obj instanceof TextNote &&
-                ((TextNote) obj).getTitle().equals(getTitle()) &&
-                ((TextNote) obj).text.equals(text) &&
-                ((TextNote) obj).getPriority().equals(getPriority());
+                ((TextNote) obj).getUid().equals(this.getUid());
     }
     
     @Override
     public int hashCode()
     {
-        return text.hashCode();
+        return getUid().hashCode();
     }
     
     @Override
@@ -66,6 +93,6 @@ public class TextNote extends Note implements Remindable
     @Override
     public void remind()
     {
-        System.out.print(" ->[Reminder set in " + getHoursToDeadline() + " hours]\n");
+        System.out.print(" ->[Reminder set in " + getHoursToDeadline(deadline) + " hours]\n");
     }
 }

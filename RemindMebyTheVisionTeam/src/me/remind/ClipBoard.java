@@ -19,56 +19,62 @@ public class ClipBoard implements Iterable<Note>, Serializable
 {
     private static final long serialVersionUID = 1L;
     
-    private Map<Note, String> allNotes;
-    private Map<RemindableNote, String> remindableNotes;
-    private Map<Note, String> archivedNotes;
-    private Map<Note, String> pinnedNotes;
+    private List<Note> allNotes;
+    private List<RemindableNote> remindableNotes;
+    private List<Note> archivedNotes;
+    private List<Note> pinnedNotes;
+    
+    
+    //    private Map<Note, String> allNotes;
+//    private Map<RemindableNote, String> remindableNotes;
+//    private Map<Note, String> archivedNotes;
+//    private Map<Note, String> pinnedNotes;
     private static ClipboardFileManager cfm = new ClipboardFileManager();
     
     public ClipBoard()
     {
-        setAllNotes(new LinkedHashMap<>());
-        setRemindableNotes(new LinkedHashMap<>());
-        setArchivedNotes(new LinkedHashMap<>());
-        setPinnedNotes(new LinkedHashMap<>());
+        setAllNotes(new ArrayList<>());
+        setRemindableNotes(new ArrayList<>());
+        setArchivedNotes(new ArrayList<>());
+        setPinnedNotes(new ArrayList<>());
     }
     
-    protected Map<Note, String> getAllNotes()
+    protected List<Note> getAllNotes()
     {
-        return allNotes;
+        return new ArrayList<>(allNotes);
     }
     
-    private void setAllNotes(Map<Note, String> allNotes)
+    private void setAllNotes(List<Note> allNotes)
     {
         this.allNotes = allNotes;
     }
     
-    protected Map<RemindableNote, String> getRemindableNotes()
+    protected List<RemindableNote> getRemindableNotes()
     {
-        return remindableNotes;
+        return new ArrayList<>(remindableNotes);
     }
     
-    private void setRemindableNotes(Map<RemindableNote, String> remindableNotes)
+    private void setRemindableNotes(List<RemindableNote> remindableNotes)
     {
         this.remindableNotes = remindableNotes;
     }
     
-    protected Map<Note, String> getArchivedNotes()
+    protected List<Note> getArchivedNotes()
     {
-        return archivedNotes;
+        return new ArrayList<>(archivedNotes);
     }
     
-    private void setArchivedNotes(Map<Note, String> archivedNotes)
+    private void setArchivedNotes(List<Note> archivedNotes)
     {
         this.archivedNotes = archivedNotes;
     }
     
-    protected Map<Note, String> getPinnedNotes()
+    protected List<Note> getPinnedNotes()
     {
-        return pinnedNotes;
+        return new ArrayList<>(pinnedNotes);
     }
     
-    private void setPinnedNotes(Map<Note, String> pinnedNotes)
+    private void setPinnedNotes(List<Note> pinnedNotes)
     {
         this.pinnedNotes = pinnedNotes;
     }
@@ -79,13 +85,14 @@ public class ClipBoard implements Iterable<Note>, Serializable
     protected void addTextNote(String title, DateTime deadline, Priority priority)
             throws IOException
     {
-        TextNote textNote = new TextNote(title, deadline, priority);
+        RemindableNote textNote = new TextNote(title, deadline, priority);
         
-        allNotes.put(textNote, textNote.getUid());
+        if (!allNotes.contains(textNote))
+            allNotes.add(textNote);
         
         // notes without deadlines aren't added to the remindables data structure
-        if (deadline != null)
-            remindableNotes.put(textNote, textNote.getUid());
+        if (deadline != null && !remindableNotes.contains(textNote))
+            remindableNotes.add(textNote);
         
         cfm.serialize(this);
     }
@@ -96,12 +103,13 @@ public class ClipBoard implements Iterable<Note>, Serializable
     protected void addListNote(String title, DateTime deadline, Priority priority)
             throws IOException
     {
-        ListNote listNote = new ListNote(title, deadline, priority);
+        RemindableNote listNote = new ListNote(title, deadline, priority);
         
-        allNotes.put(listNote, listNote.getUid());
+        if (!allNotes.contains(listNote))
+            allNotes.add(listNote);
         
-        if (deadline != null)
-            remindableNotes.put(listNote, listNote.getUid());
+        if (deadline != null && !remindableNotes.contains(listNote))
+            remindableNotes.add(listNote);
         
         cfm.serialize(this);
     }
@@ -114,9 +122,10 @@ public class ClipBoard implements Iterable<Note>, Serializable
     protected void addPhotoNote(String title, Priority priority, String filePath,
                                 String description) throws IOException
     {
-        PhotoNote photoNote = new PhotoNote(title, priority, filePath, description);
+        Note photoNote = new PhotoNote(title, priority, filePath, description);
         
-        allNotes.put(photoNote, photoNote.getUid());
+        if (!allNotes.contains(photoNote))
+            allNotes.add(photoNote);
         
         cfm.serialize(this);
     }
@@ -129,12 +138,13 @@ public class ClipBoard implements Iterable<Note>, Serializable
     protected void addVoiceNote(String title, DateTime deadline, Priority priority, String audioFile)
             throws IOException, LineUnavailableException, UnsupportedAudioFileException
     {
-        VoiceNote voiceNote = new VoiceNote(title, deadline, priority, audioFile);
+        RemindableNote voiceNote = new VoiceNote(title, deadline, priority, audioFile);
         
-        allNotes.put(voiceNote, voiceNote.getUid());
+        if (!allNotes.contains(voiceNote))
+            allNotes.add(voiceNote);
         
-        if (deadline != null)
-            remindableNotes.put(voiceNote, voiceNote.getUid());
+        if (deadline != null && !remindableNotes.contains(voiceNote))
+            remindableNotes.add(voiceNote);
         
         cfm.serialize(this);
     }
@@ -147,7 +157,7 @@ public class ClipBoard implements Iterable<Note>, Serializable
      */
     protected List<Note> search(String title)
     {
-        return allNotes.keySet().stream()
+        return allNotes.stream()
                 .filter(note -> note.getTitle().equals(title))
                 .collect(Collectors.toList());
     }
@@ -158,7 +168,7 @@ public class ClipBoard implements Iterable<Note>, Serializable
     protected void showPinnedTitles()
     {
         System.out.println("\n[Pinned]\n");
-        pinnedNotes.keySet().forEach(note -> System.out.println("\t" +
+        pinnedNotes.forEach(note -> System.out.println("\t" +
                 note.getTitleWithTypeAndPriority()));
     }
     
@@ -179,7 +189,7 @@ public class ClipBoard implements Iterable<Note>, Serializable
         };
         
         System.out.println("\n[All notes]\n");
-        allNotes.keySet().forEach(note -> System.out.println(ref.index++ + "." +
+        allNotes.forEach(note -> System.out.println(ref.index++ + "." +
                 note.getTitleWithTypeAndPriority()));
     }
     
@@ -189,7 +199,7 @@ public class ClipBoard implements Iterable<Note>, Serializable
     protected void showReminders()
     {
         System.out.println("\n[Reminders]\n");
-        remindableNotes.keySet().forEach(note ->
+        remindableNotes.forEach(note ->
         {
             System.out.print("\t" + note.toString());
             note.remind();
@@ -202,7 +212,7 @@ public class ClipBoard implements Iterable<Note>, Serializable
     protected void showArchive()
     {
         System.out.println("\n[Archive]\n");
-        archivedNotes.keySet().forEach(note -> System.out.println("\t" +
+        archivedNotes.forEach(note -> System.out.println("\t" +
                 note.getTitleWithTypeAndPriority()));
     }
     
@@ -214,7 +224,7 @@ public class ClipBoard implements Iterable<Note>, Serializable
     protected void pinNote(Note note) throws IOException
     {
         note.setPinned(true);
-        pinnedNotes.put(note, note.getUid());
+        pinnedNotes.add(note);
         
         cfm.serialize(this);
     }
@@ -228,9 +238,7 @@ public class ClipBoard implements Iterable<Note>, Serializable
     {
         if (note.isPinned())
         {
-            if (pinnedNotes.containsValue(note.getUid()))
-                pinnedNotes.remove(note, note.getUid());
-            
+            pinnedNotes.remove(note);
             note.setPinned(false);
         }
         
@@ -246,8 +254,8 @@ public class ClipBoard implements Iterable<Note>, Serializable
     {
         note.setArchived(true);
         
-        archivedNotes.put(note, note.getUid());
-        allNotes.remove(note, note.getUid());
+        archivedNotes.add(note);
+        allNotes.remove(note);
         
         cfm.serialize(this);
     }
@@ -261,8 +269,8 @@ public class ClipBoard implements Iterable<Note>, Serializable
     {
         note.setArchived(false);
         
-        archivedNotes.remove(note, note.getUid());
-        allNotes.put(note, note.getUid());
+        archivedNotes.remove(note);
+        allNotes.add(note);
         
         cfm.serialize(this);
     }
@@ -290,14 +298,14 @@ public class ClipBoard implements Iterable<Note>, Serializable
      */
     protected void deleteNote(Note note) throws IOException
     {
-        allNotes.remove(note, note.getUid());
+        allNotes.remove(note);
         
         if (note.isPinned())
-            pinnedNotes.remove(note, note.getUid());
+            pinnedNotes.remove(note);
         
         if (note instanceof RemindableNote)
             if (((RemindableNote) note).getDeadline() != null)
-                remindableNotes.remove(note, note.getUid());
+                remindableNotes.remove(note);
         
         cfm.serialize(this);
     }
@@ -426,6 +434,6 @@ public class ClipBoard implements Iterable<Note>, Serializable
     @Override
     public Iterator<Note> iterator()
     {
-        return allNotes.keySet().iterator();
+        return allNotes.iterator();
     }
 }

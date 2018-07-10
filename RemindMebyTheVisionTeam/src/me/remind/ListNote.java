@@ -14,7 +14,6 @@ public class ListNote extends RemindableNote
     public static final int MIN_LIST_SIZE = 0;
     
     private List<Item> checkBoxesList;
-    private DateTime deadline;
     
     public ListNote(String title, DateTime deadline, Priority priority)
             throws IOException

@@ -90,7 +90,7 @@ public class PhotoNote extends Note
         JLabel jLabel = new JLabel(imageIcon);
         JFrame frame = new JFrame(getTitle());
         frame.setSize(image.getWidth(), image.getHeight());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frame.setAlwaysOnTop(true);
         
         frame.add(jLabel);

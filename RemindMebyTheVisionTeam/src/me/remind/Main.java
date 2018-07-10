@@ -114,13 +114,13 @@ public class Main
                     }
                     
                     System.out.println();
-                    List<Note> list = List.copyOf(clipBoard.getAllNotes().keySet());
+                    List<Note> list = clipBoard.getAllNotes();
                     switch (Menus.selectMainSubMenu())
                     {
                         // Show notes
                         case 1:
                             list.get(index - 1).showNote();
-                            br.readLine();
+                            //br.readLine();
                             Thread.sleep(400);
                             break;
                         // 2.Edit notes
@@ -390,12 +390,13 @@ public class Main
                             } catch (FileNotFoundException ex)
                             {
                                 System.err.print("Image file not found!");
-                                Thread.sleep(400);
                             }
                             
                             title.setLength(0);
                             fileName.setLength(0);
                             description.setLength(0);
+    
+                            Thread.sleep(400);
                             break;
                         }
                     }

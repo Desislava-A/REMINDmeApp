@@ -66,7 +66,7 @@ public class PhotoNote extends Note
     public boolean equals(Object obj)
     {
         return obj instanceof PhotoNote &&
-                ((PhotoNote) obj).getUid().equals(this.getUid());
+                ((PhotoNote) obj).getFileName().equals(fileName);
     }
     
     @Override

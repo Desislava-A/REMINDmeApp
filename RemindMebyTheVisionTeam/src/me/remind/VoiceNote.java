@@ -68,8 +68,8 @@ public class VoiceNote extends RemindableNote
     @Override
     public boolean equals(Object obj)
     {
-        return obj instanceof VoiceNote && ((VoiceNote) obj)
-                .getFileName().equals(getFileName());
+        return obj instanceof VoiceNote &&
+                ((VoiceNote) obj).getFileName().equals(getFileName());
     }
     
     @Override

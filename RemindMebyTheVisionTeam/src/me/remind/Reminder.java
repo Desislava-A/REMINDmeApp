@@ -23,7 +23,7 @@ public class Reminder
     
     public void remindOneDayBefore(ClipBoard clipboard)
     {
-        clipboard.getRemindableNotes().keySet().stream()
+        clipboard.getRemindableNotes().stream()
                 .filter(note -> note.getHoursToDeadline(
                         note.getDeadline()) == HOURS_TO_REMIND)
                 .forEach(this::remindMessage);
@@ -31,7 +31,7 @@ public class Reminder
     
     public void remindNow(ClipBoard clipboard)
     {
-        clipboard.getRemindableNotes().keySet().forEach(note ->
+        clipboard.getRemindableNotes().forEach(note ->
         {
             DateTime deadline = note.getDeadline();
             
